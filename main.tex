@@ -1,5 +1,5 @@
 %% Package and Class "uiucthesis2014" for use with LaTeX2e.
-\documentclass[edeposit,fullpage]{uiucthesis2018}
+\documentclass[edeposit,fullpage,11pt]{uiucthesis2018}
 
 
 \usepackage[acronym,toc]{glossaries}
@@ -78,7 +78,7 @@
 %\schools{B.S., National University of Singapore, 2017}
 \msthesis
 \advisor{Kathryn D. Huff}
-\degreeyear{2018}
+\degreeyear{2019}
 \committee{Assistant Professor Kathryn D. Huff, Adviser \\ Professor xyz}
 
 
@@ -126,12 +126,18 @@ Acks.
 \chapter{Introduction}
 \input{introduction}
 
+\chapter{Molten Salt Reactors}
+\input{msr}
+
+\chapter{Modelling Approach}
+\input{model}
+
 \chapter*{Appendix}
 \input{appendix}
 
 \backmatter
 
-\bibliographystyle{apalike}
+\bibliographystyle{ieeetr}
 \bibliography{bibliography}
 
 \end{document}

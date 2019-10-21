@@ -1,0 +1,180 @@
+The main simulation tool used in this work for studying the \gls{MSFR} is
+Moltres. While we used Moltres for the steady state and transient analysis, it
+requires a dedicated neutron transport solver such as Serpent 2 to generate
+neutron energy group constant data for the deterministic, multi-group
+neutronics calculations in Moltres. This chapter provides brief descriptions
+of the Serpent 2 code and Moltres.
+
+\section{Serpent 2}
+
+Serpent 2 is a continuous-energy Monte Carlo reactor physics code under
+active development at the VTT Technical Research Centre of Finland. It was
+born in 2004 out of the need for better general-purpose neutron transport
+codes for group constant generation in lattice geometries, and has since grown
+to support more general capabilities, for an active user base of more than 500
+people worldwide. Serpent is highly parallelizable due to its support for
+both MPI and OpenMP parallel programming APIs, and highly validated and
+verified against experimental data and well-established codes.
+
+In Serpent, each neutron is tracked through a combination of ray-tracing-based
+surface tracking and rejection sampling-based delta-tracking. Users may define
+the number of neutrons and the number of active and inactive cycles for each
+simulation. Inactive cycles are required for fission source distribution
+convergence, before interactions are tallied in the active cycles.
+Interaction types and locations are
+determined stochastically based on neutron interaction data from established
+nuclear data libraries (e.g. ENDF, JEFF). These nuclear data libraries provide
+continuous-energy cross section data at discrete temperatures. For other
+temperatures, Serpent has a built-in Doppler-broadening preprocessor that
+extrapolates the relevant cross section data from a lower temperature. 
+
+In the context of this project, we used Serpent with the JEFF-3.1.2 nuclear
+data library* to generate group constants
+for Moltres. The reactor geometry is based on the axisymmetric \gls{MSFR}
+neutronics benchmark geometry published in several previous papers involving
+the \gls{MSFR}. The relevant group constant data are collapsed into six
+neutron energy groups, provided in table *, and calculated for temperature
+values of 900 K to 1200 K at 50 K intervals.
+
+The group constants relevant for neutronics calculations in Moltres are the
+macroscopic fission, absorption, and scattering neutron cross sections,
+neutron diffusion coefficients, average fission energies, average neutron
+yields, inverse neutron speeds, flux spectra, \gls{DNP} decay constants, and
+effective delayed neutron fractions. These group constants are extracted from
+the Serpent output files using a Python script available from the Github
+repository that holds the Moltres source code. The script rewrites the group
+constants into a format that Moltres can read.
+
+\section{Moltres}
+
+Moltres is a \gls{MOOSE}-based application for coupled
+neutronics/thermal-hydraulics simulations of \glspl{MSR}. \gls{MOOSE} is a
+highly parallelizable,
+finite-element framework developed at \gls{INL} for simplifying the process of
+creating fully-coupled, non-linear, multiphysics solvers. The framework
+provides a user-friendly interface for this task through object-oriented
+programming in C++. All aspects of a typical multiphysics problem, such as the
+terms in the \glspl{PDE}, the initial and boundary conditions, the material
+properties, etc., are represented in \gls{MOOSE} as C++ objects. This approach
+is helpful for many researchers, a significant fraction of whom do not possess
+high-level programming backgrounds, as they are unencumbered by the
+technical details and complexicities involved in programming mesh handling
+and \gls{PDE} solving in finite element analysis.
+
+\gls{MOOSE} itself relies heavily on LibMesh and PETSc for
+its mesh handling and \gls{PDE} solver functionalities. As a result,
+\gls{MOOSE} supports adaptive meshing schemes and automatic variable scaling
+amongst other features for improved accuracy and performance times. Full
+coupling is maintained by the execution of Newton-based solves on the
+weak formulations of the multiple \glspl{PDE} to minimize the residual values.
+Fully-coupled solves are essential for accurately resolving systems with
+strongly interacting physics. The \gls{MSR} concept is one such example, where
+the neutronics and thermal-hydraulics are tightly coupled through the Doppler
+effect and the temperature dependence of liquid fuel salt density.
+
+\gls{MOOSE}, and Moltres by extension, are capable of up to 3D geometry
+modelling. They support a wide range of input mesh file formats listed in a
+\gls{MOOSE} webpage, including the commonly used Exodus II file format.
+Specifically for the 2D case, axial symmetry is easily imposed by changing
+one line of code in the input file, without any changes in the Cartesian
+representations of the \glspl{PDE} and boundary conditions in their original
+C++ implementations. This feature provides significant computational time
+savings for 3D systems that exhibit high axial symmetry. Another important
+feature for reducing computational time is the use of MPI for parallel
+computing. All \gls{MOOSE}-based codes can be easily compiled and run on high
+performance computing clusters.
+
+Both \gls{MOOSE} and Moltres are open source codes licensed under Lesser GNU
+Public License (LPGL) terms. In the case of Moltres, this was done in support
+of open and transparent research practices as well as to leverage on the ease
+of access for peer review and encourage continued development of the code.
+Moltres is hosted on a Github repository of the same name. Github provides
+version control and continuous integration testing, which ensure existing
+physics capabilities are protected from potential bugs inadvertently
+introduced when developing new physics.
+
+\subsection{Neutronics}
+
+Focussing our attention on Moltres, the neutronics calculations are
+implemented through the standard formulation of the time-dependent multi-group
+neutron diffusion equations and \gls{DNP} concentration equations as shown in
+equations * and *:
+%
+\begin{align}
+	\frac{1}{v_g} \frac{\partial \phi_g}{\partial t} - \nabla \cdot D_g \nabla
+	\phi_g + \Sigma^r_g \phi_g
+	= \sum^G_{g \neq g'} \Sigma^s_{g' \rightarrow g} \phi_{g'} + \chi^p_g
+	\sum^G_{g'=1} (1-\beta) \nu \Sigma^f_{g'} \phi_{g'} + \chi^d_g \sum^I_i
+	\lambda_i C_i, \label{eq1}
+\end{align}
+%
+\begin{align}
+	\frac{\partial C_i}{\partial t} = \sum^G_{g'=1} \beta_i \nu \Sigma^f_{g'}
+	\phi_{g'} - \lambda_i C_i - \nabla \cdot u C_i. \label{eq2}
+\end{align}
+%
+where
+{\small
+%
+\begin{align*}
+	v_g &= \text{average speed of neutrons in group }g \\
+	\phi_g &= \text{flux of neutrons in group }g \\
+	t &= \text{time} \\
+	D_g &= \text{diffusion coefficient of neutrons in group }g \\
+	\Sigma^r_g &= \text{macroscopic cross-section for removal of neutrons from
+	group }g \\
+	\Sigma^s_{g' \rightarrow g} &= \text{macroscopic cross-section of
+	scattering from }g' \text{ to }g \\
+	\chi^p_g &= \text{prompt fission spectrum neutrons in group }g \\
+	G &= \text{total number of discrete neutron groups} \\
+	\nu &= \text{average number of neutrons produced per fission} \\
+	\Sigma^f_{g} &= \text{macroscopic fission cross-section for neutron in group }g \\
+	\chi^d_g &= \text{delayed fission spectrum neutrons in group }g \\
+	I &= \text{total number of delayed neutron precursor groups} \\
+	\beta &= \text{total delayed neutron fraction} \\
+	\beta_i &= \text{delayed neutron fraction of precursor group i} \\
+	\lambda_i &= \text{average decay constant of delayed neutron precursors in precursor group }i \\
+	C_i &= \text{concentration of delayed neutron precursors in precursor group }i
+\end{align*}
+}
+%
+
+Moltres users may call for an arbitrary number of neutron energy groups as
+long as they provide Moltres with the appropriate group constant data. The
+number of precursor groups is also arbitrary, though usually pre-determined by
+the choice of nuclear data library in the group constant generation step.
+Moltres automatically interpolates the group constant data for required
+temperatures using one of the many pre-defined interpolation methods available
+in \gls{MOOSE}. Once again, users have the freedom to select their
+interpolation method of choice.
+
+\subsection{Thermal-Hydraulics}
+
+The governing equation for temperature in the molten salt is given as:
+%
+\begin{align}
+	\rho c_{p} \frac{\partial T}{\partial t} + \nabla \cdot \big( \rho
+	c_{p} \overrightarrow{u} \cdot T - k \nabla T \big) = Q_s - Q_{hx},
+	\label{eq3}
+\end{align}
+%
+	where
+{\small
+\begin{align*}
+	\rho &= \text{density of molten salt} \\
+	c_{p} &= \text{specific heat capacity of molten salt} \\
+	T &= \text{temperature of molten salt} \\
+	\overrightarrow{u} &= \text{velocity of molten salt} \\
+	k &= \text{thermal conductivity of molten salt} \\
+	Q_{hx} &= \text{heat sink},
+\end{align*}
+}
+	and the source term $Q_s$ is given as:
+%
+\begin{align}
+Q_s = \sum^G_{g=1} \epsilon_g \Sigma_g^f \phi_g. \label{eq4}
+\end{align}
+
+For steady-state solves, there are two options: the inverse power
+method (\texttt{InversePowerMethod}) and the nonlinear Newton method
+(\texttt{NonlinearEigen}). 
