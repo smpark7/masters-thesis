@@ -23,7 +23,7 @@
 \def\fileversion{v2.25b} \def\filedate{2014/05/02}
 %% Package and Class "uiucthesis2014" for use with LaTeX2e.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{uiucthesis2014}
+\ProvidesClass{uiucthesis2018}
          [\filedate\ \fileversion\ UIUC Thesis (PJC)]
 \RequirePackage{setspace}
 \expandafter\ifx\csname @ifundefined\endcsname\relax
