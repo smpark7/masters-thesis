@@ -76,16 +76,60 @@ higher proportions of fertile material than the fuel salt mixture.
 \section{Molten Salt Fast Reactor}
 
 The \gls{MSFR} is a reference fast-spectrum \gls{MSR} concept developed
-under the \gls{EVOL} project. Inspired by the \gls{MSBR}, the \gls{MSFR} is
+under the \gls{EVOL} and \gls{SAMOFAR} projects. The main reactor
+specifications and schematic view are shown in Table * and Fig. *
+respectively. Inspired by the \gls{MSBR}, the \gls{MSFR} is
 intended to run primarily on a closed thorium fuel cycle with
 continuous online fuel reprocessing. Several reasons motivated the omission of
 graphite moderators from the \gls{MSFR} design. Graphite is susceptible to
 long-term radiation damage and replacement is likely to be necessary during
-the operating lifetime of the reactor. The fast neutron spectrum improves
-breeding ratios due to higher fission neutron yield in $^{233}$U and lower
-parasitic absorption in non-fuel materials. Lastly, graphite has a positive
-temperature coefficient of reactivity; eliminating graphite from the design
-ensures a greater safety margin.
+the operating lifetime of the reactor. The relatively fast neutron spectrum
+improves breeding ratios due to higher fission neutron yield in $^{233}$U and
+lower parasitic absorption in non-fuel materials. Lastly, graphite has a
+positive temperature coefficient of reactivity; eliminating graphite from the
+design ensures a greater safety margin.
+
+In the \gls{MSFR} design, fuel salt flows upwards through a 9 m$^3$ central
+core region. At the top of the core, the flow separates into 16 smaller
+external loops, each of which passes through a heat exchanger before being
+pumped back into the bottom of the core. Other instrumentation are situated
+along the external loop for online salt reprocessing and gas sparging. The
+core is surrounded axially by nickel alloy reflectors, and radially by a
+toroidal blanket tank containing fertile salt for breeding. There is a layer
+of boron carbide behind the blanket tanks to protect the peripheral equipment
+from excessive neutron damage. In case of severe accidents, there is an
+actively cooled freeze plug at the bottom of the core that melts when
+temperatures exceed a certain threshold. The fuel salt would drain into a
+containment vessel designed to keep it subcritical. Reactivity control under
+normal operating conditions is performed by varying pump speeds to advantage
+of strong thermal feedback. Coupled with the fact that there is no excess
+reactivity reserve due to online fuel reprocessing, control rods are not
+included in the \gls{MSFR}.
+
+Although the \gls{MSFR} is primarily designed to operate on the thorium fuel
+cycle, it can support a range of start-up fuel and feed compositions. This
+versatility is particularly important for the first few \glspl{MSFR} to be
+deployed due to the lack of $^{233}$U reserves required for the initial core
+loading. In general, the fuel and blanket salts are approximately composed of
+eutectic mixtures of 77.5\% LiF - 22.5\% AcF$_4$, where AcF$_4$ represents
+actinide fluorides such as uranium, thorium, plutonium, and other \gls{TRU}
+fluorides. For an initial composition consisting of $^{232}$Th and $^{233}$U,
+the benchmark value for the amount of uranium for criticality under
+normal operating conditions is 2.515 mol\%. However, most code verification
+studies adjust the ratio of $^{232}$Th to $^{233}$U to achieve exact
+criticality at a uniform temperature of 973 K; this ensures that subsequent
+neutronics and safety analyses are not affected by the difference in
+k$_{\textt{eff}}$ values. We performed the same exercise in this paper.
 
 Power output of the \gls{MSFR} is rated at 3000 MW$_{\text{th}}$ and 1500
-MW$_{\text{e}}$. The high thermal efficiency is achieved 
+MW$_{\text{e}}$. It has a high thermal efficiency due to its high operating
+temperature. \glspl{MSR} in general are not restricted by the same pressure
+constraints seen in \glspl{LWR}. The inlet and outlet temperature
+specifications of the fuel salt are 923 K and 1023 K respectively. This was
+motivated by the need for a minimum 50 K temperature buffer between the
+operating temperatures and the melting point of the salt. The \gls{MSFR} has
+heat exchangers and an intermediate coolant loop to isolate the power
+conversion system from the highly radioactive fuel salt. This also serves as
+a layer of containment between the radioactive material and the outside
+environment. The exact composition of the intermediate coolant is still under
+active study and not finalized yet.
