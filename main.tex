@@ -1,8 +1,9 @@
-%% Package and Class "uiucthesis2014" for use with LaTeX2e.
+%% Package and Class "uiucthesis2018" for use with LaTeX2e.
 \documentclass[edeposit,fullpage,12pt]{uiucthesis2018}
 
 
 \usepackage[acronym,toc]{glossaries}
+\makeglossaries
 \include{acros}
 
 \usepackage{xspace}
@@ -46,12 +47,6 @@
 }
 
 \usepackage{tabularx}
-\newcolumntype{b}{>{\hsize=1.0\hsize}X}
-\newcolumntype{q}{>{\hsize=0.5\hsize}X}
-\newcolumntype{R}{>{\raggedleft\arraybackslash\hsize=0.5\hsize}X}
-\newcolumntype{z}{>{\hsize=0.75\hsize}X}
-\newcolumntype{s}{>{\hsize=.5\hsize}X}
-\newcolumntype{m}{>{\hsize=.75\hsize}X}
 
 \usepackage{cleveref}
 \usepackage{datatool}
@@ -78,7 +73,7 @@
 %\schools{B.S., National University of Singapore, 2017}
 \msthesis
 \advisor{Kathryn D. Huff}
-\degreeyear{2019}
+\degreeyear{2020}
 \committee{Assistant Professor Kathryn D. Huff, Adviser \\ Professor xyz}
 
 
@@ -115,8 +110,8 @@ Acks.
 
 %% Create a List of Abbreviations. The left column
 %% is 1 inch wide and left-justified
-%\chapter{List of Abbreviations}
-%\printglossaries
+\printglossary[title=List of Abbreviations,type=\acronymtype,nonumberlist,
+nogroupskip=true]
 %% Create a List of Symbols. The left column
 %% is 0.7 inch wide and centered
 
@@ -143,4 +138,3 @@ Acks.
 \end{document}
 \endinput
 %%
-%% End of file `thesis-ex.tex'.
