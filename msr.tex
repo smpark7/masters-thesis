@@ -131,25 +131,72 @@ fuel salt mixture.
 
 \subsection{Safety}
 
-\glspl{MSR} hold a number of safety advantages over current \glspl{LWR}. The
-most immediate and significant advantage is the strong negative temperature
-reactivity feedback of the fuel salt. This is due to greater
-temperature-induced density changes in liquid fuel than solid fuel. Combined
-with the Doppler broadening of resonance capture cross sections present in
-both fuel forms, we expect to observe a smaller temperature increase following
-an unprotected reactivity insertion. The overall temperature reactivity
-coefficient varies widely between different \gls{MSR} designs due to other
-structures, such as moderators and reflectors, present in the core. In
-particular, graphite moderators tend to have slightly positive temperature
-reactivity coefficients. This was notably observed in the \gls{MSBR} concept,
-but the total temperature reactivity coefficient was still relatively large
-and negative.
+\glspl{MSR} are generally deemed to be safer than \glspl{LWR} due to their
+reliance on natural physical phenomena for passive safety.
+The most immediate and significant safety characteristic is the strong
+negative temperature reactivity feedback of the fuel salt. This is due to
+greater temperature-induced volumetric expansion in liquid fuel than solid
+fuel. Combined with the Doppler broadening of resonance capture cross sections
+present in both fuel forms, we expect to observe a smaller temperature
+increase following an unprotected reactivity insertion. The overall
+temperature reactivity coefficient varies widely between different \gls{MSR}
+designs due to other structures, such as moderators and reflectors, present in
+the core. In particular, graphite moderators tend to have slightly positive
+temperature reactivity coefficients. This was notably observed in the
+\gls{MSBR} concept, but the total temperature reactivity coefficient was still
+relatively large and negative \cite{rykhlevskii_modeling_2019}. This
+phenomenon provides a large degree of control and stability as it is always
+present in an \gls{MSR} regardless whether the operating conditions.
 
 Continuous online fuel reprocessing allows operators to maintain low excess
 reactivity inventories in the core as additional fuel can be added on an ad
-hoc basis. This factor, in addition to the strong negative temperature
+hoc basis. Reprocessing and gas sparging systems help reduce fissile
+requirements by continuously removing neutron poisons. These factors, in
+addition to the strong negative temperature
 reactivity coefficient, diminishes the likelihood and severity of unprotected
-criticality accidents in \glspl{MSR}. 
+criticality accidents in \glspl{MSR} \cite{elsheikh_safety_2013}. In the
+unlikely situation where an \gls{MSR} encounters a severe runaway reaction,
+we can rely on another passive safety feature, freeze plugs. A freeze plug is
+a plug filled with solidified salt at the bottom of the core
+\cite{elsheikh_safety_2013}. It is actively
+cooled by fans or other cooling systems to keep it just below the freezing
+point of the salt. When temperatures in the core exceed a certain threshold
+during a dangerous transient, the freeze plug melts and the molten salt in the
+core drains into a containment tank designed to keep the salt in a
+sub-critical configuration. This is especially easy to achieve for
+thermal-spectrum \glspl{MSR} as the absence of moderators in the containment
+tank would automatically bring the multiplication factor down below unity
+\cite{elsheikh_safety_2013}. \glspl{MSR} also typically have large
+margin-to-boiling under nominal operating conditions so that fuel salt boiling
+does not occur. Furthermore, the reactor vessel is consequently subject to
+much lower stresses as \glspl{MSR} operate at near-atmospheric pressure
+levels. Thus, the probability of pipe ruptures due to high pressure is low.
+
+\glspl{MSR} may be more resilient to pump failure accidents as natural
+circulation could passively sustain enough heat transfer through the heat
+exchanger to remove any remaining fission and decay heat after the failure. If
+natural circulation proves insufficient, the aforementioned freeze plug can
+drain the salt out of the core. Decay heat in \glspl{MSR} with online
+reprocessing isexpected to be lower than that in \glspl{LWR} due to the
+continuous removal of \glspl{FP}. For example, the decay heat in an \gls{MSFR}
+after reaching equilibrium salt composition is approximately 3.5 \% compared
+to 6 \% in \glspl{LWR} \cite{brovchenko_design-related_2013}.
+
+However, there are also some safety disadvantages associated with \glspl{MSR}.
+Firstly, \glspl{MSR} have smaller fractions of \gls{DNP} in the active core
+region as some of them decay in the external loop regions. This complicates
+reactor control and may result in faster transients due to the decrease in
+average neutron lifetime. Secondly, structural materials in the core must be
+resistant to salt corrosion under high temperatures and neutron irradiation
+over the lifetime of the reactor. To a lesser extent, pipes should also be
+corrosion resistant to prevent pipe ruptures. Lastly, fuel salt overcooling is
+a potentially dangerous accident scenario as the strong temperature
+coefficient can effectively cause a large reactivity insertion. Overcooling
+may also cause salt to freeze and restrict flow, thereby causing a complete
+loss of flow accident.
+
+\subsection{Sustainability}
+
 
 
 \section{Molten Salt Fast Reactor}
