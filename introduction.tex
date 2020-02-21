@@ -7,8 +7,8 @@ record breaking extreme weather events. Urgent measures are necessary to limit
 CO$_2$ emissions and the negative impacts of global warming.
 
 Since electricity generation from burning fossil fuels represents the
-largest source of CO$_2$ emissions (38\% in 2018 \cite{iea_global_2019}), replacing them with
-low-carbon
+largest source of CO$_2$ emissions (38\% in 2018 \cite{iea_global_2019}),
+replacing them with low-carbon
 alternatives would effectively curb a large fraction of these emissions. Out
 of all low-carbon power sources, nuclear power in general is best suited to
 replace fossil fuel burning; it provides consistent base load
@@ -36,85 +36,98 @@ MSRs possess an inherently robust safety feature in the
 strongly negative fuel temperature reactivity coefficient from Doppler
 broadening and thermal fuel expansion that greatly reduces
 the risk of a reactor power excursion. Many designs can also incorporate the
-thorium fuel cycle for improved sustainability arising from the use of abundant
-natural thorium resources and reduced transuranic waste. The resultant reduced
-radiotoxicity from transuranic waste also reduces costs associated with
-long-term nuclear waste storage.
-In addition, the ability to operate at near atmospheric pressures eliminates
-the need for a thick pressure vessel and drives down construction
-costs, while online fuel reprocessing reduces reactor downtime during reactor
-operation.
+thorium fuel cycle for improved sustainability arising from the use of
+abundant natural thorium resources and reduced transuranic waste. The
+resultant reduced radiotoxicity from transuranic waste also reduces costs
+associated with long-term nuclear waste storage. In addition, the ability to
+operate at near atmospheric pressures eliminates the need for a thick pressure
+vessel and drives down construction costs, while online fuel reprocessing
+reduces reactor downtime during reactor operation.
 
-The development of MSR designs requires efficient and accurate simulation tools
-for the complex neutronics and thermal-hydraulics behaviors expected in the
-reactor core. Among other uses, these tools are essential in identifying and
-characterizing potential accident scenarios to improve the safety of the design
-and inform efforts towards creating MSR licensing frameworks.
+However, the liquid fuel form also brought about novel computational
+challenges in simulating the transient behavior of \glspl{MSR}; the
+neutronics and thermal-hydraulics are more tightly coupled due to the strong
+temperature reactivity coefficient, and the additional advection coupling
+terms. Furthermore, we have to account for the movement of \glspl{DNP} as
+they are now generated directly within the primary coolant loop. Therefore,
+the choice of coupling methods for each set of physics requires careful
+consideration. Existing reactor system-level codes and modeling approaches
+for conventional \glspl{LWR} analysis contain simplifying assumptions in
+multiphysics coupling and other areas that render the techniques unsuitable
+for simulating \gls{MSR}. Thus, making minor modifications to these codes
+without changing the underlying algorithms is not the best approach for
+\gls{MSR} safety analysis.
 
-Over the past decade, there has been a significant increase in the number of
-simulation tools made available for transient MSR analyses. They generally fall
-into two categories: loosely coupled, separate, stand-alone codes for
-neutronics and thermal-hydraulic, and multiphysics software for concurrently
-solving neutron transport and thermal-hydraulics. Fiorina et al.
-\cite{fiorina_modelling_2014} presented simulation results from two
-models developed independently at \textit{Politechnico di Milano} and
-\textit{Technical University of Delft} in the context of the Molten Salt Fast
-Reactor (MSFR). The MSFR is a circulating fuel reactor concept under active
-development in the H2020 SAMOFAR project. The fuel consists of a molten salt
-mixture of thorium and uranium fluorides dissolved in lithium fluoride (LiF).
-The former employed the commercial
-multiphysics modeling software COMSOL \cite{comsol_ab_comsol_2018}, while the
-latter coupled two in-house codes DALTON and HEAT for neutron transport and
-CFD calculations respectively. Both models showed generally good agreement with
-each other with a simplified, 2-D axisymmetric model for several transient
-scenarios.
+In the past two decades, researchers have developed several
+new tools for simulating steady-state and transient behavior in \glspl{MSR}.
+Many of the earlier efforts featured simplifications in simulating
+thermal-hydraulics by solving 1-D Navier-Stokes equations or using
+predetermined uniform velocity fields \cite{krepel_dyn3d-msr_2007}
+\cite{kophazi_development_2009}. In more recent years, there has been
+significant progress towards fully coupled, spatial codes that feature
+2-D axisymmetric or full 3-D models. In 2011, Cammi et al.
+\cite{cammi_multi-physics_2011} performed an ``\gls{MPM}'' analysis
+of a simplified 2-D axisymmetric model of a single MSBR fuel channel using
+the commercial finite-element analysis software COMSOL Multiphysics. The
+physics were implemented through the two-group neutron diffusion
+equations, and the \gls{RANS} standard $k-\epsilon$ turbulence model, for the
+neutronics and thermal-hydraulics respectively. The
+authors emphasized the need for proper full coupling of the multiphysics, and
+presented both steady-state and transient results in various
+scenarios such as reactivity insertions, changes in pumping rate, and the
+presence of periodic perturbations. This approach featured again in a later
+paper by Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D
+axisymmetric model of the
+\gls{MSFR}. The authors presented results from the Politecnico di Milano
+COMSOL-based approach, and another approach by researchers from Delft
+University of Technology, where they coupled their in-house neutronics and
+thermal-hydraulics codes, DALTON and HEAT respectively. With multi-group
+neutron diffusion and \gls{RANS} formulations on ultra-fine meshes, both
+models showed good agreement in the steady-state neutron flux, temperature,
+and \gls{DNP} distributions, and in the power responses following various
+accident transient initiations. Aufiero et al. \cite{aufiero_development_2014}
+concurrently developed
+a full-core 3-D model of the \gls{MSFR} on OpenFOAM, albeit with one-group
+neutron diffusion to reduce computational load. With the 3-D model, the
+authors could simulate the asymmetric reactor response to the failure of a
+single pump in the sixteen-pump \gls{MSFR} configuration. The authors also
+provided some quantitative data supporting the use of implicit coupling over
+explicit coupling to obtain accurate solutions of the transient cases.
+Recognizing the huge computational burden required for full 3-D simulations, 
+later authors came up with innovative ways to alleviate this issue such as
+selective geometrical reduced order modeling for various components of a
+reactor based on the importance of the physical phenomena being simulated
+\cite{zanetti_geometric_2015}, or using a novel, efficient method for
+neutronics calculations \cite{laureau_transient_2017}.
 
-Another paper by Aufiero et al. showed simulation results for a full 3-D model
-of the MSFR using the multiphysics toolkit OpenFOAM. While running a 3-D model
-is more computationally intensive, it allows for proper modeling of 3-D
-turbulent effects, and the analysis of asymmetric transient scenarios such as
-the single pump failure scenario in the MSFR (out of 16
-pumps). The authors also demonstrated that there exists a clear discrepancy in
-the results between implicit and explicit coupling schemes for the neutronics
-and thermal-hydraulics. This is especially true for MSRs due to the strong
-coupling arising from large temperature feedback coefficients. 
-
-The preceding discussion highlights the challenges faced in MSR simulation, and
-the need for a highly efficient simulation tool that incorporates implicitly
-coupled multiphysics with good computational scalability over multiple
-processing units. This paper presents the open source MSR simulation tool,
-Moltres, as a strong contender to overcoming these challenges for simulating
-the MSFR. Moltres is an application code
+The preceding discussion highlights the challenges faced in MSR simulation,
+and the need for a highly efficient simulation tool that incorporates
+implicitly coupled multiphysics with good computational scalability over
+multiple processing units. This paper presents the open source MSR simulation
+tool, Moltres, as a strong contender to overcoming these challenges for
+simulating the MSFR. Moltres is an application code
 built in the Multiphysics Object-Oriented Simulation Environment (MOOSE)
-parallel finite element framework. It solves the deterministic neutronics and
-thermal-hydraulics governing equations with implicit
-time-stepping on a single mesh for up to three dimensions. The MOOSE framework
-is also highly parallelizable with its use of MPI for parallel computing.
+parallel finite element framework. Similar to COMSOL and OpenFOAM, it solves
+the deterministic multi-group neutron diffusion and thermal-hydraulics
+\glspl{PDE} simultaneously on the same mesh. It supports up to 3-D meshes and
+scales well for a large number of processors.
 
 \section{Objectives}
 
 In this thesis, we demonstrate the coupled multiphysics modeling capabilities
 of Moltres through the reference configuration of the MSFR design. Moltres
-differs from many other codes used for simulating MSRs due to the fully
-implicit coupling between the neutronics and thermal-hydraulics governing
-equations, to fully account for the tight coupling expected in MSRs due to the
-movement of fuel in the salt. The Reynolds-Averaged Navier-Stokes (RANS)-based
-k-epsilon ($k-\epsilon$)
-turbulence model was implemented for better simulating turbulence effects in
-the high Reynolds number flows expected in MSFRs. The model simulates the mean
-flow in turbulent flow with the introduction of two additional variables, the
-turbulence kinetic energy ($k$) and the rate of dissipation of turbulence
-energy ($\epsilon$). Moltres models
-neutronics and thermal-hydraulics behaviors through the deterministic
-multi-group neutron diffusion and convection-diffusion partial
-differential equations respectively.
+employs fully implicit coupling between the neutronics and thermal-hydraulics
+governing equations, to fully account for the tight coupling expected in MSRs
+due to the movement of fuel in the salt. We implemented flow using the
+Navier-Stokes equations for an accurate representation of the flow profile as
+opposed to imposing a predetermined velocity field.
 
-The objectives of this thesis are: 1) to demonstrate and verify the new
-$k-\epsilon$ turbulence modeling feature in Moltres, 2) and to study
-steady-state and transient cases with the reference MSFR model and identify
-general characteristic behaviors in MSRs and fast spectrum reactors. The
-results can be verified against common test cases for
-turbulence models, and the MSFR simulation results by Rouch et al. and Aufiero
-et al., both of which couple neutronics with the $k-\epsilon$ turbulence model.
+The objectives of this thesis are: 1) study the steady-state operating
+conditions with the reference \gls{MSFR} model, 2) study the transient
+behavior of the \gls{MSFR} under several unprotected accident scenarios, and
+identify general characteristic behaviors in MSRs and fast spectrum reactors.
+The simulation results are verified against the results by Fiorina et al.
+\cite{fiorina_modelling_2014} and Aufiero et al.
+\cite{aufiero_development_2014}.
 
 ** insert thesis outline here **

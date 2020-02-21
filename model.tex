@@ -7,14 +7,15 @@ of the Serpent 2 code and Moltres.
 
 \section{Serpent 2}
 
-Serpent 2 is a continuous-energy Monte Carlo reactor physics code under
+Serpent 2 \cite{leppanen_serpent_2014} is a continuous-energy Monte Carlo
+reactor physics code under
 active development at the VTT Technical Research Centre of Finland. It was
 born in 2004 out of the need for better general-purpose neutron transport
 codes for group constant generation in lattice geometries, and has since grown
 to support more general capabilities, for an active user base of more than 500
 people worldwide. Serpent is highly parallelizable due to its support for
 both MPI and OpenMP parallel programming APIs, and highly validated and
-verified against experimental data and well-established codes.
+verified against experimental data and other well-established codes.
 
 In Serpent, each neutron is tracked through a combination of ray-tracing-based
 surface tracking and rejection sampling-based delta-tracking. Users may define
@@ -29,12 +30,12 @@ temperatures, Serpent has a built-in Doppler-broadening preprocessor that
 extrapolates the relevant cross section data from a lower temperature. 
 
 In the context of this project, we used Serpent with the JEFF-3.1.2 nuclear
-data library* to generate group constants
+data library \cite{oecd/nea_jeff-3.1.2_2014} to generate group constants
 for Moltres. The reactor geometry is based on the axisymmetric \gls{MSFR}
 neutronics benchmark geometry published in several previous papers involving
 the \gls{MSFR}. The relevant group constant data are collapsed into six
-neutron energy groups, provided in table *, and calculated for temperature
-values of 900 K to 1200 K at 50 K intervals.
+neutron energy groups, and calculated for
+temperature values of 900 K to 1200 K at 50 K intervals.
 
 The group constants relevant for neutronics calculations in Moltres are the
 macroscopic fission, absorption, and scattering neutron cross sections,
@@ -83,15 +84,6 @@ savings for 3D systems that exhibit high axial symmetry. Another important
 feature for reducing computational time is the use of MPI for parallel
 computing. All \gls{MOOSE}-based codes can be easily compiled and run on high
 performance computing clusters.
-
-Both \gls{MOOSE} and Moltres are open source codes licensed under Lesser GNU
-Public License (LPGL) terms. In the case of Moltres, this was done in support
-of open and transparent research practices as well as to leverage on the ease
-of access for peer review and encourage continued development of the code.
-Moltres is hosted on a Github repository of the same name. Github provides
-version control and continuous integration testing, which ensure existing
-physics capabilities are protected from potential bugs inadvertently
-introduced when developing new physics.
 
 \subsection{Neutronics}
 
@@ -158,9 +150,27 @@ Moltres automatically interpolates the group constant data for required
 temperatures using one of the many pre-defined interpolation methods available
 in \gls{MOOSE}. Once again, users have the freedom to select their
 interpolation method of choice. For this work, we have selected six neutron
-energy groups according to the energy boundaries in table *, eight \gls{DNP}
-groups as defined by the JEFF-3.1.2 library, and the spline interpolation
-method.
+energy groups according to the energy boundaries in table \ref{table:bound},
+eight \gls{DNP} groups as defined by the JEFF-3.1.2 library, and the spline
+interpolation method.
+%
+\begin{table}[htb!]
+	\centering
+	\caption{Neutron energy group upper bounds used in Serpent.}
+	\begin{tabular}{c S}
+		\hline
+		{Group number} & {Upper bound [MeV]}\\
+		\hline
+		1 & 20\\
+		2 & 2.2313\\
+		3 & 0.4979\\
+		4 & 2.47875$\times 10^{-2}$\\
+		5 & 5.5308$\times 10^{-3}$\\
+		6 & 7.485$\times 10^{-4}$\\
+		\hline
+	\end{tabular}
+	\label{table:bound}
+\end{table}
 
 For the decay heat model, previous studies on the MSFR * have shown that
 using three decay heat precursor groups with different half-lives can model

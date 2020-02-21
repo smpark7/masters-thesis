@@ -158,7 +158,7 @@ criticality accidents in \glspl{MSR} \cite{elsheikh_safety_2013}. In the
 unlikely situation where an \gls{MSR} encounters a severe runaway reaction,
 we can rely on another passive safety feature, freeze plugs. A freeze plug is
 a plug filled with solidified salt at the bottom of the core
-\cite{elsheikh_safety_2013}. It is actively
+\cite{aji_experimental_2020}. It is actively
 cooled by fans or other cooling systems to keep it just below the freezing
 point of the salt. When temperatures in the core exceed a certain threshold
 during a dangerous transient, the freeze plug melts and the molten salt in the
@@ -195,126 +195,61 @@ coefficient can effectively cause a large reactivity insertion. Overcooling
 may also cause salt to freeze and restrict flow, thereby causing a complete
 loss of flow accident.
 
-\subsection{Sustainability}
+\subsection{Other factors}
 
+Other factors for assessing a reactor design include sustainability,
+economics, waste management, and non-proliferation.
 
+Breeder \gls{MSR} designs easily score well in the sustainability category.
+\glspl{MSR} generally have good neutron economy due to little structural
+material in the core and continuous online removal of neutron poisons. Noble
+metal neutron poisons also naturally plate out onto the inner walls of the
+loop which are generally regions of lower neutronic importance. Both
+$^{232}$Th/$^{233}$U and $^{238}$U/$^{239}$Pu fuel cycles are viable
+candidates for breeding in \gls{MSR}, with the former being more suited for
+thermal reactors and the latter being more suited for fast reactors. Another
+benefit of this is that some \glspl{MSR} can potentially start with an initial
+core loading of $^{239}$Pu with a fast spectrum before transitioning towards
+$^{233}$U fuel with a $^{232}$Th feed. This measure effectively circumvents
+the issue of having insufficient $^{233}$U inventory to start up the reactor.
 
-\section{Molten Salt Fast Reactor}
+The $^{232}$Th/$^{233}$U fuel cycle produces significantly less \gls{TRU}
+waste than the other cycles due to the smaller atomic masses of $^{232}$Th and
+$^{233}$U. This reduces the overall radiotoxicity and long-term decay heat
+associated with long-lived plutonium and \gls{MA} isotopes. However, there are
+other radionuclides such as $^{231}$Pa, $^{229}$Th, and $^{230}$U that may
+pose long-term radiological concerns. Nevertheless, this feature complements
+\gls{TRU} burning in fast spectrum \glspl{MSR} to reduce overall levels
+of \gls{TRU} waste going into long-term storage in nuclear waste repositories.
 
-The \gls{MSFR} is a reference fast-spectrum \gls{MSR} concept developed
-under the \gls{EVOL} and \gls{SAMOFAR} projects. The main reactor
-specifications and schematic view are shown in Table \ref{table:msfr} and Fig.
-\ref{fig:msfr} respectively. Inspired by the \gls{MSBR}, the \gls{MSFR} is
-intended to run primarily on a closed thorium fuel cycle with
-continuous online fuel reprocessing. Several reasons motivated the omission of
-graphite moderators from the \gls{MSFR} design. Graphite is susceptible to
-long-term radiation damage and replacement is likely to be necessary during
-the operating lifetime of the reactor. The relatively fast neutron spectrum
-improves breeding ratios due to higher fission neutron yield in $^{233}$U and
-lower parasitic absorption in non-fuel materials. Lastly, graphite has a
-positive temperature coefficient of reactivity; eliminating graphite from the
-design ensures a greater safety margin.
-%
-\begin{figure}[htb!] 
-	\centering
-	\includegraphics[width=0.6\textwidth]{MSFR}
-	\caption{Schematic view of the MSFR concept \cite{serp_molten_2014}.}
-	\label{fig:msfr}
-\end{figure}
-%
-\begin{table}[htb!]
-	\caption{Main specifications of the \gls{MSFR} concept
-				\cite{serp_molten_2014}.}
-	\centering
-	\begin{tabular}{ l r }
-		\hline
-		Parameter & Value \\
-		\hline
-		Thermal/Electric output [MW$_{\text{th}}$/MW$_{\text{e}}$] & 3000 /
-		1500 
-		\\
-		Salt volume [m$^3$] & 18 \\
-		Salt fraction in core & 0.5 \\
-		Number of circulation loops & 16 \\
-		Nominal flow rate [kg s$^{-1}$] & 18500  \\
-		Nominal circulation time [s] & 4.0 \\
-		Inlet/outlet temperature [K] & 923 / 1023 \\
-		Blanket volume [m$^3$] & 7.3\\
-		\hline
-	\end{tabular}
-	\label{table:msfr}
-\end{table}
+There are some nuclear non-proliferation concerns with the thorium fuel cycle
+in \glspl{MSR}.
+The main concern involves the separation of the intermediate $^{233}$Pa
+isotope from the fuel salt. $^{233}$Pa decays into $^{233}$U with a half-life
+of approximately 27 days, and $^{233}$U is at least as potent as $^{235}$U for
+nuclear weapons production. The highly radioactive $^{232}$U provides some
+level of proliferation resistance but it can be sidestepped by
+separating away its $^{232}$Pa precursor, which has a half-life of only 1.31
+days. Strong regulatory framework and close monitoring of \glspl{MSR} would be
+essential to ensure non-proliferation.
 
-In the \gls{MSFR} design, fuel salt flows upwards through a 9 m$^3$ central
-core region. At the top of the core, the flow separates into 16 smaller
-external loops, each of which passes through a heat exchanger before being
-pumped back into the bottom of the core. Other instrumentation are situated
-along the external loop for online salt reprocessing and gas sparging. The
-core is surrounded axially by nickel alloy reflectors, and radially by a
-toroidal blanket tank containing fertile salt for breeding. There is a layer
-of boron carbide behind the blanket tanks to protect the peripheral equipment
-from excessive neutron damage. In case of severe accidents, there is an
-actively cooled freeze plug at the bottom of the core that melts when
-temperatures exceed a certain threshold. The fuel salt would drain into a
-containment vessel designed to keep it subcritical. Reactivity control under
-normal operating conditions is performed by varying pump speeds to advantage
-of strong thermal feedback. Coupled with the fact that there is no excess
-reactivity reserve due to online fuel reprocessing, control rods are not
-included in the \gls{MSFR} design.
+The economic prospects are uncertain at this stage of \gls{MSR} development
+but we can qualitatively list the potential impacts. Capital costs are
+expected to be greater due to the need for increased corrosion resistance and
+the supporting reprocessing facilities. This is in spite of the reduced
+pressure constraints on the reactor pressure vessel for \glspl{MSR} resulting
+from the significantly lower operating pressure. There are potential cost
+savings from eliminating fuel pellet and fuel assembly fabrication. Higher
+fuel utilization is achieveable as neutron poisons are continuously removed
+from the core via the continuous online reprocessing and gas sparging systems.
+Online fuel reprocessing also minimizes reactor downtime because refuelling
+can be performed at any time. The higher operating temperature results in
+greater thermal efficiencies and presents new opportunities beyond
+conventional electricity generation, namely industrial process heat
+applications and hydrogen production.
 
-Although the \gls{MSFR} is primarily designed to operate on the thorium fuel
-cycle, it can support a range of start-up fuel and feed compositions. This
-versatility is particularly important for the first few \glspl{MSFR} to be
-deployed due to the lack of $^{233}$U reserves required for the initial core
-loading. In general, the fuel and blanket salts are approximately composed of
-eutectic mixtures of 77.5\% LiF - 22.5\% AcF$_4$, where AcF$_4$ represents
-actinide fluorides such as uranium, thorium, plutonium, and other \gls{TRU}
-fluorides. For an initial composition consisting of $^{232}$Th and $^{233}$U,
-the benchmark value for the amount of uranium for criticality under
-normal operating conditions is 2.515 mol\%. However, most code verification
-studies adjust the ratio of $^{232}$Th to $^{233}$U to achieve exact
-criticality at a uniform temperature of 973 K; this ensures that subsequent
-neutronics and safety analyses are not affected by the difference in
-k$_{\text{eff}}$ values. We performed the same exercise in this paper.
-
-Power output of the \gls{MSFR} is rated at 3000 MW$_{\text{th}}$ and 1500
-MW$_{\text{e}}$. It has a high thermal efficiency due to the high operating
-temperature. \glspl{MSR} in general are not restricted by the same pressure
-constraints seen in \glspl{LWR}. The inlet and outlet temperature
-specifications of the fuel salt are 923 K and 1023 K respectively. This was
-motivated by the need for a minimum 50 K temperature buffer between the
-operating temperatures and the melting point of the salt. The \gls{MSFR} has
-heat exchangers and an intermediate coolant loop to isolate the power
-conversion system from the highly radioactive fuel salt. This also serves as
-a layer of containment between the radioactive material and the outside
-environment. The exact composition of the intermediate coolant is still under
-active study and not finalized yet.
-
-\subsection{Model Geometry}
-
-In this thesis, we study the 2-D axisymmetric representation of the
-\gls{MSFR} as shown in Fig. \ref{fig:msfrgeom}. This is the same model
-geometry used in a neutronic benchmark
-study of the \gls{MSFR} and the coupled analyses by Fiorina et al., Aufiero
-et al., and Zhang et al. Even though this is an outdated design that had been
-later optimized for better flow distribution *, the analysis results are still
-valid for code verification purposes. Future efforts will adopt the optimized
-hourglass-shaped design for a more realistic assessment of the \gls{MSFR}.
-%
-\begin{figure}[htb!] 
-	\centering
-	\includegraphics[width=0.5\textwidth]{msfr-geom}
-	\caption{2-D axisymmetric model of the \gls{MSFR} core used for the
-	simulations in Serpent and Moltres. All dimensions are in meters.
-	\cite{brovchenko_neutronic_2019}}
-	\label{fig:msfrgeom}
-\end{figure}
-
-For the 2-D axisymmetric model, the sixteen individual loops are homogenized
-into a single loop while keeping the nominal volumetric flow rate constant.
-Keeping with the model used in the previous studies, we assumed that the
-region for heat exchangers and pumps on the loop consists of 100\% fuel salt.
-However, this assumption has a negligible impact on the multiplication factor
-due to its location behind the strong boron carbide absorber layer; 
-
-
+Beyond these factors, \glspl{MSR} still require significant R\&D efforts and
+engineering demonstrations for experimental validation of various components
+before a full commercial model can be commissioned. Work towards creating
+safety and licensing framework for \glspl{MSR} have picked up pace only in
+recent years due to the growing interest from commercial \gls{MSR} developers.
