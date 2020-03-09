@@ -1,7 +1,7 @@
 The main simulation tool used in this work for studying the \gls{MSFR} is
-Moltres. While we used Moltres for the steady state and transient analysis, it
+Moltres. While we used Moltres for the steady-state and transient analysis, it
 requires a dedicated neutron transport solver such as Serpent 2 to generate
-neutron energy group constant data for the deterministic, multi-group
+neutron energy group constant data for the deterministic, multigroup
 neutronics calculations in Moltres. This chapter provides brief descriptions
 of the Serpent 2 code and Moltres.
 
@@ -51,7 +51,7 @@ constants into a Moltres-compatible format.
 Moltres is a \gls{MOOSE}-based application for coupled
 neutronics/thermal-hydraulics simulations of \glspl{MSR}. \gls{MOOSE}
 \cite{gaston_physics-based_2015} is a highly parallelizable,
-finite-element framework developed at \gls{INL} for simplifying the process of
+finite element framework developed at \gls{INL} for simplifying the process of
 creating fully-coupled, non-linear, multiphysics solvers. The framework
 provides a user-friendly interface for this task through object-oriented
 programming in C++. All aspects of a typical multiphysics problem, such as the
@@ -61,7 +61,7 @@ can inherit properties from related old objects to simplify implementation and
 reduce code duplication. Overall, this approach
 is helpful for many researchers, a significant fraction of whom do not possess
 high-level programming backgrounds, as they are unencumbered by the
-technical details and complexicities involved in programing mesh handling
+technical details and complexities involved in programing mesh handling
 and \gls{PDE} solving in finite element analysis.
 
 \gls{MOOSE} itself relies heavily on libMesh \cite{kirk_libmesh:_2006} and
@@ -76,14 +76,14 @@ strongly interacting physics. The \gls{MSR} concept is one such example, where
 the neutronics and thermal-hydraulics are tightly coupled through the Doppler
 effect and the temperature dependence of liquid fuel salt density.
 
-\gls{MOOSE}, and Moltres by extension, are capable of up to 3D geometry
+\gls{MOOSE}, and Moltres by extension, are capable of up to 3-D geometry
 modelling. They support a wide range of input mesh file formats listed in a
 \gls{MOOSE} webpage, including the commonly used Exodus II file format.
-Specifically for the 2D case, axial symmetry is easily and automatically
+Specifically for the 2-D case, axial symmetry is easily and automatically
 imposed by changing one line of code in the input file, without any changes in
 the Cartesian representations of the \glspl{PDE} and boundary conditions in
 their original C++ implementations. This feature provides significant
-computational time savings for 3D systems that exhibit high axial symmetry.
+computational time savings for 3-D systems that exhibit high axial symmetry.
 Another important feature for reducing computational time is the use of MPI
 for parallel computing. All \gls{MOOSE}-based codes can be compiled and
 run on high performance computing clusters.
@@ -91,7 +91,7 @@ run on high performance computing clusters.
 \subsection{Neutronics}
 
 Focusing our attention on Moltres, the neutron flux calculations are
-performed using the standard formulations for the time-dependent multi-group
+performed using the standard formulations for the time-dependent multigroup
 neutron diffusion equations and \gls{DNP} concentration equations as shown in
 equations \ref{eq:neut} and \ref{eq:dnp}:
 %
@@ -105,44 +105,45 @@ equations \ref{eq:neut} and \ref{eq:dnp}:
     \phi_{g'} - \lambda_i C_i - \boldsymbol{u} \cdot \nabla C_i + \nabla \cdot
     D_t \nabla C_i, \label{eq:dnp} \\
     \intertext{where}
-    v_g &= \text{average speed of neutrons in group $g$ [cm s$^{-1}$]} 
+    v_g &= \text{average speed of neutrons in group $g$ [cm s$^{-1}$],} 
     \nonumber \\
-    \phi_g &= \text{neutron flux in group $g$ [cm$^{-2}$ s$^{-1}$]} \nonumber
+    \phi_g &= \text{neutron flux in group $g$ [cm$^{-2}$ s$^{-1}$],} \nonumber
     \\
-    t &= \text{time [s]} \nonumber \\
+    t &= \text{time [s],} \nonumber \\
     D_g &= \text{diffusion coefficient of neutrons in group $g$ [cm$^2$
-    s$^{-1}$]} \nonumber \\
-    \Sigma^r_g &= \text{macroscopic cross-section for removal of neutrons from
-    group $g$ [cm$^{-1}$]} \nonumber \\
-    \Sigma^s_{g' \rightarrow g} &= \text{macroscopic cross-section of
-    scattering from $g'$ to $g$ [cm$^{-1}$]} \nonumber \\
-    \chi^p_g &= \text{prompt fission spectrum for neutrons in group $g$}
+    s$^{-1}$],} \nonumber \\
+    \Sigma^r_g &= \text{macroscopic cross section for removal of neutrons from
+    group $g$ [cm$^{-1}$],} \nonumber \\
+    \Sigma^s_{g' \rightarrow g} &= \text{macroscopic cross section of
+    scattering from $g'$ to $g$ [cm$^{-1}$],} \nonumber \\
+    \chi^p_g &= \text{prompt fission spectrum for neutrons in group $g$,}
     \nonumber \\
-    G &= \text{total number of discrete neutron groups} \nonumber \\
-    \nu &= \text{average number of neutrons produced per fission} \nonumber \\
-    \Sigma^f_{g} &= \text{macroscopic fission cross-section for neutron in
-    group $g$ [cm$^{-1}$]} \nonumber \\
-    \chi^d_g &= \text{delayed fission spectrum for neutrons in group }g
+    G &= \text{total number of discrete neutron groups,} \nonumber \\
+    \nu &= \text{average number of neutrons produced per fission,} \nonumber
+    \\
+    \Sigma^f_{g} &= \text{macroscopic fission cross section for neutron in
+    group $g$ [cm$^{-1}$],} \nonumber \\
+    \chi^d_g &= \text{delayed fission spectrum for neutrons in group $g$,}
     \nonumber \\
-    I &= \text{total number of delayed neutron precursor groups} \nonumber \\
-    \beta &= \text{total delayed neutron fraction} \nonumber \\
-    \beta_i &= \text{delayed neutron fraction of precursor group $i$}
+    I &= \text{total number of delayed neutron precursor groups,} \nonumber \\
+    \beta &= \text{total delayed neutron fraction,} \nonumber \\
+    \beta_i &= \text{delayed neutron fraction of precursor group $i$,}
     \nonumber \\
     \lambda_i &= \text{average decay constant of delayed neutron precursors in
-    precursor group $i$} \nonumber \\
+    precursor group $i$,} \nonumber \\
     C_i &= \text{concentration of delayed neutron precursors in precursor
-    group $i$} \nonumber \\
+    group $i$,} \nonumber \\
     D_t &= \text{turbulent diffusion of the delayed neutron precursors [cm$^2$
-    s$^{-1}$]} \nonumber
+    s$^{-1}$].} \nonumber
 \end{align}
 %
 
-While the limitations of the multi-group neutron diffusion compared to other
+While the limitations of the multigroup neutron diffusion compared to other
 deterministic and Monte Carlo methods, particularly for flux values near
-boundaries, are well-documented, it provides acceptable
+boundaries, are well-documented, the diffusion model provides acceptable
 accuracy at lower computational costs. Moreover, the
 \gls{MSFR} contains no material interfaces in the middle of the core where
-most of the fission interactions take place. The results section provides a
+most of the fission interactions take place. The Results section provides a
 comparison of the \gls{MSFR} multiplication factor values and reactivity
 coefficients between Moltres and Serpent.
 
@@ -160,7 +161,7 @@ density of the fuel salt [kg cm$^{-3}$], and $Sc_t$ is the turbulent Schmidt
 number. We assumed $Sc_t = 0.85$ for a fair comparison with the Polimi/TUDelft
 models which used the same value. Moltres also accounts for the decay of
 \glspl{DNP} outside the active core region by simulating its flow in a
-separate 1D pipe geometry. This outer loop pipe simulation is loosely coupled
+separate 1-D pipe geometry. This outer loop pipe simulation is loosely coupled
 to the active core simulation through MOOSE's MultiApp functionality and
 inlet/outlet boundary values. The loose coupling is justified as the evolution
 of \gls{DNP} concentrations due to inflow is relatively slow. The length and
@@ -171,10 +172,10 @@ residence time of 2 seconds to follow the design specifications.
 
 Moltres users may vary the total number of neutron energy groups as
 long as they provide Moltres with the appropriate group constant data. The
-number of precursor groups is also variable, though usually pre-determined by
+number of precursor groups is also variable, though usually predetermined by
 the choice of nuclear data library in the group constant generation step.
 Moltres automatically interpolates the group constant data for required
-temperatures using one of the many pre-defined interpolation methods available
+temperatures using one of the many predefined interpolation methods available
 in \gls{MOOSE}. Once again, users have the freedom to select their
 interpolation method of choice.
 
@@ -183,6 +184,7 @@ boundaries in table \ref{table:bound}, eight \gls{DNP} groups as defined by
 the JEFF-3.1.2 library, and the spline interpolation method. The neutron flux
 and \gls{DNP} concentration values were approximated by first-order Lagrange
 and constant monomial shape functions respectively on the finite element mesh.
+Figure * shows the mesh adopted for the \gls{MSFR} model.
 We assumed vacuum boundary conditions for all six neutron group fluxes along
 the external boundaries of the geometry, and homogeneous Neumann boundary
 conditions along the axial symmetry boundary. For the \gls{DNP}
@@ -214,8 +216,8 @@ For the decay heat model, a previous study on the MSFR by Aufiero et al.
 \cite{aufiero_extended_2013} has shown that using three decay heat precursor
 groups with different half-lives in the form of exponential equations, can
 accurately model decay heat in the MSFR for up to 300 seconds after shutdown
-with a relative error of less than 2 \%. Thus, we implemented a decay heat
-model using the following set of equations:
+with a relative error of less than 2\%. Thus, we implemented a decay heat
+model using the following equation:
 %
 \begin{align}
 	\frac{\partial \omega_k}{\partial t} &= f_k \sum^G_{g=1} \epsilon_{g}
@@ -247,7 +249,7 @@ models for three decay heat groups.
 		\midrule
 		1 & 0.1974 & 0.0117 \\
 		2 & 0.0168 & 0.0129 \\
-		3 & 3.58 $\times 10^{-4}$ & 0.0186 \\
+		3 & 0.000358 & 0.0186 \\
 		\bottomrule
 	\end{tabular}
 	\label{table:decayheat}
@@ -255,64 +257,70 @@ models for three decay heat groups.
 
 \subsection{Thermal-Hydraulics}
 
-The governing equation for temperature in the molten salt is:
+Fluid dynamics in Moltres can be modeled using the \gls{INS} equations with
+the Boussinesq hypothesis for eddy viscosity. Most of the Navier-Stokes
+capabilities in Moltres is derived from the MOOSE Navier-Stokes module
+\cite{peterson_overview_2017}. The standard \gls{INS} equations are:
+%
+\begin{align}
+    \text{Momentum eq.:} && \rho \frac{\partial \boldsymbol{u}}{\partial t} &=
+    -\rho (\boldsymbol{u}
+    \cdot \nabla) \boldsymbol{u} + \nabla \cdot (-p \boldsymbol{I} + \mu [
+    \nabla \boldsymbol{u} + (\nabla \boldsymbol{u})^T] + \boldsymbol{f} &&
+    \label{eq:momemtum} \\
+    \text{Divergence-free:} && \nabla \cdot \boldsymbol{u} &= 0 &&
+    \label{eq:divergence}
+    \intertext{where}
+    && p &= \text{ pressure} && \nonumber \\
+    && \mu &= \text{ dynamic viscosity} && \nonumber \\
+    && \boldsymbol{f} &= \text{ body force per unit volume} && \nonumber
+\end{align}
+
+In addition to the intrinsic molecular viscosity, we introduced an eddy
+viscosity term to approximate turbulent flow effects. The current
+implementation of Moltres does not have a turbulence model such as the
+\gls{RANS} models used in the Polimi/TUDelft models. Thus, we made a
+zeroth-order approximation of the eddy viscosity based on the results reported
+in the Polimi/TUDelft models. The eddy viscosity is assumed to be 40 Pa s.
+Despite the simplicity of this assumption, we were able to reproduce much of
+the flow profile observed in the Polimi/TUDelft models at steady state.
+
+The flow rate is dictated by an inflow boundary condition at the core inlet
+for a volumetric flow rate of 4.5 m$^3$ s$^{-1}$. We imposed no-slip boundary
+conditions on the walls of the core, and homogeneous Neumann boundary
+conditions on the core outlet. The energy balance equation for temperature is
+given in Eq. \ref{eq:temp}. The diffusion term includes turbulent heat
+diffusivity based on the eddy viscosity $\mu_t$ and the turbulent Prandtl
+number $Pr_t$, which we assume to be equal to 0.85. 
 %
 \begin{align}
     \rho c_{p} \frac{\partial T}{\partial t} &= - \rho c_p \boldsymbol{u}
-    \cdot \nabla T + \nabla \cdot k \nabla T + Q_s - Q_{hx},
-    \label{eq:th}
+    \cdot \nabla T + \nabla \cdot [(k + k_t) \nabla T] + Q_s - Q_{hx}
+    \label{eq:temp} \\
+    k_t &= \frac{\mu_t}{\rho Pr_t} \\
+    Q_s &= \Big( 1 - \sum^K_{k=1} f_k \Big) \sum^G_{g=1} \epsilon_g \Sigma_g^f
+    \phi_g + \sum^K_{k=1} \omega_k, \label{eq:source}
     \intertext{where}
     \rho &= \text{density of molten salt} \nonumber \\
     c_{p} &= \text{specific heat capacity of molten salt} \nonumber \\
     T &= \text{temperature of molten salt} \nonumber \\
-    \overrightarrow{u} &= \text{velocity of molten salt} \nonumber \\
+    \boldsymbol{u} &= \text{velocity of molten salt} \nonumber \\
     k &= \text{thermal conductivity of molten salt} \nonumber \\
-    Q_{hx} &= \text{heat sink},
-\end{align}
-	and the source term $Q_s$ is:
-%
-\begin{align}
-    Q_s = \Big( 1 - \sum^K_{k=1} f_k \Big) \sum^G_{g=1} \epsilon_g \Sigma_g^f
-    \phi_g + \sum^K_{k=1} \omega_k, \label{eq:source}
+    Q_{hx} &= \text{heat sink} \nonumber \\
 \end{align}
 %
-where $K$ is the total number of decay heat groups.
+where $K$ is the total number of decay heat groups. The first term in the heat
+source expression represents prompt fission heat, and the second term
+represents decay heat from the $K$ decay heat groups.
 
-Salt flow in the core is governed by the standard incompressible Navier-Stokes
-equations:
-%
-\begin{align}
-    \rho \frac{\partial \boldsymbol{u}}{\partial t} &= -\rho (\boldsymbol{u}
-    \cdot \nabla) \boldsymbol{u} + \nabla \cdot (-p \boldsymbol{I} + \mu [
-    \nabla \boldsymbol{u} + (\nabla \boldsymbol{u})^T] + \boldsymbol{f}
-    \label{eq:momemtum} \\
-    \nabla \cdot \boldsymbol{u} &= 0 \label{eq:divergence}
-    \intertext{where}
-    p &= \text{ pressure} \nonumber \\
-    \mu &= \text{ dynamic viscosity} \nonumber \\
-    \boldsymbol{f} &= \text{ body force per unit volume} \nonumber
-\end{align}
+We modeled the heat exchanger using a point source/sink at the center of the
+1-D outer loop pipe region. The rate of heat extraction is equivalent to the
+nominal 3 GW$_{\text{th}}$ power output with appropriate scaling to account
+for the 1-D geometry. *** include more detail when finalized ***
 
-In the \gls{MSFR}, salt flow in the core has a Reynolds number on the order of
-10$^6$. Thus the Navier-Stokes module in \gls{MOOSE} cannot sufficiently
-capture the turbulent flow behavior. Furthermore, the \gls{MSFR} benchmark
-geometry encourages the formation of turbulent recirculation regions in the
-fuel salt near the blanket tank regions as seen in the Polimi/TUDelft models
-\cite{fiorina_modelling_2014}. Moltres does not have a turbulence model in its
-current implementation. Therefore, instead of solving for the eddy viscosity
-with a two-equation \gls{RANS} model, we took a zeroth-order approximation of
-the eddy viscosity based on results reported by Fiorina et al.
-\cite{fiorina_modelling_2014}. We assumed $\mu_t = 40$ Pa s throughout the
-core.
-
-Another consequence is the absence of turbulent diffusion, resulting
-in higher-than-expected temperatures along the central axis of the reactor
-where the neutron flux and heat generation is highest. This is further
-exacebated by the high Prandtl number of the molten salt; heat transfer is
-dominated by convective flow. This means that there would be very low heat
-transfer observed by diffusion due to the negligible contributions from
-heat conduction.
-
-For steady-state solves, there are two options: the inverse power
-method (\texttt{InversePowerMethod}) and the nonlinear Newton method
-(\texttt{NonlinearEigen}). 
+We expect good qualitative agreement with the Polimi/TUDelft models,
+including the large recirculation region near the blanket tank walls and the
+resulting high temperatures in that region. There would be some minor
+discrepancies where the viscosity values are under- or over-predicted, leading
+to slightly inaccurate temperature and precursor concentration values from
+turbulent diffusion.

@@ -1,8 +1,8 @@
 The \gls{MSFR} is a reference fast-spectrum \gls{MSR} concept developed
 under the \gls{EVOL} and \gls{SAMOFAR} projects. The main reactor
-specifications and schematic view are shown in Table \ref{table:msfr} and Fig.
-\ref{fig:msfr} respectively. Developed from the \gls{MSBR}, the \gls{MSFR} is
-intended to run primarily on a closed thorium fuel cycle with
+specifications and schematic view are shown in Table \ref{table:msfr} and
+Figure \ref{fig:msfr}, respectively. Developed from the \gls{MSBR}, the
+\gls{MSFR} is intended to run primarily on a closed thorium fuel cycle with
 continuous online fuel reprocessing. Several reasons motivated the omission of
 graphite moderators from the \gls{MSFR} design. Graphite is susceptible to
 long-term radiation damage and replacement is likely to be necessary during
@@ -45,7 +45,7 @@ large volume of graphite needed for thermalization
 \end{table}
 
 In the \gls{MSFR} design, fuel salt flows upwards through a 9 m$^3$ central
-core region. At the top of the core, the flow separates into 16 smaller
+core region. At the top of the core, the flow separates into sixteen smaller
 external loops, each of which passes through a heat exchanger before being
 pumped back into the bottom of the core. Other instrumentation are situated
 along the external loop for online salt reprocessing and gas sparging. The
@@ -56,10 +56,10 @@ from excessive neutron damage. In case of severe accidents, there is an
 actively cooled freeze plug at the bottom of the core that melts when
 temperatures exceed a certain threshold. The fuel salt would drain into a
 containment vessel designed to keep it subcritical. Reactivity control under
-normal operating conditions is performed by varying pump speeds to advantage
-of strong thermal feedback. Coupled with the fact that there is no excess
-reactivity reserve due to online fuel reprocessing, there are no control rods
-in the \gls{MSFR} design.
+normal operating conditions is performed by varying pump speeds to take
+advantage of the strong thermal feedback. Coupled with the fact that there is
+no excess reactivity reserve due to online fuel reprocessing, there are no
+control rods in the \gls{MSFR} design.
 
 Although the \gls{MSFR} is primarily designed to operate on the thorium fuel
 cycle, it can support a range of start-up fuel and feed compositions. This
@@ -80,7 +80,7 @@ Power output of the \gls{MSFR} is rated at 3000 MW$_{\text{th}}$ and 1500
 MW$_{\text{e}}$. It has a high thermal efficiency due to the high operating
 temperature. \glspl{MSR} in general are not restricted by the same pressure
 constraints seen in \glspl{LWR}. The inlet and outlet temperature
-specifications of the fuel salt are 923 K and 1023 K respectively. This was
+specifications of the fuel salt are 923 K and 1023 K, respectively. This was
 motivated by the need for a minimum 50 K temperature buffer between the
 operating temperatures and the melting point of the salt. The \gls{MSFR} has
 heat exchangers and an intermediate coolant loop to isolate the power
@@ -95,14 +95,14 @@ For this work, we used a model similar to the reference square-cylindrical
 \gls{MSFR} design to benchmark our results against results published by
 Fiorina et al. and Aufiero et al. The reference design is a 2-D axisymmetric
 model with the sixteen individual external loops homogenized into a single
-outer loop as shown in Fig. \ref{fig:msfrgeom}. For the multi-group
+outer loop as shown in Figure \ref{fig:msfrgeom}. For the multigroup
 cross sections and group constants calculations in Serpent, we extended this
 2-D axisymmetric model into a 3-D model by a simple full rotation about the
 central axis. The material definitions are the same as those specified in the
 reference \gls{MSFR} model. Accordingly, the pump and heat exchanger regions
 are assumed to be composed of 100\% fuel salt. While this may not be entirely
 accurate, the exact details of the pump and heat exchanger systems are still
-be researched, and this external loop region is presumed to be of little
+under active study, and this external loop region is presumed to be of little
 neutronic importance due to its position behind the strong boron carbide
 neutron absorber layer.
 %
@@ -115,13 +115,15 @@ neutron absorber layer.
 	\label{fig:msfrgeom}
 \end{figure}
 
-There are two key differences between our \gls{MSFR} model geometry in
-Moltres and the Polimi/TUDelft models. The first difference is a relative
+Although we used the exact reference model for generating group constant data
+from Serpent, there are two minor differences between the \gls{MSFR} model
+geometry we used in Moltres, and the Polimi/TUDelft models. The
+first difference is a relative
 minor change to the mesh by the exclusion of the 2 cm thick structural
 material around the blanket tank that separates the fuel and blanket salts.
-We removed this feature in our finite element mesh as we had difficulty
-meshing this layer that is relatively much thinner than the rest of the model.
-Any impact on the
+We removed this feature in our finite element mesh as we encountered
+difficulty meshing this layer that is relatively much thinner than the rest of
+the model. Any impact on the
 neutron flux is expected to be minimal. Furthermore, we solved for the
 temperature distribution only in the primary loop and applied homogeneous
 Neumann boundary conditions for temperature on the core walls, as was done in
@@ -176,7 +178,7 @@ Boiling temperature [K] & 1874 & {N/A} & 1 bar \\
 Density, $\rho$ [kg m$^{-3}$] & $4094-0.882 \cdot (T-1008)$ & $4125$ & 893-1123 K \\
 Dynamic viscosity, $\mu$ [Pa s] & $\rho \cdot 5.55 \times 10^{-8} \cdot e^{3689/T}$ & $1.015$ & 898-1121 K \\
 Thermal conductivity, $k$ [W m$^{-1}$ K$^{-1}$] & $0.928+8.397 \times 10^{-5} \cdot T$ & $0.01010$ & 891-1020 K \\
-Specific heat, $c_p$ [J kg$^{-1}$ K$^{-1}$] & $-1111+2.78\cdot T$ & $1555$* & 867-907 K \\
+Specific heat, $c_p$ [J kg$^{-1}$ K$^{-1}$] & $-1111+2.78\cdot T$ & $1594$ & 867-907 K \\
 \bottomrule
 \end{tabular}
 \label{table:prip}
@@ -189,11 +191,11 @@ made of a nickel-based alloy provided from reference specifications
 \cite{delpech_reactor_2009}. Table \ref{table:refl} details the compositions
 of the nickel-based alloy and boron carbide absorber. The alloy has a density
 of 10 g cm$^{-3}$. The material composition of the reflectors may be subject
-to minor changes but it is not a major concern as the reflectors are not
+to minor changes, but it is not a major concern as the reflectors are not
 situated in regions of high neutron flux. The \gls{MSFR} also includes a 20 cm
 layer of boron carbide (B$_4$C) to protect the heat exchangers and pumps from
 neutron irradiation. The reference specifications indicate that natural boron
-is used, which is composed of 19.8 \% B$^{10}$ and 80.2 \% B$^{11}$, with an
+is used, which is composed of 19.8 \% $^{10}$B and 80.2 \% $^{11}$B, with an
 overall density of 2.52 g cm$^{-3}$. 
 %
 \begin{table}[htb!]

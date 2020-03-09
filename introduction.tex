@@ -1,34 +1,32 @@
 \section{Background and Motivation}
 
-Rapidly rising greenhouse gas emissions since the Industrial Revolution in the
-1800s have contributed significantly to global warming, the consequences of
-which have been acutely felt in recent years through increasingly frequent and
-record breaking extreme weather events. Urgent measures are necessary to limit
-CO$_2$ emissions and the negative impacts of global warming.
+Since the Industrial Revolution in the 1800s, rapidly rising greenhouse gas
+emissions have contributed significantly to global warming, the consequences
+of which have been acutely felt in recent years through increasingly frequent
+and record breaking extreme weather events. Urgent measures are necessary to
+limit CO$_2$ emissions and the negative impacts of global warming.
 
 Since electricity generation from burning fossil fuels represents the
 largest source of CO$_2$ emissions (38\% in 2018 \cite{iea_global_2019}),
 replacing them with low-carbon
 alternatives would effectively curb a large fraction of these emissions. Out
 of all low-carbon power sources, nuclear power in general is best suited to
-replace fossil fuel burning; it provides consistent base load
+replace fossil fuel burning; it provides consistent base-load
 power independent of weather and local geographical conditions. Solar and wind
-power are dependent on favorable weather conditions, while hydropower requires
-relatively more area and is limited
-to geologically appropriate locations. This argument
-provides a strong case for nuclear power being the most appropriate and
-realistic alternative to burning fossil fuels for our current and future
-electricity needs.
+power are dependent on favorable weather conditions while hydropower requires
+relatively more area and is limited to geologically appropriate locations.
+This argument provides a strong case for nuclear power being the most
+appropriate and realistic alternative to burning fossil fuels for our current
+and future electricity needs.
 
 Large scale reactor deployments would be necessary to displace the
-presently large share of energy production from fossil fuel power plants.
-However, several obstacles stand in the way of mass reactor deployments. These
+presently large share of energy production from fossil fuel power plants;
+however, several obstacles stand in the way of mass reactor deployments. These
 include perceived safety risks, sustainability concerns, nuclear proliferation
-risks and the ability to compete economically with other sources of energy.
-The Molten Salt Reactor (MSR) concept, one of six advanced reactor designs
-selected by the Generation IV International Forum
-(GIF)* for continued research and development, is a potential solution to the
-aforementioned issues.
+risks, and the ability to compete economically with other sources of energy.
+The \gls{MSR} concept, one of six advanced reactor designs
+selected by the \gls{GIF} \cite{gif_technology_2002} for continued research
+and development, is a potential solution to the aforementioned issues.
 
 The primary coolant in MSRs is a molten salt mixture,
 with fissile and/or fertile material directly dissolved in the coolant.
@@ -52,9 +50,9 @@ terms. Furthermore, we have to account for the movement of \glspl{DNP} as
 they are now generated directly within the primary coolant loop. Therefore,
 the choice of coupling methods for each set of physics requires careful
 consideration. Existing reactor system-level codes and modeling approaches
-for conventional \glspl{LWR} analysis contain simplifying assumptions in
+for conventional \gls{LWR} analysis contain simplifying assumptions in
 multiphysics coupling and other areas that render the techniques unsuitable
-for simulating \gls{MSR}. Thus, making minor modifications to these codes
+for simulating \glspl{MSR}. Thus, making minor modifications to these codes
 without changing the underlying algorithms is not the best approach for
 \gls{MSR} safety analysis.
 
@@ -66,23 +64,23 @@ predetermined uniform velocity fields \cite{krepel_dyn3d-msr_2007}
 \cite{kophazi_development_2009}. In more recent years, there has been
 significant progress towards fully coupled, spatial codes that feature
 2-D axisymmetric or full 3-D models. In 2011, Cammi et al.
-\cite{cammi_multi-physics_2011} performed an ``\gls{MPM}'' analysis
-of a simplified 2-D axisymmetric model of a single MSBR fuel channel using
-the commercial finite-element analysis software COMSOL Multiphysics. The
+\cite{cammi_multi-physics_2011} performed a ``\gls{MPM}'' analysis
+of a simplified 2-D axisymmetric model of a single \gls{MSBR} fuel channel
+using the commercial finite element analysis software COMSOL Multiphysics. The
 physics were implemented through the two-group neutron diffusion
 equations, and the \gls{RANS} standard $k-\epsilon$ turbulence model, for the
 neutronics and thermal-hydraulics respectively. The
-authors emphasized the need for proper full coupling of the multiphysics, and
+authors emphasized the need for proper full coupling of the multiphysics and
 presented both steady-state and transient results in various
 scenarios such as reactivity insertions, changes in pumping rate, and the
-presence of periodic perturbations. This approach featured again in a later
-paper by Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D
+presence of periodic perturbations. This approach was featured again in a
+later paper by Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D
 axisymmetric model of the
 \gls{MSFR}. The authors presented results from the Politecnico di Milano
 COMSOL-based approach, and another approach by researchers from Delft
 University of Technology, where they coupled their in-house neutronics and
-thermal-hydraulics codes, DALTON and HEAT respectively. With multi-group
-neutron diffusion and \gls{RANS} formulations on ultra-fine meshes, both
+thermal-hydraulics codes, DALTON and HEAT respectively. With multigroup
+neutron diffusion and \gls{RANS} formulations on ultra fine meshes, both
 models showed good agreement in the steady-state neutron flux, temperature,
 and \gls{DNP} distributions, and in the power responses following various
 accident transient initiations. Aufiero et al. \cite{aufiero_development_2014}
@@ -108,7 +106,7 @@ tool, Moltres, as a strong contender to overcoming these challenges for
 simulating the MSFR. Moltres is an application code
 built in the Multiphysics Object-Oriented Simulation Environment (MOOSE)
 parallel finite element framework. Similar to COMSOL and OpenFOAM, it solves
-the deterministic multi-group neutron diffusion and thermal-hydraulics
+the deterministic multigroup neutron diffusion and thermal-hydraulics
 \glspl{PDE} simultaneously on the same mesh. It supports up to 3-D meshes and
 scales well for a large number of processors.
 

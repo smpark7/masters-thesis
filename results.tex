@@ -1,0 +1,87 @@
+This chapter discusses three main sets of simulation results. First, we
+compare the key neutronics results between Serpent and Moltres for a static
+model of the \gls{MSFR}, i.e. no salt flow, to assess the accuracy of the
+six-group neutron diffusion model in Moltres on a fast-spectrum reactor. This
+exercise also serves as a checking exercise for the group constant data
+generated for Moltres from Serpent. Second, we present steady-state results
+from Moltres with salt flow and verify it against published results, namely
+from the Polimi/TUDelft and OpenFOAM models developed by Fiorina et al.
+\cite{fiorina_modelling_2014} and Aufiero et al.
+\cite{aufiero_development_2014}, respectively. Lastly, we present and compare
+transient simulation results from Moltres with the aforementioned models.
+Transient accident scenarios include an unprotected reactivity insertion, an
+unprotected loss of flow, an unprotected loss of heat sink, a chilled inlet,
+and a pump overspeed scenario.
+
+\section{Static Model}
+
+We calculated estimates of $k_{\text{eff}}$ values in Serpent and Moltres for
+the \gls{MSFR} model with static salt (no flow), a uniform temperature
+distribution of 973 K, and a fuel salt density of $4.1249 \times 10^3$ kg
+m$^{-3}$. Moltres performs eigenvalue calculations for finding the 
+$k_{\text{eff}}$ as it does not currently have the capability to calculate
+the adjoint flux. Table \ref{table:keff} shows the $k_{\text{eff}}$ values
+from Serpent, and from Moltres with and without \glspl{DNP}. We observe a
+small 127.9 pcm discrepancy between the two codes, which we attribute to two
+main factors: the neutron diffusion model, and the omission of the blanket
+tank structural material. It is well-known that the neutron diffusion model is
+not as accurate as the other S$_{\text{N}}$ or SP$_{\text{N}}$ deterministic
+methods nor the Monte Carlo approach in Serpent. Regarding the omission of the
+blanket tank material, we replaced the 2 cm-thick structural material with
+blanket salt. This decision may be partly responsible for the higher
+$k_{\text{eff}}$ value calculated by Moltres. Nevertheless, the discrepancy is
+smaller than the 228.5 pcm and 256.7 pcm discrepancy reported by Cervi et al.
+\cite{cervi_development_2019} for their six-group $SP_3$ and neutron diffusion
+methods, respectively, in OpenFOAM. The neutron diffusion model in OpenFOAM is
+the same approach Aufiero et al. \cite{aufiero_development_2014} used for
+their transient analysis of the \gls{MSFR}, albeit with one neutron energy
+group. 
+
+\begin{table}[htb!]
+	\centering
+	\caption{$k_{\text{eff}}$ values from Serpent and Moltres.}
+	\begin{tabular}{l S S}
+		\toprule
+		{Code} & {$k_{\text{eff}}$} & {Diff. wrt Serpent [pcm]}\\
+		\midrule
+		{Serpent} & 1.00667 \pm 0.000049 & 0\\
+		{Moltres with \glspl{DNP}} & 1.007949 \pm 0.000001 & 127.9\\
+		{Moltres without \glspl{DNP}} & 1.004937 \pm 0.000001 & {-}\\
+		\bottomrule
+	\end{tabular}
+	\label{table:keff}
+\end{table}
+%
+\begin{table}[htb!]
+	\centering
+	\caption{$\beta_{\text{eff}}$ values from Serpent and Moltres.}
+	\begin{tabular}{l S S}
+		\toprule
+		{Code} & {$\beta_{\text{eff}}$ [pcm]} & {Diff. wrt Serpent [pcm]}\\
+		\midrule
+		{Serpent} & 303.2 \pm .8 & 0\\
+		{Moltres} & 301.2 \pm .2 & 2.0\\
+		\bottomrule
+	\end{tabular}
+	\label{table:betaeff}
+\end{table}
+
+The 
+
+\section{Steady-State Behavior}
+
+\subsection{Neutronics}
+
+\subsection{Thermal-Hydraulics}
+
+\section{Transient Behavior}
+
+\subsection{Unprotected Reactivity Insertion}
+
+\subsection{Unprotected Loss of Flow}
+
+\subsection{Unprotected Loss of Heat Sink}
+
+\subsection{Chilled Inlet}
+
+\subsection{Pump Overspeed}
