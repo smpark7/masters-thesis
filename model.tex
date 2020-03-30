@@ -130,9 +130,9 @@ equations \ref{eq:neut} and \ref{eq:dnp}:
     \beta_i &= \text{delayed neutron fraction of precursor group $i$,}
     \nonumber \\
     \lambda_i &= \text{average decay constant of delayed neutron precursors in
-    precursor group $i$,} \nonumber \\
+    precursor group $i$ [s$^{-1}$],} \nonumber \\
     C_i &= \text{concentration of delayed neutron precursors in precursor
-    group $i$,} \nonumber \\
+    group $i$ [cm$^{-3}$],} \nonumber \\
     D_t &= \text{turbulent diffusion of the delayed neutron precursors [cm$^2$
     s$^{-1}$].} \nonumber
 \end{align}
@@ -154,11 +154,14 @@ equation:
 %
 \begin{align}
     D_t &= \frac{\mu_t}{\rho Sc_t}
+    \intertext{where}
+    \mu_t &= \text{ eddy viscosity [Pa s],} \nonumber \\ 
+    \rho &= \text{ density of the fuel salt [kg m$^{-3}$],} \nonumber \\
+    Sc_t &= \text{ turbulent Schmidt number.} \nonumber
 \end{align}
 %
-where $\mu_t$ is the eddy viscosity [kg cm$^{-1}$ s$^{-1}$] , $\rho$ is the
-density of the fuel salt [kg cm$^{-3}$], and $Sc_t$ is the turbulent Schmidt
-number. We assumed $Sc_t = 0.85$ for a fair comparison with the Polimi/TUDelft
+
+We assumed $Sc_t = 0.85$ for a fair comparison with the Polimi/TUDelft
 models which used the same value. Moltres also accounts for the decay of
 \glspl{DNP} outside the active core region by simulating its flow in a
 separate 1-D pipe geometry. This outer loop pipe simulation is loosely coupled
@@ -235,8 +238,9 @@ model using the following equation:
 
 Like the neutron and \gls{DNP} groups, Moltres can take an arbitrary number of
 decay heat groups. In this work, as with the other parameters, we used the
-same decay heat fractions and decay constants used in the Polimi/TUDelft
-models for three decay heat groups.
+same decay heat fractions and decay constants, shown in Table
+\ref{eq:decayheat}, used in the Polimi/TUDelft models for three decay heat
+groups.
 
 \begin{table}[htb!]
 	\centering
@@ -271,9 +275,10 @@ capabilities in Moltres is derived from the MOOSE Navier-Stokes module
     \text{Divergence-free:} && \nabla \cdot \boldsymbol{u} &= 0 &&
     \label{eq:divergence}
     \intertext{where}
-    && p &= \text{ pressure} && \nonumber \\
-    && \mu &= \text{ dynamic viscosity} && \nonumber \\
-    && \boldsymbol{f} &= \text{ body force per unit volume} && \nonumber
+    && p &= \text{ pressure [Pa],} && \nonumber \\
+    && \mu &= \text{ dynamic viscosity [Pa s],} && \nonumber \\
+    && \boldsymbol{f} &= \text{ body force per unit volume [N m$^{-3}$].} &&
+    \nonumber
 \end{align}
 
 In addition to the intrinsic molecular viscosity, we introduced an eddy
@@ -301,12 +306,14 @@ number $Pr_t$, which we assume to be equal to 0.85.
     Q_s &= \Big( 1 - \sum^K_{k=1} f_k \Big) \sum^G_{g=1} \epsilon_g \Sigma_g^f
     \phi_g + \sum^K_{k=1} \omega_k, \label{eq:source}
     \intertext{where}
-    \rho &= \text{density of molten salt} \nonumber \\
-    c_{p} &= \text{specific heat capacity of molten salt} \nonumber \\
-    T &= \text{temperature of molten salt} \nonumber \\
-    \boldsymbol{u} &= \text{velocity of molten salt} \nonumber \\
-    k &= \text{thermal conductivity of molten salt} \nonumber \\
-    Q_{hx} &= \text{heat sink} \nonumber \\
+    c_p &= \text{specific heat capacity of molten salt [J kg$^{-1}$ K$^{-1}$],
+    } \nonumber \\
+    T &= \text{temperature of molten salt [K]} \nonumber \\
+    \boldsymbol{u} &= \text{velocity of molten salt [m s$^{-1}$],} \nonumber
+    \\
+    k &= \text{thermal conductivity of molten salt [W m$^{-1}$ K$^{-1}$,}
+    \nonumber \\
+    Q_{hx} &= \text{heat loss rate through the heat exchanger [W].} \nonumber
 \end{align}
 %
 where $K$ is the total number of decay heat groups. The first term in the heat
