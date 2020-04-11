@@ -1,9 +1,10 @@
 The main simulation tool used in this work for studying the \gls{MSFR} is
 Moltres. While we used Moltres for the steady-state and transient analysis, it
 requires a dedicated neutron transport solver such as Serpent 2 to generate
-neutron energy group constant data for the deterministic, multigroup
-neutronics calculations in Moltres. This chapter provides brief descriptions
-of the Serpent 2 code and Moltres.
+neutron energy group constant data for the multigroup neutron diffusion
+calculations in Moltres. This chapter provides brief introductions of the
+Serpent and Moltres codes, and the modeling approach for the multiphysics
+simulations.
 
 \section{Serpent 2}
 
@@ -88,9 +89,40 @@ Another important feature for reducing computational time is the use of MPI
 for parallel computing. All \gls{MOOSE}-based codes can be compiled and
 run on high performance computing clusters.
 
-\subsection{Neutronics}
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=.5\textwidth]{central-core}
+    \caption{2-D axisymmetric model of the MSFR. The red box indicates the
+    central core region relevant to the modeling approach in Moltres.}
+    \label{fig:core}
+\end{figure}
 
-Focusing our attention on Moltres, the neutron flux calculations are
+As mentioned in the previous chapter, we divided the fuel salt loop into two
+regions, the central core region where most of the fissions take place, and
+the outer loop region where the heat exchanger is located. The central core
+region specifically refers to the central region indicated by
+the red box in Figure \ref{fig:core}. We simplified the outer loop
+into a 1-D pipe as it is a subcritical region and its main purposes are to
+introduce a out-of-core residence time for the \glspl{DNP} and to cool the
+fuel salt before redirecting it back into the central core region.
+Accordingly, this section provides separate descriptions for the governing
+equations in the central core region and the outer loop region. There is also
+a third region comprising of the blanket salt, the Ni-alloy reflectors, 
+and other material . This region is important for capturing an accurate
+estimate of neutron leakage as opposed to simpler approximations such as
+imposing fixed albedo boundary conditions on the neutron fluxes.
+
+\subsection{Central Core Region}
+
+The central core region is of greatest interest to us during steady state and
+transient scenarios; the center of the reactor is naturally where most of the
+fissions and heat generation occur. Consequently, the \glspl{PDE} solved for
+in this region are in their most complete form relatively to simplifying
+assumptions found in the other regions.
+
+\subsubsection{Neutronics}
+
+The neutron flux calculations in the central core region are
 performed using the standard formulations for the time-dependent multigroup
 neutron diffusion equations and \gls{DNP} concentration equations as shown in
 equations \ref{eq:neut} and \ref{eq:dnp}:
@@ -143,7 +175,7 @@ deterministic and Monte Carlo methods, particularly for flux values near
 boundaries, are well-documented, the diffusion model provides acceptable
 accuracy at lower computational costs. Moreover, the
 \gls{MSFR} contains no material interfaces in the middle of the core where
-most of the fission interactions take place. The Results section provides a
+most of the fission interactions take place. The Results* section provides a
 comparison of the \gls{MSFR} multiplication factor values and reactivity
 coefficients between Moltres and Serpent.
 
@@ -259,7 +291,7 @@ groups.
 	\label{table:decayheat}
 \end{table}
 
-\subsection{Thermal-Hydraulics}
+\subsubsection{Thermal-Hydraulics}
 
 Fluid dynamics in Moltres can be modeled using the \gls{INS} equations with
 the Boussinesq hypothesis for eddy viscosity. Most of the Navier-Stokes
@@ -331,3 +363,9 @@ resulting high temperatures in that region. There would be some minor
 discrepancies where the viscosity values are under- or over-predicted, leading
 to slightly inaccurate temperature and precursor concentration values from
 turbulent diffusion.
+
+\subsection{Outer Loop Region}
+
+\subsubsection{Neutronics}
+
+\subsubsection{Thermal-Hydraulics}
