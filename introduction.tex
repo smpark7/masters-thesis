@@ -1,16 +1,16 @@
 \section{Background and Motivation}
 
 Since the Industrial Revolution in the 1800s, rapidly rising greenhouse gas
-emissions have contributed significantly to global warming, the consequences
-of which have been acutely felt in recent years through increasingly frequent
+emissions have contributed significantly to global warming. The consequences
+have been acutely felt in recent years through increasingly frequent
 and record breaking extreme weather events. Urgent measures are necessary to
 limit CO$_2$ emissions and the negative impacts of global warming.
 
 Since electricity generation from burning fossil fuels represents the
 largest source of CO$_2$ emissions (38\% in 2018 \cite{iea_global_2019}),
 replacing them with low-carbon
-alternatives would effectively curb a large fraction of these emissions. Out
-of all low-carbon power sources, nuclear power in general is best suited to
+alternatives would effectively curb a large fraction of emissions. Out
+of all low-carbon power sources, nuclear power is arguably best suited to
 replace fossil fuel burning; it provides consistent base-load
 power independent of weather and local geographical conditions. Solar and wind
 power are dependent on favorable weather conditions while hydropower requires
@@ -19,16 +19,16 @@ This argument provides a strong case for nuclear power being the most
 appropriate and realistic alternative to burning fossil fuels for our current
 and future electricity needs.
 
-Large scale reactor deployments would be necessary to displace the
-presently large share of energy production from fossil fuel power plants;
-however, several obstacles stand in the way of mass reactor deployments. These
+Large-scale reactor deployments are necessary to displace the
+presently large share of energy production from fossil fuel power plants.
+However, several obstacles stand in the way of mass reactor deployments. These
 include perceived safety risks, sustainability concerns, nuclear proliferation
 risks, and the ability to compete economically with other sources of energy.
 The \gls{MSR} concept, one of six advanced reactor designs
 selected by the \gls{GIF} \cite{gif_technology_2002} for continued research
 and development, is a potential solution to the aforementioned issues.
 
-The primary coolant in MSRs is a molten salt mixture,
+The primary coolant in MSRs is a molten salt mixture
 with fissile and/or fertile material directly dissolved in the coolant.
 MSRs possess an inherently robust safety feature in the
 strongly negative fuel temperature reactivity coefficient from Doppler
@@ -42,7 +42,7 @@ operate at near atmospheric pressures eliminates the need for a thick pressure
 vessel and drives down construction costs, while online fuel reprocessing
 reduces reactor downtime during reactor operation.
 
-However, the liquid fuel form also brought about novel computational
+However, the liquid fuel form also brings about novel computational
 challenges in simulating the transient behavior of \glspl{MSR}; the
 neutronics and thermal-hydraulics are more tightly coupled due to the strong
 temperature reactivity coefficient, and the additional advection coupling
@@ -50,8 +50,8 @@ terms. Furthermore, we have to account for the movement of \glspl{DNP} as
 they are now generated directly within the primary coolant loop. Therefore,
 the choice of coupling methods for each set of physics requires careful
 consideration. Existing reactor system-level codes and modeling approaches
-for conventional \gls{LWR} analysis contain simplifying assumptions in
-multiphysics coupling and other areas that render the techniques unsuitable
+for conventional \gls{LWR} analysis contain reactor-specific assumptions in
+multiphysics coupling and other areas that render the techniques less suitable
 for simulating \glspl{MSR}. Thus, making minor modifications to these codes
 without changing the underlying algorithms is not the best approach for
 \gls{MSR} safety analysis.
@@ -78,7 +78,7 @@ later paper by Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D
 axisymmetric model of the
 \gls{MSFR}. The authors presented results from the Politecnico di Milano
 COMSOL-based approach, and another approach by researchers from Delft
-University of Technology, where they coupled their in-house neutronics and
+University of Technology, in which they coupled their in-house neutronics and
 thermal-hydraulics codes, DALTON and HEAT respectively. With multigroup
 neutron diffusion and \gls{RANS} formulations on ultra fine meshes, both
 models showed good agreement in the steady-state neutron flux, temperature,
@@ -110,14 +110,14 @@ the deterministic multigroup neutron diffusion and thermal-hydraulics
 \glspl{PDE} simultaneously on the same mesh. It supports up to 3-D meshes and
 scales well for a large number of processors.
 
-\section{Objectives}
-
 Moltres employs fully implicit coupling between the neutronics and
 thermal-hydraulics governing equations, to fully account for the tightly
 coupled physics expected in MSRs due to the movement of fuel in the salt. We
 implemented flow using the Navier-Stokes equations and zeroth-order
 approximation of eddy viscosity for a more accurate representation of the flow
 profile compared to imposing a predetermined velocity field.
+
+\section{Objectives}
 
 The main objective of this thesis is to demonstrate Moltres' capabilities in
 modeling multiphysics, steady-state and transient behavior of fast-spectrum
