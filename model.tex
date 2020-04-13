@@ -3,8 +3,8 @@ Moltres. While we used Moltres for the steady-state and transient analysis, it
 requires a dedicated neutron transport solver such as Serpent 2 to generate
 neutron energy group constant data for the multigroup neutron diffusion
 calculations in Moltres. This chapter provides brief introductions of the
-Serpent and Moltres codes, and the modeling approach for the multiphysics
-simulations.
+Serpent and Moltres codes, and the general modeling approach for the
+multiphysics simulations in Moltres.
 
 \section{Serpent 2}
 
@@ -102,9 +102,9 @@ regions, the central core region where most of the fissions take place, and
 the outer loop region where the heat exchanger is located. The central core
 region specifically refers to the central region indicated by
 the red box in Figure \ref{fig:core}. We simplified the outer loop
-into a 1-D pipe as it is a subcritical region and its main purposes are to
-introduce a out-of-core residence time for the \glspl{DNP} and to cool the
-fuel salt before redirecting it back into the central core region.
+into a 1-D pipe as it is a subcritical region and its main purposes are: to
+introduce a out-of-core residence time for the \glspl{DNP}, and to site the
+heat exchanger-equivalent object in Moltres.
 Accordingly, this section provides separate descriptions for the governing
 equations in the central core region and the outer loop region. There is also
 a third region comprising of the blanket salt, the Ni-alloy reflectors, 
@@ -120,7 +120,7 @@ fissions and heat generation occur. Consequently, the \glspl{PDE} solved for
 in this region are in their most complete form relatively to simplifying
 assumptions found in the other regions.
 
-\subsubsection{Neutronics}
+\subsubsection{Neutronics Model}
 
 The neutron flux calculations in the central core region are
 performed using the standard formulations for the time-dependent multigroup
@@ -173,11 +173,10 @@ equations \ref{eq:neut} and \ref{eq:dnp}:
 While the limitations of the multigroup neutron diffusion compared to other
 deterministic and Monte Carlo methods, particularly for flux values near
 boundaries, are well-documented, the diffusion model provides acceptable
-accuracy at lower computational costs. Moreover, the
-\gls{MSFR} contains no material interfaces in the middle of the core where
-most of the fission interactions take place. The Results* section provides a
-comparison of the \gls{MSFR} multiplication factor values and reactivity
-coefficients between Moltres and Serpent.
+accuracy at lower computational costs. Moreover, the central core region
+contains no material interfaces except at its boundaries. The Neutronics
+results section provides a comparison of the \gls{MSFR} multiplication factor
+values and reactivity coefficients between Moltres and Serpent.
 
 The \gls{DNP} concentration equation has additional advection and turbulent
 diffusion terms to account for the movement of \glspl{DNP} in the primary
@@ -194,16 +193,15 @@ equation:
 %
 
 We assumed $Sc_t = 0.85$ for a fair comparison with the Polimi/TUDelft
-models which used the same value. Moltres also accounts for the decay of
-\glspl{DNP} outside the active core region by simulating its flow in a
-separate 1-D pipe geometry. This outer loop pipe simulation is loosely coupled
-to the active core simulation through MOOSE's MultiApp functionality and
-inlet/outlet boundary values. The loose coupling is justified as the evolution
-of \gls{DNP} concentrations due to inflow is relatively slow. The length and
-velocity defined in this geometry may differ according to reactor
-specifications. For this work with the \gls{MSFR} model, we assumed a pipe
-length of 2.255 m with salt flowing at 1.1275 m s$^{-1}$ for an out-of-core
-residence time of 2 seconds to follow the design specifications.
+models which used the same value.
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=.8\textwidth]{mesh}
+    \caption{Mesh adopted in Moltres and a close-up view of the mesh around
+    the boron carbide absorber.}
+    \label{fig:mesh}
+\end{figure}
 
 Moltres users may vary the total number of neutron energy groups as
 long as they provide Moltres with the appropriate group constant data. The
@@ -213,21 +211,6 @@ Moltres automatically interpolates the group constant data for required
 temperatures using one of the many predefined interpolation methods available
 in \gls{MOOSE}. Once again, users have the freedom to select their
 interpolation method of choice.
-
-For this work, we have six neutron energy groups according to the energy
-boundaries in table \ref{table:bound}, eight \gls{DNP} groups as defined by
-the JEFF-3.1.2 library, and the spline interpolation method. The neutron flux
-and \gls{DNP} concentration values were approximated by first-order Lagrange
-and constant monomial shape functions respectively on the finite element mesh.
-Figure * shows the mesh adopted for the \gls{MSFR} model.
-We assumed vacuum boundary conditions for all six neutron group fluxes along
-the external boundaries of the geometry, and homogeneous Neumann boundary
-conditions along the axial symmetry boundary. For the \gls{DNP}
-concentrations, we imposed homogeneous Neumann boundary conditions on the
-walls, and inflow and outflow boundary conditions on the inlet and outlet
-boundaries respectively. The inlet \gls{DNP} concentration values were
-imported from the outlet values of the 1-D outer loop pipe at the same
-timestep.
 
 \begin{table}[htb!]
 	\centering
@@ -247,8 +230,23 @@ timestep.
 	\label{table:bound}
 \end{table}
 
+For this work, we have six neutron energy groups according to the energy
+boundaries in table \ref{table:bound}, eight \gls{DNP} groups as defined by
+the JEFF-3.1.2 library, and the spline interpolation method. The neutron flux
+and \gls{DNP} concentration values were approximated by first-order Lagrange
+and constant monomial shape functions respectively on the finite element mesh.
+Figure \ref{fig:mesh} shows the mesh adopted for the \gls{MSFR} model.
+We assumed vacuum boundary conditions for all six neutron group fluxes along
+the external boundaries of the geometry, and homogeneous Neumann boundary
+conditions along the axial symmetry boundary. For the \gls{DNP}
+concentrations, we imposed homogeneous Neumann boundary conditions on the
+walls, and inflow and outflow boundary conditions on the inlet and outlet
+boundaries respectively. The inlet \gls{DNP} concentration values were
+imported from the outlet values of the 1-D outer loop pipe at the same
+timestep.
+
 For the decay heat model, a previous study on the MSFR by Aufiero et al.
-\cite{aufiero_extended_2013} has shown that using three decay heat precursor
+\cite{aufiero_extended_2013} had shown that using three decay heat precursor
 groups with different half-lives in the form of exponential equations, can
 accurately model decay heat in the MSFR for up to 300 seconds after shutdown
 with a relative error of less than 2\%. Thus, we implemented a decay heat
@@ -291,7 +289,7 @@ groups.
 	\label{table:decayheat}
 \end{table}
 
-\subsubsection{Thermal-Hydraulics}
+\subsubsection{Thermal-Hydraulics Model}
 
 Fluid dynamics in Moltres can be modeled using the \gls{INS} equations with
 the Boussinesq hypothesis for eddy viscosity. Most of the Navier-Stokes
@@ -322,17 +320,14 @@ in the Polimi/TUDelft models. The eddy viscosity is assumed to be 40 Pa s.
 Despite the simplicity of this assumption, we were able to reproduce much of
 the flow profile observed in the Polimi/TUDelft models at steady state.
 
-The flow rate is dictated by an inflow boundary condition at the core inlet
-for a volumetric flow rate of 4.5 m$^3$ s$^{-1}$. We imposed no-slip boundary
-conditions on the walls of the core, and homogeneous Neumann boundary
-conditions on the core outlet. The energy balance equation for temperature is
+The energy balance equation for temperature is
 given in Eq. \ref{eq:temp}. The diffusion term includes turbulent heat
 diffusivity based on the eddy viscosity $\mu_t$ and the turbulent Prandtl
 number $Pr_t$, which we assume to be equal to 0.85. 
 %
 \begin{align}
     \rho c_{p} \frac{\partial T}{\partial t} &= - \rho c_p \boldsymbol{u}
-    \cdot \nabla T + \nabla \cdot [(k + k_t) \nabla T] + Q_s - Q_{hx}
+    \cdot \nabla T + \nabla \cdot [(k + k_t) \nabla T] + Q_s
     \label{eq:temp} \\
     k_t &= \frac{\mu_t}{\rho Pr_t} \\
     Q_s &= \Big( 1 - \sum^K_{k=1} f_k \Big) \sum^G_{g=1} \epsilon_g \Sigma_g^f
@@ -343,19 +338,13 @@ number $Pr_t$, which we assume to be equal to 0.85.
     T &= \text{temperature of molten salt [K]} \nonumber \\
     \boldsymbol{u} &= \text{velocity of molten salt [m s$^{-1}$],} \nonumber
     \\
-    k &= \text{thermal conductivity of molten salt [W m$^{-1}$ K$^{-1}$,}
+    k &= \text{thermal conductivity of molten salt [W m$^{-1}$ K$^{-1}$],}
     \nonumber \\
-    Q_{hx} &= \text{heat loss rate through the heat exchanger [W].} \nonumber
+    K &= \text{total number of decay heat groups.} \nonumber
 \end{align}
 %
-where $K$ is the total number of decay heat groups. The first term in the heat
-source expression represents prompt fission heat, and the second term
-represents decay heat from the $K$ decay heat groups.
-
-We modeled the heat exchanger using a point source/sink at the center of the
-1-D outer loop pipe region. The rate of heat extraction is equivalent to the
-nominal 3 GW$_{\text{th}}$ power output with appropriate scaling to account
-for the 1-D geometry. *** include more detail when finalized ***
+The first term in the heat source $Q_s$ represents prompt fission heat, and
+the second term represents decay heat from the $K$ decay heat groups.
 
 We expect good qualitative agreement with the Polimi/TUDelft models,
 including the large recirculation region near the blanket tank walls and the
@@ -366,6 +355,98 @@ turbulent diffusion.
 
 \subsection{Outer Loop Region}
 
-\subsubsection{Neutronics}
+Moltres also accounts for the decay of
+\glspl{DNP} outside the central core region by simulating its flow in a
+separate 1-D pipe geometry. This outer loop pipe simulation is implicitly
+coupled to the active core simulation through Picard iterations in MOOSE's
+MultiApp functionality and inlet/outlet boundary values. For this work with
+the \gls{MSFR} model, we assumed a pipe
+length of 2.255 m with salt flowing at 1.1275 m s$^{-1}$ for an average
+out-of-core residence time of 2 seconds to follow the design specifications.
 
-\subsubsection{Thermal-Hydraulics}
+\subsubsection{Neutronics Model}
+
+Since this region is largely subcritical, the only significant
+neutronics-related phenomena are the drift, and decay of \glspl{DNP}.
+The governing equation for the \glspl{DNP} is:
+%
+\begin{align}
+    \frac{\partial C_i}{\partial t} &= - \lambda_i C_i - u
+    \frac{\partial C_i}{\partial x} + D_t \frac{\partial^2 C_i}{\partial x^2}.
+    \label{eq:dnploop}
+\end{align}
+%
+Equation \ref{eq:dnploop} is derived from equation \ref{eq:dnp} by removing
+the fission \gls{DNP} source term, and the conversion of the advection and
+diffusion terms to their 1-D forms. The decay constants and diffusion
+coefficient are the same values used in the central core region.
+
+\subsubsection{Thermal-Hydraulics Model}
+
+Instead of the Navier-Stokes equations, we have a predetermined velocity of
+1.1275 m s$^{-1}$ in the outer loop region. The governing equation for
+temperature, derived from equation \ref{eq:temp}, is:
+%
+\begin{align}
+    \rho c_{p} \frac{\partial T}{\partial t} &= - \rho c_p u
+    \frac{\partial T}{\partial x} - Q_{hx} \label{eq:temploop} \\
+    Q_{hx} &= \alpha (T - T_i) \delta (x_0) \label{eq:hx} \\
+    \intertext{where}
+    \alpha &= \text{heat transfer coefficient [W K$^{-1}$],} \nonumber \\
+    x_0 &= \text{position of the point heat exchanger [m].} \nonumber
+\end{align}
+
+The fission heat source term is replaced with a heat exchanger sink term
+which depends on the temperature difference between the fuel salt $T$ and the
+secondary loop salt $T_s$. For simplicity, we assumed a constant temperature
+of 823 K in the secondary loop. The heat transfer coefficient was determined
+by assuming that the fuel outlet temperature is 1023 K and calculating the
+heat removal rate to induce a 100 K drop at the given volumetric flow rate
+and heat capacity of the fuel salt. We opted to ignore the diffusion term due
+to the discontinuity of the temperature distribution across the point heat
+exchanger. 
+
+\subsection{Boundary Conditions and Flow Transfers}
+
+This subsection details the various boundary conditions for all of the
+tracked variables, and the \gls{DNP} and temperature flow transfers between
+the central core and outer loop regions. 
+
+Starting with the central core region, for the neutron group fluxes, we
+imposed vacuum boundary conditions on the
+outermost boundaries of the geometry in Figure \ref{fig:core} excluding the
+axial boundary. The \gls{DNP} variables have homogeneous Neumann boundary
+conditions along the axis and the walls in the central core region, and inflow
+and outflow boundary conditions on the inlet and outlet boundaries,
+respectively. The temperature variable shares the same type of boundary
+conditions as the \gls{DNP} variables.
+
+The flow rate is dictated by an inflow boundary condition at the core inlet
+for a volumetric flow rate of 4.5 m$^3$ s$^{-1}$. We imposed no-slip boundary
+conditions on the walls of the central core, and homogeneous Neumann boundary
+conditions on the outlet. Along the axial boundary, we have homogeneous
+Dirichlet boundary condition for the radial velocity component, and
+homogeneous Neumann boundary condition for the axial velocity component.
+
+At every timestep, Moltres also calculates weighted averages of the
+temperature and \gls{DNP} at the outlet. These values are weighted by the
+outflow velocity values at the outlet according to the following equation:
+%
+\begin{align}
+    \overline{\phi} &= \frac{\int_\mathcal{C} \phi(y) u(y) dy}{
+    \int_\mathcal{C} u(y) dy} \\
+    \intertext{where}
+    \phi &= \text{variable to be weighted} \nonumber \\
+    \mathcal{C} &= \text{outlet boundary curve} \nonumber \\
+    u &= \text{outflow velocity perpendicular to the outlet boundary [m
+    s$^{-1}$].} \nonumber
+\end{align}
+
+This outflow value from the central core region is transferred to the 1-D
+outer loop region as input for the inhomogeneous Dirichlet boundary
+condition at the inlet boundary. Likewise, the outflow value from the outer
+loop region is used for the inflow value in the central core region. No
+averaging is required for this step as the outer loop region is a 1-D system.
+We assume that the inflow temperature and \gls{DNP} are uniform at the inlet.
+The Picard iterations within every timestep ensure that the two systems are
+implicitly coupled even though they're solved separately.

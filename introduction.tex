@@ -112,20 +112,34 @@ scales well for a large number of processors.
 
 \section{Objectives}
 
-In this thesis, we demonstrate the coupled multiphysics modeling capabilities
-of Moltres through the reference configuration of the MSFR design. Moltres
-employs fully implicit coupling between the neutronics and thermal-hydraulics
-governing equations, to fully account for the tight coupling expected in MSRs
-due to the movement of fuel in the salt. We implemented flow using the
-Navier-Stokes equations for an accurate representation of the flow profile as
-opposed to imposing a predetermined velocity field.
+Moltres employs fully implicit coupling between the neutronics and
+thermal-hydraulics governing equations, to fully account for the tightly
+coupled physics expected in MSRs due to the movement of fuel in the salt. We
+implemented flow using the Navier-Stokes equations and zeroth-order
+approximation of eddy viscosity for a more accurate representation of the flow
+profile compared to imposing a predetermined velocity field.
 
-The objectives of this thesis are: 1) study the steady-state operating
-conditions with the reference \gls{MSFR} model, 2) study the transient
-behavior of the \gls{MSFR} under several unprotected accident scenarios, and
-identify general characteristic behaviors in MSRs and fast spectrum reactors.
-The simulation results are verified against the results by Fiorina et al.
+The main objective of this thesis is to demonstrate Moltres' capabilities in
+modeling multiphysics, steady-state and transient behavior of fast-spectrum
+\glspl{MSR} through the study of the \gls{MSFR} concept. This is achieved by
+first verifying Moltres' neutronics results against Serpent in the context of
+the \gls{MSFR}, and then comparing the coupled neutronics/thermal-hydraulics
+steady-state and transient accident results of the \gls{MSFR} concept. The
+multiphysics results are verified against the results by Fiorina et al.
 \cite{fiorina_modelling_2014} and Aufiero et al.
 \cite{aufiero_development_2014}.
 
-** insert thesis outline here **
+\section{Thesis Outline}
+
+The outline of this thesis is as follows: Chapter 2 discusses the history and
+features of \glspl{MSR}. The \gls{MSFR} concept is covered in greater detail.
+Chapter 3 details the simulation codes and the general modeling approach for
+generating the results in this thesis. Chapter 4 provides a neutronics
+assessment by comparing key neutronics parameters from Moltres' eigenvalue
+calculations to Serpent's Monte Carlo calculations. Chapter 5 presents
+steady-state results of coupled neutronics/thermal-hydraulics \gls{MSFR}
+simulations in Moltres. Chapters 6 to 9 present transient accident simulation
+results for unprotected reactivity insertions, unprotected loss of flow,
+unprotected pump overspeed, and unprotected loss of heat sink, respectively.
+Lastly, Chapter 10 summarizes the key findings of this thesis and posits some
+potential avenues for future work.
