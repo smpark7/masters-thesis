@@ -1,0 +1,85 @@
+This chapter discusses the transient multiphysics simulation results of the
+\gls{MSFR} from Moltres for four accident scenarios. These scenarios include
+unprotected instances of reactivity insertion, loss of flow, pump overspeed,
+and loss of heat sink. The term ``unprotected'' means that there is no
+external intervention in these scenarios. As such, these simulations
+give an insight on the \gls{MSFR}'s passive safety capabilities in the absence
+of any active safety system. We used the steady-state configuration presented
+in the previous chapter as the initial conditions for the transient
+simulations discussed in this chapter. In essence, we imported all
+steady-state spatial values for neutron flux, delayed neutron precursor
+concentration, temperature, velocity, and pressure as the initial state of the
+transient scenarios.
+
+As noted by Fiorina et al. \cite{fiorina_modelling_2014}, explicit decay heat
+modeling has a negligible effect on reactivity-, pump-, and enhanced
+cooling-initiated transients. Furthermore, only their Polimi model had decay
+heat modeling capabilities. Therefore, they presented results from their
+Polimi and TUDelft model for the four accident scenarios (listed above)
+without decay heat modeling. They only enabled decay heat modeling for the
+loss of heat sink transient scenario only. For a fair comparison, we also ran
+all transient scenarios without the decay heat model with the exception of the
+loss of heat sink scenario in which we ran the simulations with and without
+the decay heat model.
+
+We detailed the setup for each transient simulation in their respective
+sections.
+
+\section{Unprotected Reactivity Insertion}
+
+\glspl{RIA} are a type of nuclear accident caused by unintended positive
+reactivity insertions. The excess reactivity causes the power output and
+temperatures in nuclear reactors to rise to potentially dangerous levels. In
+\glspl{MSR}, a positive reactivity insertion could occur when the online
+refueling system injects excess fissile material into the core. Excessively
+high neutron fluences and temperatures negatively impact reactor structural
+integrity and increase the risk of containment breach.
+
+We modeled two unprotected reactivity insertion scenarios in Moltres by
+swapping out the original set of group constant data with two new, separate
+sets of data from Serpent corresponding to 50 pcm and 200 pcm reactivity
+insertions, respectively. We increased the reactivity of the Serpent
+\gls{MSFR} models by increasing the $^{233}$U-to-$^{232}$Th ratio in the fuel
+salt.
+
+
+\section{Unprotected Loss of Flow}
+
+A loss of forced flow accident can occur in the event of a station
+blackout; the pumps would cease operating due to the loss of AC electrical
+power. Natural circulation resulting from temperature-dependent density
+changes becomes the dominant driving force for salt flow in the primary loop.
+While Fiorina et al. \cite{fiorina_modelling_2014} and Aufiero et al.
+\cite{aufiero_development_2014} applied the Boussinesq approximation for
+bouyancy-driven flow in their models, it is not directly applicable to the
+\gls{MSFR} model in this thesis because we partitioned the primary loop into
+two separate geometries and used Dirichlet boundary conditions to drive flow.
+Fiorina et al.'s Polimi and TUDelft models featured complete exponential
+coast-downs of the pumps with a time constant of 5 s. The resulting flow rate
+from natural circulation was approximately 18 times smaller than the initial
+flow rate. Thus, for the \gls{MSFR} model in Moltres, we imposed a similar
+exponential decay term with the same time constant on the inflow Dirichlet
+boundary condition to reduce the flow rate to the same final flow rate
+observed by Fiorina et al. Figure * shows the change in flow rate over the
+transient simulation.
+
+We also expect the reduced flow rate to decrease the heat transfer rate
+between the primary and secondary loop through the heat exchanger as the heat
+transfer coefficient is dependent on the flow rate. Given the limited
+information available on the heat exchanger specifications, we assumed that
+the heat transfer coefficient is directly proportional to the flow rate, and
+the overall heat transfer rate retains its linear dependence to the
+temperature difference between the primary and secondary loop at the location
+of the heat exchanger as shown previously in \ref{eq:hx}.
+
+
+
+\section{Unprotected Pump Overspeed}
+
+
+
+\section{Unprotected Loss of Heat Sink}
+
+\subsection{Without Decay Heat Model}
+
+\subsection{With Decay Heat Model}
