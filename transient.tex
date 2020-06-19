@@ -1,5 +1,6 @@
 This chapter discusses the transient multiphysics simulation results of the
-\gls{MSFR} from Moltres for four accident scenarios. These scenarios include
+\gls{MSFR} from Moltres for four accident scenarios. These scenarios, adapted
+from Fiorina et al.'s work, include
 unprotected instances of reactivity insertion, loss of flow, pump overspeed,
 and loss of heat sink. The term ``unprotected'' means that there is no
 external intervention in these scenarios. As such, these simulations
@@ -15,15 +16,15 @@ As noted by Fiorina et al. \cite{fiorina_modelling_2014}, explicit decay heat
 modeling has a negligible effect on reactivity-, pump-, and enhanced
 cooling-initiated transients. Furthermore, only their Polimi model had decay
 heat modeling capabilities. Therefore, they presented results from their
-Polimi and TUDelft model for the four accident scenarios (listed above)
-without decay heat modeling. They only enabled decay heat modeling for the
+Polimi and TUDelft model for the four accident scenarios 
+without decay heat modeling; they enabled decay heat modeling for the
 loss of heat sink transient scenario only. For a fair comparison, we also ran
 all transient scenarios without the decay heat model with the exception of the
 loss of heat sink scenario in which we ran the simulations with and without
-the decay heat model.
-
-We detailed the setup for each transient simulation in their respective
-sections.
+the decay heat model. More generally, we imposed various other simplifying
+assumptions in our transient models to match their implementations as closely
+as possible, within Moltres' capabilities. The details of the setup for each
+transient simulation are in their respective sections.
 
 \section{Unprotected Reactivity Insertion}
 
@@ -42,10 +43,15 @@ insertions, respectively. We increased the reactivity of the Serpent
 \gls{MSFR} models by increasing the $^{233}$U-to-$^{232}$Th ratio in the fuel
 salt.
 
+The focus of this transient study is the neutronic and thermal-hydraulic
+behavior of the reactor core. Thus, we assume that the heat exchanger and the
+associated power generation equipment (generator turbines, heat sinks, etc.)
+can withstand all variations in the power output during the transients.
+
 
 \section{Unprotected Loss of Flow}
 
-A loss of forced flow accident can occur in the event of a station
+A loss of forced flow transient can occur in the event of a station
 blackout; the pumps would cease operating due to the loss of AC electrical
 power. Natural circulation resulting from temperature-dependent density
 changes becomes the dominant driving force for salt flow in the primary loop.
@@ -70,15 +76,40 @@ information available on the heat exchanger specifications, we assumed that
 the heat transfer coefficient is directly proportional to the flow rate, and
 the overall heat transfer rate retains its linear dependence to the
 temperature difference between the primary and secondary loop at the location
-of the heat exchanger as shown previously in \ref{eq:hx}.
+of the heat exchanger as shown previously in \ref{eq:hx}. Lastly, we assume
+the turbulent viscosity, $\mu_t$, is directly proportional to the flow rate to
+account for reduced mixing when the flow rate decreases.
 
 
 
 \section{Unprotected Pump Overspeed}
 
+In the context of this thesis, pump overspeed refers to a sustained
+increase in pump speed in the primary coolant loop. We followed Fiorina et
+al.'s implementation by ramping up the inlet velocity, $u$, by 50\% from
+the nominal value, $u_0$, according to the following formula:
 
+\begin{align}
+    u(t) &= u_0 [1 + 0.5 (1 - e^{-t / \tau})] \\
+    \intertext{where}
+    \tau &= 5 \text{ s.} \nonumber
+\end{align} 
+
+We retain the directly proportional assumption between the flow rate and
+$\mu_t$ that we imposed in the unprotected loss of flow simulation.
+The increased flow rate impacts reactor performance in several ways.
+It affects the neutronics by reducing the in-core $\beta_eff$ as more of the
+shorter-lived precursors will tend to flow out of the core before decaying.
+This net loss of neutrons reduces the reactivity in the core, thereby causing
+core temperatures to fall to counteract this change through temperature
+reactivity feedback. The increased flow rate also enhances the heat transfer
+coefficient on the primary loop side of the heat exchanger and enables the
+reactor to operate at a higher power output. At the same time, the improved
+mixing flattens the temperature distribution in the core.
 
 \section{Unprotected Loss of Heat Sink}
+
+
 
 \subsection{Without Decay Heat Model}
 

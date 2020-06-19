@@ -18,34 +18,17 @@ state is reached when the volume integral values of every variable remain
 constant (up to 6 sig. fig.) for at least four seconds in the simulation; this
 time period corresponds to the nominal circulation time of the \gls{MSFR}.
 
-For a direct comparison with the steady-state results from the Polimi/TUDelft
-models, the bulk of our steady-state results do not have decay heat modeling.
-Instead, we separately discuss the minor differences borne from decay heat
-modeling in the last subsection.
+For a direct comparison with the steady-state results from the Polimi and
+TUDelft models \cite{aufiero_development_2014}, we will first present our
+steady-state results without modeling decay heat. After this comparison, we
+separately discuss the minor differences borne from decay heat modeling in the
+last subsection.
 
-\section{Thermal-Hydraulics}
+\section{Steady-State Thermal-Hydraulics Results}
 
-Figure \ref{fig:flow-temp} shows the temperature and velocity fields
-of the fuel salt in the core at steady state from Moltres and the
-Polimi/TUDelft models. The results from Moltres show good qualitative
-agreement with the Polimi/TUDelft models; we observe similar flow and hotspot
-features in all three models. There is a large recirculation region near the
-blanket tank walls arising from turbulent flow. Inertial forces dominate over
-viscous forces to form this large eddy. The figure also shows two relatively
-stagnant regions along the central axis at the top and bottom of the core.
-Temperature hotspots form in these regions of recirculation as convection is
-the dominant heat transfer mechanism. The maximum temperature from Moltres,
-1279 K near the bottom of the recirculation zone, is closer to the maximum
-temperature in the Polimi model ($\approx$ 1300 K) than the TUDelft model
-($\approx$ 1200K). The minimum temperature is 922 K at the inlet. Figure
-\ref{fig:flow} provides an alternate view of the flow profile through flow
-streamlines superimposed on the velocity magnitude distribution. The fastest
-salt flow occurs at the inlet, outlet, and at core half-height approximately
-0.40 m away from the central axis.
-
-\begin{figure}[htb!]
+\begin{figure}[t!]
     \centering
-    \begin{subfigure}[t]{.37\textwidth}
+    \begin{subfigure}[t]{.365\textwidth}
         \centering
         \includegraphics[width=\textwidth]{flow-temp}
     \end{subfigure}
@@ -61,7 +44,7 @@ salt flow occurs at the inlet, outlet, and at core half-height approximately
     \label{fig:flow-temp}
 \end{figure}
 
-\begin{figure}[htb!]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=.6\textwidth]{flow}
     \caption{Fuel salt flow streamlines and velocity magnitude in the core.
@@ -69,6 +52,25 @@ salt flow occurs at the inlet, outlet, and at core half-height approximately
     right.}
     \label{fig:flow}
 \end{figure}
+
+Figure \ref{fig:flow-temp} shows the temperature and velocity fields of the
+fuel salt in the core at steady state from Moltres and the Polimi/TUDelft
+models. The results from Moltres show good qualitative agreement with the
+Polimi and TUDelft models \cite{aufiero_development_2014}; we observe similar
+flow and hotspot features in all three models. There is a large recirculation
+region near the blanket tank walls arising from turbulent flow. Inertial
+forces dominate over viscous forces to form this large eddy. The figure also
+shows two relatively stagnant regions along the central axis at the top and
+bottom of the core. Temperature hotspots form in these regions of
+recirculation as convection is
+the dominant heat transfer mechanism. The maximum temperature from Moltres,
+1275 K near the bottom of the recirculation zone, is closer to the maximum
+temperature in the Polimi model ($\approx$ 1300 K) than the TUDelft model
+($\approx$ 1200K). The minimum temperature is 922 K at the inlet. Figure
+\ref{fig:flow} provides an alternate view of the flow profile through flow
+streamlines superimposed on the velocity magnitude distribution. The fastest
+salt flow occurs at the inlet, outlet, and at core half-height approximately
+0.40 m away from the central axis.
 
 While the temperatures at the hotspots are well below the melting point of the
 Ni-alloy structure (1500 K), they may cause undue thermal stress on the
@@ -83,32 +85,100 @@ recirculation zones and hotspots from forming. A study of this new design
 using Moltres is a potential subject for future work when a proper turbulence
 model is in place.
 
-\section{Neutronics}
+\section{Steady-State Neutronics Results}
+
+\subsection{Neutron Flux}
 
 The neutron flux distribution represents the heat source distribution in a
-nuclear reactor. Figure * shows the neutron flux distributions for all six
-neutron energy groups. The distribution forms the symmetrical shape we expect
-to see in a nuclear reactor with the peak at the center of the core. The
-relatively lower temperatures near the center of the core enhances the neutron
-flux peak but it is not a major concern as there are no structural parts
-vulnerable to neutron damage in that region. The total flux at the center is
-*, which is very close to values reported by Fiorina et al. 
-\cite{fiorina_molten_2013} and Aufiero \cite{aufiero_development_2014}, albeit
-their results are from their neutronics models at a fixed uniform temperature.
+nuclear reactor. Figure \ref{fig:neutronflux} shows the neutron flux
+distributions in the core for all six neutron energy groups, and Figure
+\ref{fig:axialradial} shows the axial and radial fluxes along the center of
+the core and at reactor half-height, respectively.
+The distributions are highly symmetric along the
+central and horizontal axes, as expected of a cylindrical reactor design. The
+relatively lower temperatures near the center of the core promotes the neutron
+flux peaking but it is not a major concern as there are no structural parts
+vulnerable to neutron damage in that region. The peak total flux at the center
+is $9.80 \times 10^{15}$ cm$^{-2}$ s$^{-1}$, which is close to values reported
+by Fiorina et al. \cite{fiorina_molten_2013} and Aufiero et al.
+\cite{aufiero_development_2014} as shown in Table \ref{table:peak-flux}. The
+peak flux value from this paper is slightly higher as we used the steady-state
+temperature distribution while Fiorina et al. and Aufiero et al. imposed a
+uniform temperature distribution at 973 K.
 
-\begin{figure}[htb!]
+\begin{figure}[t!]
     \centering
-%    \includegraphics[width=.6\textwidth]{}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-g1}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-g2}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-g3}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-g4}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-g5}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-g6}
+    \end{subfigure}
     \caption{Neutron flux distributions in the core for neutron energy groups
-    1 to 6.}
+    1 to 6. The y and x axes represent height and radius values of the core
+    relative to the entire reactor geometry.}
     \label{fig:neutronflux}
 \end{figure}
 
+\begin{figure}[t!]
+    \centering
+    \begin{subfigure}[t]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{axial-flux}
+    \end{subfigure}
+    \begin{subfigure}[t]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{radial-flux}
+    \end{subfigure}
+    \caption{Axial (left) and radial (right) neutron flux distributions in the
+    core for neutron energy groups 1 to 6.}
+    \label{fig:axialradial}
+\end{figure}
+
+\begin{table}[t!]
+	\centering
+	\caption{Peak neutron flux values from Moltres (this paper), COMSOL
+	\cite{fiorina_molten_2013}, and OpenFOAM \cite{aufiero_development_2014}
+	models. The COMSOL and OpenFOAM values were calculated with uniform
+	temperature distributions.}
+	\begin{tabular}{l S}
+		\toprule
+		{Model} & {Peak Neutron Flux [$\times 10^{15}$ cm$^{-2}$ s$^{-1}$]}
+		\\
+		\midrule
+		{Moltres (This paper)} & 9.80\\
+		{COMSOL} & 8.6 \\
+		{OpenFOAM} & 9.0 \\
+		\bottomrule
+	\end{tabular}
+	\label{table:peak-flux}
+\end{table}
+
 As mentioned before, the \glspl{DNP} are mobile in \glspl{MSR} and their
 distributions do not directly correspond to the neutron flux distributions.
-The location where delayed neutrons are emitted impacts their neutron
-importance according to their proximity to fissile and parasitic isotopes.
-Figure * shows the \gls{DNP} distributions for all eight \gls{DNP} groups. The
+The location where the \glspl{DNP} decay and emit neutrons impacts their
+neutron
+importance depending on their proximity to fissile and parasitic isotopes.
+Figure \ref{fig:dnp} shows the \gls{DNP} distributions for all eight \gls{DNP}
+groups. The
 precursors from the shortest-lived group (Group 8) predominantly decay within
 the core as their half-lives are shorter than the time it takes to reach the
 outlet while the precursors from the longest-lived group (Group 1) are
@@ -120,17 +190,51 @@ further refinement for future work involving similar geometries.
 
 \begin{figure}[htb!]
     \centering
-%    \includegraphics[width=.6\textwidth]{}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre1}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre2}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre3}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre4}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre5}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre6}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre7}
+    \end{subfigure}
+    \begin{subfigure}[t]{.243\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ss-pre8}
+    \end{subfigure}
     \caption{\gls{DNP} distributions in the core for \gls{DNP} groups
-    1 to 8.}
+    1 to 8 (from left to right, top to bottom). Refer to Figure \ref{fig:neutronflux} for the height and radius
+    scales on the y and x axes, respectively. Note the different scales for
+    each distribution.}
     \label{fig:dnp}
 \end{figure}
 
-An important parameter for \gls{MSR} codes is the overall in-core
-$\beta_{\text{eff}}$ value. This value represents the true effective delayed
-neutron fraction in \glspl{MSR} that accounts for the loss of delayed neutrons
-due to \gls{DNP} decay outside the core where fissions cannot be sustained. 
-** DNP values and comparison **
+\subsection{In-Core \texorpdfstring{$\beta_{\text{eff}}$}{beta_eff}}
+
+An important safety parameter for \glspl{MSR} is the actual in-core
+$\beta_{\text{eff}}$ value. This value represents the actual effective delayed
+neutron fraction in \glspl{MSR} after accounting for the loss of delayed
+neutrons due to out-of-core \gls{DNP} decay. Table * shows 
 
 \section{Decay Heat}
 

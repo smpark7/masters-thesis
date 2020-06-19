@@ -3,17 +3,27 @@ for a static model of the \gls{MSFR}, i.e. no salt flow, and uniform
 temperature distribution to assess the accuracy of the
 six-group neutron diffusion model in Moltres on a fast-spectrum reactor. This
 exercise also serves as a verification for the group constant data
-generated for Moltres from Serpent.
+generated for Moltres from Serpent. For visibility, we list the important
+details of the static model below.
+
+\textbf{Details of the static \gls{MSFR} model on Moltres}
+\begin{itemize}
+    \item No salt flow (static salt)
+    \item Uniform temperature of 973 K throughout the 2D core model
+    \item Six neutron energy groups
+    \item Eight delayed neutron precursor groups
+    \item Vacuum boundary conditions on the outer boundaries of the 2D core
+    mesh
+\end{itemize}
 
 \section{Effective Multiplication Factor and Delayed Neutron Fraction}
 
 We calculated estimates of $k_{\text{eff}}$ values in Serpent and Moltres for
-the \gls{MSFR} model with static salt (no flow), and uniform temperature
-distributions. Moltres solves the six-group neutron diffusion equations as a
+the static \gls{MSFR} model. Moltres solves the six-group neutron diffusion equations as a
 steady-state eigenvalue problem to find the $k_{\text{eff}}$ as it does not
 currently have the capability to calculate the adjoint flux. Table
 \ref{table:keff} shows the $k_{\text{eff}}$ values from Serpent and Moltres at
-973 K and the corresponding salt density, while Table \ref{table:keff} shows
+973 K and the corresponding salt density, while Table \ref{table:ktemp} shows
 the $k_{\text{eff}}$ values for other temperatures at 100 K intervals. We
 observe small discrepancies on the order of 100 pcm between the two codes
 which we attribute to two main factors: the accuracy of the neutron diffusion
@@ -27,10 +37,10 @@ as the macroscopic fission cross sections of the blanket salt are non-zero for
 the higher neutron energy groups. Nevertheless, the discrepancy is smaller
 than the 228.5 pcm and 256.7 pcm discrepancies reported by Cervi et al.
 \cite{cervi_development_2019} for their six-group $SP_3$ and neutron
-diffusion methods, respectively, in OpenFOAM. The neutron diffusion model in
-OpenFOAM is the same approach Aufiero et al. \cite{aufiero_development_2014}
-used for their transient analysis of the \gls{MSFR}, albeit with one neutron
-energy group.
+diffusion methods, respectively, in OpenFOAM. Aufiero et al.
+\cite{aufiero_development_2014} used the same neutron diffusion model in
+OpenFOAM for their transient analysis of the \gls{MSFR}, albeit with one
+neutron energy group to reduce computational load.
 
 \begin{table}[htb!]
     \small
@@ -41,8 +51,8 @@ energy group.
 		{Code} & {$k_{\text{eff}}$} & {Difference wrt Serpent [pcm]}\\
 		\midrule
 		{Serpent} & 1.00662 \pm 0.00005 & {-}\\
-		{Moltres with \glspl{DNP}} & 1.0079488 \pm 0.0000010 & 133\\
-		{Moltres without \glspl{DNP}} & 1.0049369 \pm 0.0000010 & {-}\\
+		{Moltres with \glspl{DNP}} & 1.0079400 \pm 0.0000010 & 132\\
+		{Moltres without \glspl{DNP}} & 1.0049197 \pm 0.0000010 & {-}\\
 		\bottomrule
 	\end{tabular}
 	\label{table:keff}
@@ -73,14 +83,16 @@ energy group.
 \end{table}
 
 The absolute value of $k_{\text{eff}}$ largely impacts the steady-state
-temperature of the reactor. We may adjust $k_{\text{eff}}$ by controlling
-fissile inventory to raise or lower the operating temperatures and meet the
-design specifications for inlet and outlet temperatures. For transient
-analysis, the $\beta_{\text{eff}}$ and reactivity coefficients are arguably
-more important as they dictate the duration and magnitude of the reactor
-response to a transient initiator. The $\beta_{\text{eff}}$ values at 973 K,
-shown in Table \ref{table:betaeff}, are in excellent agreement with a 2.89
-pcm discrepancy.
+temperature of the reactor. We can raise or lower the average core temperature
+at steady state to meet the design specifications for the inlet and outlet
+temperatures by adjusting the fissile inventory and $k_{\text{eff}}$. In
+transient analysis, the $\beta_{\text{eff}}$ and reactivity coefficients are
+important as they dictate the duration and magnitude of the reactor
+response to a transient initiator. We calculated $\beta_{\text{eff}}$ by
+taking the relative difference between the $k_{\text{eff}}$ values with and
+without \glspl{DNP} in Table \ref{table:keff}. The $\beta_{\text{eff}}$ values
+at 973 K, shown in Table \ref{table:betaeff}, are in excellent agreement with
+a 4.43 pcm discrepancy.
 
 \begin{table}[htb!]
 	\centering
@@ -91,7 +103,7 @@ pcm discrepancy.
 		\\
 		\midrule
 		{Serpent} & 304.08 \pm .81 & {-}\\
-		{Moltres} & 301.19 \pm .20 & 2.89\\
+		{Moltres} & 299.65 \pm .20 & 4.43\\
 		\bottomrule
 	\end{tabular}
 	\label{table:betaeff}
@@ -149,23 +161,24 @@ discrepancy of 0.019 pcm K$^{-1}$.
     \label{fig:ntspec}
 \end{figure}
 
-Moltres also reproduced the six-group neutron spectrum very well from the
-Serpent group constants. Figure \ref{fig:ntspec} compares the energy spectra
-from Serpent and Moltres in the central fuel salt region. The six-group
-neutron spectra overlap exactly over each other. More generally, the plot
-shows the distinctive fast spectrum observed in the \gls{MSFR} with dips in
-the spectrum corresponding to elastic scattering resonances from lithium and
-fluorine. From this plot, we observe that the discrepancies in
+Moltres also closely replicated the six-group neutron spectrum from the
+Serpent group constants. Figure \ref{fig:ntspec} compares the neutron energy
+spectra from Serpent and Moltres in the central fuel salt region. The
+six-group neutron spectra overlap exactly over each other. More generally, the
+plot shows the distinctive fast spectrum observed in the \gls{MSFR} with dips
+in the spectrum corresponding to elastic scattering resonances from lithium
+and fluorine. From this plot, we observe that the discrepancies in
 $k_{\text{eff}}$ arise mainly from discretizing neutron energy into groups
 rather than the neutron diffusion model itself. We could obtain a more
 accurate representation of the neutronics in the \gls{MSFR} by using more
 neutron energy groups but this would adversely impact simulation times in the
 subsequent multiphysics finite element analyses.
 
-In summary, Moltres can replicate most of the relevant neutronics parameters
-accurately with the group constant data from Serpent. While the
-$k_{\text{eff}}$ values have discrepancies on the order of 100 pcm, they are
-relatively small compared to results from other codes. Furthermore, the
-$\beta_{\text{eff}}$ and temperature coefficients, which are important
+In summary, Moltres replicated most of the relevant neutronics parameters
+accurately with the group constant data from Serpent. The $\beta_{\text{eff}}$
+and temperature reactivity coefficients, which are important
 parameters for modeling transient reactor behavior, are in excellent
-agreement.
+agreement. While the
+$k_{\text{eff}}$ values have discrepancies on the order of 100 pcm, they are
+relatively small compared to the $k_{\text{eff}}$ values from the neutron
+diffusion and SP3 models in OpenFOAM \cite{cervi_development_2019}.
