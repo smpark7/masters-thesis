@@ -54,23 +54,32 @@ last subsection.
 \end{figure}
 
 Figure \ref{fig:flow-temp} shows the temperature and velocity fields of the
-fuel salt in the core at steady state from Moltres and the Polimi/TUDelft
-models. The results from Moltres show good qualitative agreement with the
-Polimi and TUDelft models \cite{aufiero_development_2014}; we observe similar
-flow and hotspot features in all three models. There is a large recirculation
-region near the blanket tank walls arising from turbulent flow. Inertial
-forces dominate over viscous forces to form this large eddy. The figure also
-shows two relatively stagnant regions along the central axis at the top and
-bottom of the core. Temperature hotspots form in these regions of
-recirculation as convection is
-the dominant heat transfer mechanism. The maximum temperature from Moltres,
-1275 K near the bottom of the recirculation zone, is closer to the maximum
-temperature in the Polimi model ($\approx$ 1300 K) than the TUDelft model
-($\approx$ 1200K). The minimum temperature is 922 K at the inlet. Figure
-\ref{fig:flow} provides an alternate view of the flow profile through flow
-streamlines superimposed on the velocity magnitude distribution. The fastest
-salt flow occurs at the inlet, outlet, and at core half-height approximately
-0.40 m away from the central axis.
+fuel salt in the core at steady state from Moltres and the Polimi and TUDelft
+models. Figure \ref{fig:flow} provides an alternate view of the flow profile
+through flow streamlines superimposed on the velocity magnitude distribution.
+The results from Moltres show good qualitative agreement with the
+Polimi and TUDelft models \cite{fiorina_modelling_2014}; we observe similar
+flow and hotspot features in all three models. Furthermore, the highest salt
+velocities in all three models occur at the inlet, outlet, and at core
+half-height approximately 0.40 m away from the central axis. There is a large
+recirculation region near the blanket tank walls arising from turbulent flow.
+Inertial forces dominate over viscous forces to form this large eddy. The main
+difference between Moltres and Fiorina et al.'s models is the flow profile
+near the central axis at the top and bottom of the core.
+The Polimi and TUDelft models predict relatively stagnant flow in these
+regions without recirculation. Moltres, on the other hand, predicts explicit
+recirculating flow in these regions. This is due to our constant turbulent
+viscosity approximation in Moltres. The k-$\epsilon$ turbulence models in the
+Polimi and TUDelft models predict that the turbulent viscosity in these
+regions is as high as 100 Pa s, much higher than our 40 Pa s approximation.
+
+Nevertheless, similar temperature hotspots form in these regions of
+recirculation and stagnation as convection is the dominant heat transfer
+mechanism. The maximum temperature from Moltres, 1275 K near the bottom of the
+large recirculation zone, is closer to the maximum temperature in the Polimi
+model ($\approx$ 1300 K) than the TUDelft model ($\approx$ 1200K). Similarly,
+we observe cooler temperatures in high-velocity regions. The minimum
+temperature is 924 K at the inlet. 
 
 While the temperatures at the hotspots are well below the melting point of the
 Ni-alloy structure (1500 K), they may cause undue thermal stress on the
@@ -106,7 +115,7 @@ peak flux value from this paper is slightly higher as we used the steady-state
 temperature distribution while Fiorina et al. and Aufiero et al. imposed a
 uniform temperature distribution at 973 K.
 
-\begin{figure}[t!]
+\begin{figure}[b!]
     \centering
     \begin{subfigure}[t]{.325\textwidth}
         \centering
@@ -133,7 +142,7 @@ uniform temperature distribution at 973 K.
         \includegraphics[width=\textwidth]{ss-g6}
     \end{subfigure}
     \caption{Neutron flux distributions in the core for neutron energy groups
-    1 to 6. The y and x axes represent height and radius values of the core
+    1 to 6. The y and x axes represent height and radius (in cm) of the core
     relative to the entire reactor geometry.}
     \label{fig:neutronflux}
 \end{figure}
@@ -153,42 +162,26 @@ uniform temperature distribution at 973 K.
     \label{fig:axialradial}
 \end{figure}
 
-\begin{table}[t!]
+\begin{table}[b!]
 	\centering
 	\caption{Peak neutron flux values from Moltres (this paper), COMSOL
 	\cite{fiorina_molten_2013}, and OpenFOAM \cite{aufiero_development_2014}
-	models. The COMSOL and OpenFOAM values were calculated with uniform
-	temperature distributions.}
-	\begin{tabular}{l S}
+	models along with the temperature distribution with which the values were
+	obtained.}
+	\begin{tabular}{l l S}
 		\toprule
-		{Model} & {Peak Neutron Flux [$\times 10^{15}$ cm$^{-2}$ s$^{-1}$]}
+		{Model} & {Temperature distribution} & {Peak Neutron Flux [$\times 10^{15}$ cm$^{-2}$ s$^{-1}$]}
 		\\
 		\midrule
-		{Moltres (This paper)} & 9.80\\
-		{COMSOL} & 8.6 \\
-		{OpenFOAM} & 9.0 \\
+		{Moltres (This paper)} & {Steady state} & 9.80\\
+		{COMSOL} & {Uniform, 973 K} & 8.6 \\
+		{OpenFOAM} & {Uniform, 973 K} & 9.0 \\
 		\bottomrule
 	\end{tabular}
 	\label{table:peak-flux}
 \end{table}
 
-As mentioned before, the \glspl{DNP} are mobile in \glspl{MSR} and their
-distributions do not directly correspond to the neutron flux distributions.
-The location where the \glspl{DNP} decay and emit neutrons impacts their
-neutron
-importance depending on their proximity to fissile and parasitic isotopes.
-Figure \ref{fig:dnp} shows the \gls{DNP} distributions for all eight \gls{DNP}
-groups. The
-precursors from the shortest-lived group (Group 8) predominantly decay within
-the core as their half-lives are shorter than the time it takes to reach the
-outlet while the precursors from the longest-lived group (Group 1) are
-effectively uniformly distributed due to their long half-lives relative to the
-average circulation time. For the longer-lived groups, the mesh elements with
-relatively high and low \gls{DNP} concentrations near the outlet and inlet,
-respectively, suggest that the mesh is too coarse. Thus, we would recommend
-further refinement for future work involving similar geometries.
-
-\begin{figure}[htb!]
+\begin{figure}[t!]
     \centering
     \begin{subfigure}[t]{.243\textwidth}
         \centering
@@ -229,12 +222,129 @@ further refinement for future work involving similar geometries.
     \label{fig:dnp}
 \end{figure}
 
-\subsection{In-Core \texorpdfstring{$\beta_{\text{eff}}$}{beta_eff}}
+\subsection{Delayed Neutron Fraction}
 
-An important safety parameter for \glspl{MSR} is the actual in-core
-$\beta_{\text{eff}}$ value. This value represents the actual effective delayed
+As mentioned earlier, the delayed neutron precursors (DNPs) are mobile in
+\glspl{MSR} and their distributions do not directly correspond to the neutron
+flux distributions. The location where the \glspl{DNP} decay and emit neutrons
+impacts their neutron
+importance depending on their proximity to fissile and parasitic isotopes.
+Figure \ref{fig:dnp} shows the \gls{DNP} distributions for all eight \gls{DNP}
+groups. In general, we observe less \glspl{DNP} in the regions with fast salt
+flow, namely
+ The
+precursors from the shortest-lived group (Group 8) predominantly decay within
+the core as their half-lives are shorter than the time it takes to reach the
+outlet while the precursors from the longest-lived group (Group 1) are
+relatively evenly distributed due to their long half-lives. For the
+longer-lived groups, the \gls{DNP} concentrations are not well-resolved on the
+mesh elements adjacent to the outlet and the inlet boundaries, respectively.
+Thus, we recommend careful mesh refinement for future work involving similar
+geometries.
+
+\begin{figure}[b!]
+    \centering
+    \begin{subfigure}[t]{.30\textwidth}
+        \centering
+        \vspace{.9cm}
+        \includegraphics[width=\textwidth]{ss-pre}
+    \end{subfigure}
+    \begin{subfigure}[t]{.69\textwidth}
+        \centering
+        \vspace{0pt}
+        \includegraphics[width=\textwidth]{fiorina-pre}
+    \end{subfigure}
+    \caption{Total \gls{DNP} distribution in the core from Moltres
+    (left), Polimi (center), and TUDelft (right) models.}
+    \label{fig:pre}
+\end{figure}
+
+In Figure \ref{fig:pre}, we compare the total delayed neutron source
+distribution from Moltres with the results from the Polimi and TUDelft models
+\cite{fiorina_modelling_2014}. In contrast to Figure \ref{fig:dnp} which shows
+the precursor distribution, Figure \ref{fig:pre} shows the rate of delayed
+neutron emission, which we calculated by multiplying each \gls{DNP} group
+$C_i$ with its associated decay constant $\lambda_i$.
+We observe that the Polimi and TUDelft models
+feature greater \gls{DNP} retention in the stagnant regions within the core.
+This effect is less pronounced in the Moltres model. There is less build-up
+of \glspl{DNP} at the top of the core in Moltres because most of the
+\glspl{DNP} produced near the center of the core cannot enter the axial
+recirculation zone that only appears in Moltres. We also observe less build-up
+in the large recirculation zone near the blanket tank.
+
+The in-core delayed neutron fraction $\beta_c$ is an important safety
+parameter for \glspl{MSR}. This value represents the actual delayed
 neutron fraction in \glspl{MSR} after accounting for the loss of delayed
-neutrons due to out-of-core \gls{DNP} decay. Table * shows 
+neutrons from \glspl{DNP} decaying outside the active core region. In general,
+reactors with smaller $\beta$ values exhibit greater prompt jumps in the
+neutron flux in response to reactivity insertions because they have a greater
+proportion of prompt neutrons under normal operating conditions. This is
+undesirable from a reactor safety perspective because it exposes the reactor
+to relatively more extreme conditions before active safety mechanisms
+activate and scram the reactor. In \glspl{MSR}, this danger is partly
+mitigated by the strong, negative fuel temperature reactivity coefficient. 
+Chapter 6 contains more in-depth discussions for various transient scenarios.
+
+In Table \ref{table:dnf}, we compare the fraction of out-of-core emissions and
+the $\beta_c$ values from Moltres with the Polimi and TUDelft models. We
+calculated the fraction of out-of-core emissions by finding the total amount
+of each \gls{DNP} group in the core and the outer loop, multiplying each total
+by their associated decay time constants $\lambda_i$, and calculating the
+proportion of emissions in the outer loop relative to the grand total. We
+calculated $\beta_c$ by first obtaining the prompt neutron emission rate from
+Moltres and subsequently using in-core delayed neutron emission rate from the
+previous calculation to find the fraction of delayed neutron emission rate
+relative to total emission rate.
+
+\begin{table}[t!]
+	\centering
+	\caption{The fraction of delayed neutrons lost from out-of-core emission
+	and the in-core delayed neutron fraction $\beta_c$ values from Moltres
+	(this paper), and the Polimi and TUDelft models
+	\cite{fiorina_modelling_2014}.}
+	\begin{tabular}{l S S}
+		\toprule
+		{Model} & {Out-of-Core Emission [\%]} & {$\beta_c$ [pcm]}
+		\\
+		\midrule
+		{Moltres (This paper)} & {44.16} & {184.9}\\
+		{Polimi} & {34.80} & {134.3} \\
+		{TUDelft} & {34.85} & {123.8} \\
+		\bottomrule
+	\end{tabular}
+	\label{table:dnf}
+\end{table}
+
+The fraction of out-of-core emissions from our Moltres model
+differs significantly by approximately 10\%, while $\beta_c$ differs by
+60-70 pcm. We attribute the former to the lesser \gls{DNP} retention in the
+stagnant flow regions in the core; the \glspl{DNP} are more evenly distributed
+along the entire primary loop, leading to more delayed neutron emissions in
+the outer loop region. The most likely reason for this is differences in the
+flow pattern in the recirculation zone because convective species transport
+dominates diffusive effects in the \gls{MSFR}. The exact flow pattern in the
+recirculation zones in the Polimi and TUDelft models is likely to differ from
+that in Moltres (Figure \ref{fig:flow}). Figure \ref{fig:flow-temp} also shows
+some minor differences in the magnitude of the flow in the recirculation zones
+between Moltres, and the Polimi and TUDelft models. Although the sizes of the
+arrows representing flow velocity are not normalized to the same scales, a
+quick comparison between the largest arrows and the arrows in the
+recirculation zone indicate that the recirculation zone in Moltres is
+relatively more stagnant. This could explain the concentration of \glspl{DNP}
+along an ``arc'' closer to the center of the core in Moltres as opposed to the
+more even distribution of \glspl{DNP} throughout the whole recirculation zones
+in the Polimi and TUDelft models. The higher peak \glspl{DNP} distribution in
+Moltres also supports this assertion.
+
+In spite of the greater delayed neutron losses, the $\beta_c$ value is higher
+in Moltres than the Polimi and TUDelft models. To account for this
+peculiarity, we note that Fiorina et al. \cite{fiorina_modelling_2014}
+applied adjoint flux weighting for their $\beta_c$ calculation while we report
+our value as the physical fraction without adjoint weighting. The weighting
+results in a significant difference in $\beta_c$ because a large fraction of
+the \glspl{DNP} decay in the recirculation zones, where the neutron importance
+is noticeably diminished.
 
 \section{Decay Heat}
 

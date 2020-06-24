@@ -86,17 +86,24 @@ The absolute value of $k_{\text{eff}}$ largely impacts the steady-state
 temperature of the reactor. We can raise or lower the average core temperature
 at steady state to meet the design specifications for the inlet and outlet
 temperatures by adjusting the fissile inventory and $k_{\text{eff}}$. In
-transient analysis, the $\beta_{\text{eff}}$ and reactivity coefficients are
-important as they dictate the duration and magnitude of the reactor
-response to a transient initiator. We calculated $\beta_{\text{eff}}$ by
+transient analysis, the delayed neutron fraction $\beta$ and reactivity
+coefficients $\alpha$ are
+important as they dictate the duration, shape, and magnitude of the reactor
+response to a transient initiator. The difference between $\beta$ and
+$\beta_{\text{eff}}$ is that $\beta$ is the physical delayed neutron fraction
+while $\beta_{\text{eff}}$ is the delayed neutron fraction weighted on the
+adjoint neutron flux. We will compare the $\beta$ value from Moltres to the
+$\beta_{\text{eff}}$ value from Serpent because Moltres currently lacks a
+adjoint calculation capability. We calculated $\beta$ by
 taking the relative difference between the $k_{\text{eff}}$ values with and
-without \glspl{DNP} in Table \ref{table:keff}. The $\beta_{\text{eff}}$ values
-at 973 K, shown in Table \ref{table:betaeff}, are in excellent agreement with
-a 4.43 pcm discrepancy.
+without \glspl{DNP} in Table \ref{table:keff}. The $\beta$ and
+$\beta_{\text{eff}}$ values at 973 K, shown in Table \ref{table:betaeff}, are
+in good agreement with a 4.43 pcm discrepancy.
 
 \begin{table}[htb!]
 	\centering
-	\caption{$\beta_{\text{eff}}$ values from Serpent and Moltres at 973 K.}
+	\caption{$\beta_{\text{eff}}$ and $\beta$ values from Serpent and Moltres,
+	respectively, at 973 K.}
 	\begin{tabular}{l S S}
 		\toprule
 		{Code} & {$\beta_{\text{eff}}$ [pcm]} & {Difference wrt Serpent [pcm]}
