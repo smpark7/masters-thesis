@@ -23,7 +23,7 @@ the static \gls{MSFR} model. Moltres solves the six-group neutron diffusion equa
 steady-state eigenvalue problem to find the $k_{\text{eff}}$ as it does not
 currently have the capability to calculate the adjoint flux. Table
 \ref{table:keff} shows the $k_{\text{eff}}$ values from Serpent and Moltres at
-973 K and the corresponding salt density, while Table \ref{table:ktemp} shows
+973 K and the corresponding salt density, and Table \ref{table:ktemp} shows
 the $k_{\text{eff}}$ values for other temperatures at 100 K intervals. We
 observe small discrepancies on the order of 100 pcm between the two codes
 which we attribute to two main factors: the accuracy of the neutron diffusion
@@ -148,9 +148,9 @@ discrepancy of 0.019 pcm K$^{-1}$.
 		K$^{-1}$]} & {$\alpha_\rho$ [pcm K$^{-1}$]} & {$\alpha_T$ [pcm
 		K$^{-1}$]} \\
 		\midrule
-		{Serpent} & -4034 \pm 14 & 3.737 \pm 0.013 & 3.424 \pm 0.013 & 7.165
-		\pm 0.013 \\
-		{Moltres} & {-} & {-} & {-} & 7.184\\
+		{Serpent} & -4034 \pm 14 & -3.737 \pm 0.013 & -3.424 \pm 0.013 &
+		-7.165 \pm 0.013 \\
+		{Moltres} & {-} & {-} & {-} & -7.184\\
 		\bottomrule
 	\end{tabular}
 	\label{table:alpha}
@@ -185,7 +185,7 @@ In summary, Moltres replicated most of the relevant neutronics parameters
 accurately with the group constant data from Serpent. The $\beta_{\text{eff}}$
 and temperature reactivity coefficients, which are important
 parameters for modeling transient reactor behavior, are in excellent
-agreement. While the
-$k_{\text{eff}}$ values have discrepancies on the order of 100 pcm, they are
-relatively small compared to the $k_{\text{eff}}$ values from the neutron
-diffusion and SP3 models in OpenFOAM \cite{cervi_development_2019}.
+agreement. The $k_{\text{eff}}$ values have discrepancies on the order of 100
+pcm and they are relatively small compared to the $k_{\text{eff}}$ values from
+the neutron diffusion and SP3 models in OpenFOAM
+\cite{cervi_development_2019}.
