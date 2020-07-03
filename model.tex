@@ -1,57 +1,94 @@
-The main simulation tool used in this work for studying the \gls{MSFR} is
-Moltres. While we used Moltres for the steady-state and transient analysis, it
-requires a dedicated neutron transport solver such as Serpent 2 to generate
-neutron energy group constant data for the multigroup neutron diffusion
-calculations in Moltres. This chapter provides brief introductions of the
-Serpent and Moltres codes, and the general modeling approach for the
+This work demonstrates the \gls{MSFR} simulation capabilities of Moltres, a
+multiphysics simulation tool for \glspl{MSR} \cite{lindsay_introduction_2018}.
+To run simulations on Moltres, it requires input
+group constant data from a neutron transport solver for the
+multigroup neutron diffusion calculations, and a mesh file representing the
+geometry of the reactor. This work uses Serpent 2 \cite{leppanen_serpent_2014}
+for the former and Trelis \cite{noauthor_trelis_2018} for the latter.
+This chapter provides brief introductions of
+Serpent 2, MOOSE, and Moltres, and the general modeling approach for the
 multiphysics simulations in Moltres.
 
 \section{Serpent 2}
 
 Serpent 2 \cite{leppanen_serpent_2014} is a continuous-energy Monte Carlo
-reactor physics code under
-active development at the VTT Technical Research Centre of Finland. It was
-created in 2004 out of the need for better general-purpose neutron transport
-codes for group constant generation in lattice geometries, and has since grown
-to support more general capabilities, for an active user base of more than 500
-people worldwide. Serpent is highly parallelizable due to its support for
-both MPI and OpenMP parallel programming APIs, and highly validated and
+neutron transport application under
+active development led by the VTT Technical Research Centre of Finland. It was
+created in 2004 for group constant generation in lattice geometries, and has
+since grown to support more general capabilities. Serpent 2 is highly
+parallelizable, supporting
+both MPI and OpenMP parallel programming APIs. It has also been validated and
 verified against experimental data and other well-established codes.
 
-In Serpent, each neutron is tracked through a combination of ray-tracing-based
-surface tracking and rejection sampling-based delta-tracking. Users may define
-the number of neutrons and the number of active and inactive cycles for each
+In Serpent 2, each neutron is tracked through a combination of
+ray-tracing-based surface tracking and rejection sampling-based delta
+tracking. Users may define the number of neutron histories and the number of
+active and inactive cycles for each
 simulation. Inactive cycles are required for fission source distribution
 convergence, before interactions are tallied in the active cycles.
 Interaction types and locations are
 determined stochastically based on neutron interaction data from established
-nuclear data libraries (e.g. ENDF, JEFF). These nuclear data libraries provide
-continuous-energy cross section data at discrete temperatures. For other
-temperatures, Serpent has a built-in Doppler-broadening preprocessor that
-extrapolates the relevant cross section data from a lower temperature. 
+nuclear data libraries (e.g. ENDF \cite{chadwick_endf/b-vii.1_2011}, JEFF
+\cite{oecd/nea_jeff-3.1.2_2014}). These nuclear data libraries provide
+continuous-energy cross section data at discrete temperatures. Beyond the
+discrete library temperatures, Serpent 2 has a built-in Doppler-broadening
+preprocessor that extrapolates the relevant cross section data from a lower
+temperature \cite{leppanen_serpent_2014}. 
 
-In the context of this project, we used Serpent with the JEFF-3.1.2 nuclear
+In the context of this work, Serpent 2 uses the JEFF-3.1.2 nuclear
 data library \cite{oecd/nea_jeff-3.1.2_2014} to generate group constants
-for Moltres. The reactor geometry is based on the axisymmetric \gls{MSFR}
-neutronics benchmark geometry published in several previous papers involving
-the \gls{MSFR}, as shown in Fig. \ref{fig:msfrgeom}. The relevant group
-constant data are collapsed into six neutron energy groups, and calculated for
-temperature values of 800 K to 1300 K at 50 K intervals.
+needed by Moltres. The relevant group constant data are collapsed into six
+neutron energy groups, and calculated at discrete temperature values from 800
+K to 1300 K at 100 K intervals. Table \ref{table:bound} shows the upper bounds
+of each neutron energy group. The group constants relevant for neutronics
+calculations in Moltres are the
+macroscopic fission $\Sigma^f_{g}$, removal $\Sigma^r_{g}$, and scattering
+$\Sigma^s_{g' \rightarrow g}$ neutron cross sections,
+neutron diffusion coefficients $D_g$, average fission energies $\epsilon_g$,
+average neutron yields $\nu$, inverse neutron speeds $1/v$, flux spectra
+$\chi$, \gls{DNP} decay constants $\lambda_i$, and effective delayed neutron
+fractions $\beta_{eff}$. These group constants are extracted from
+the Serpent 2 output files using a Python script available from the Github
+repository that holds the Moltres source code \cite{lindsay_moltres_2017}. The
+script rewrites the group constants into a Moltres-compatible format.
 
-The group constants relevant for neutronics calculations in Moltres are the
-macroscopic fission, absorption, and scattering neutron cross sections,
-neutron diffusion coefficients, average fission energies, average neutron
-yields, inverse neutron speeds, flux spectra, \gls{DNP} decay constants, and
-effective delayed neutron fractions. These group constants are extracted from
-the Serpent output files using a Python script available from the Github
-repository that holds the Moltres source code. The script rewrites the group
-constants into a Moltres-compatible format.
+Serpent 2 provides standard geometric surfaces (e.g. planes, cylinders, cones)
+for defining reactor geometries. In this work, the reactor geometry is the
+same axisymmetric \gls{MSFR} geometry from the paper by Fiorina et al.
+\cite{fiorina_modelling_2014}, as shown in Fig. \ref{fig:msfrgeom}.
 
-\section{Moltres}
+\begin{table}[htb!]
+	\centering
+	\caption{Neutron energy group upper bounds used in Serpent 2.}
+	\begin{tabular}{c S}
+		\toprule
+		{Group number} & {Upper bound [MeV]}\\
+		\midrule
+		1 & 20\\
+		2 & 2.2313\\
+		3 & 0.4979\\
+		4 & 0.0247875\\
+		5 & 0.0055308\\
+		6 & 0.0007485\\
+		\bottomrule
+	\end{tabular}
+	\label{table:bound}
+\end{table}
 
-Moltres is a \gls{MOOSE}-based application for coupled
-neutronics/thermal-hydraulics simulations of \glspl{MSR}. \gls{MOOSE}
-\cite{gaston_physics-based_2015} is a highly parallelizable,
+\section{MOOSE and Moltres}
+
+Moltres \cite{lindsay_moltres_2017} is a \gls{MOOSE}-based
+\cite{gaston_physics-based_2015} application for
+coupled neutronics/thermal-hydraulics simulations of \glspl{MSR}. MOOSE
+provides foundational framework for computationally solving \glspl{PDE} and
+pre-built physics modules for common applications such as the Navier-Stokes
+physics module. Moltres is also a MOOSE physics module for simulating
+\glspl{MSR}. This section describes MOOSE, the Navier-Stokes physics module,
+and Moltres.
+
+\subsection{MOOSE}
+
+\gls{MOOSE} \cite{gaston_physics-based_2015} is a highly parallelizable,
 finite element framework developed at \gls{INL} for simplifying the process of
 creating fully-coupled, non-linear, multiphysics solvers. The framework
 provides a user-friendly interface for this task through object-oriented
@@ -93,7 +130,7 @@ run on high performance computing clusters.
     \centering
     \includegraphics[width=.5\textwidth]{central-core}
     \caption{2-D axisymmetric model of the MSFR. The red box indicates the
-    central core region relevant to the modeling approach in Moltres.}
+    central core region in the modeling approach in Moltres.}
     \label{fig:core}
 \end{figure}
 
@@ -211,24 +248,6 @@ Moltres automatically interpolates the group constant data for required
 temperatures using one of the many predefined interpolation methods available
 in \gls{MOOSE}. Once again, users have the freedom to select their
 interpolation method of choice.
-
-\begin{table}[htb!]
-	\centering
-	\caption{Neutron energy group upper bounds used in Serpent.}
-	\begin{tabular}{c S}
-		\toprule
-		{Group number} & {Upper bound [MeV]}\\
-		\midrule
-		1 & 20\\
-		2 & 2.2313\\
-		3 & 0.4979\\
-		4 & 0.0247875\\
-		5 & 0.0055308\\
-		6 & 0.0007485\\
-		\bottomrule
-	\end{tabular}
-	\label{table:bound}
-\end{table}
 
 For this work, we have six neutron energy groups according to the energy
 boundaries in table \ref{table:bound}, eight \gls{DNP} groups as defined by

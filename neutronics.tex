@@ -1,10 +1,10 @@
-In this chapter, we compare key neutronics results between Serpent and Moltres
+This chapter compares key neutronics results between Serpent and Moltres
 for a static model of the \gls{MSFR}, i.e. no salt flow, and uniform
 temperature distribution to assess the accuracy of the
 six-group neutron diffusion model in Moltres on a fast-spectrum reactor. This
 exercise also serves as a verification for the group constant data
-generated for Moltres from Serpent. For visibility, we list the important
-details of the static model below.
+generated for Moltres from Serpent. For clarity, here are the important
+details of the static model.
 
 \textbf{Details of the static \gls{MSFR} model on Moltres}
 \begin{itemize}
@@ -18,17 +18,16 @@ details of the static model below.
 
 \section{Effective Multiplication Factor and Delayed Neutron Fraction}
 
-We calculated estimates of $k_{\text{eff}}$ values in Serpent and Moltres for
-the static \gls{MSFR} model. Moltres solves the six-group neutron diffusion equations as a
-steady-state eigenvalue problem to find the $k_{\text{eff}}$ as it does not
-currently have the capability to calculate the adjoint flux. Table
-\ref{table:keff} shows the $k_{\text{eff}}$ values from Serpent and Moltres at
-973 K and the corresponding salt density, and Table \ref{table:ktemp} shows
+Moltres solves the six-group neutron diffusion equations as a
+steady-state eigenvalue problem to find the $k_{\text{eff}}$ for the static
+\gls{MSFR} model. Table
+\ref{table:keff} shows the $k_{\text{eff}}$ values from Serpent 2 and Moltres
+at 973 K and the corresponding salt density, and Table \ref{table:ktemp} shows
 the $k_{\text{eff}}$ values for other temperatures at 100 K intervals. We
 observe small discrepancies on the order of 100 pcm between the two codes
 which we attribute to two main factors: the accuracy of the neutron diffusion
-model, and the omission of the blanket tank structural material. The neutron
-diffusion model is not as accurate as the other S$_{\text{N}}$ or
+model, and the omission of the blanket tank structural material in Moltres.
+The neutron diffusion model is not as accurate as the other S$_{\text{N}}$ or
 SP$_{\text{N}}$ deterministic methods nor the Monte Carlo approach in Serpent.
 Regarding the omission of the blanket tank material, we replaced the
 2 cm-thick structural material with blanket salt. This replacement may be
@@ -45,14 +44,14 @@ neutron energy group to reduce computational load.
 \begin{table}[htb!]
     \small
 	\centering
-	\caption{$k_{\text{eff}}$ values from Serpent and Moltres at 973 K.}
+	\caption{$k_{\text{eff}}$ values from Serpent 2 and Moltres at 973 K.}
 	\begin{tabular}{l S c}
 		\toprule
-		{Code} & {$k_{\text{eff}}$} & {Difference wrt Serpent [pcm]}\\
+		{Code} & {$k_{\text{eff}}$} \\
 		\midrule
-		{Serpent} & 1.00662 \pm 0.00005 & {-}\\
-		{Moltres with \glspl{DNP}} & 1.0079400 \pm 0.0000010 & 132\\
-		{Moltres without \glspl{DNP}} & 1.0049197 \pm 0.0000010 & {-}\\
+		{Serpent 2} & 1.00662 \pm 0.00005 \\
+		{Moltres with \glspl{DNP}} & 1.0079400 \pm 0.0000010 \\
+		{Moltres without \glspl{DNP}} & 1.0049197 \pm 0.0000010 \\
 		\bottomrule
 	\end{tabular}
 	\label{table:keff}
@@ -61,13 +60,13 @@ neutron energy group to reduce computational load.
 \begin{table}[htb!]
     \small
 	\centering
-	\caption{$k_{\text{eff}}$ values from Serpent and Moltres at various
+	\caption{$k_{\text{eff}}$ values from Serpent 2 and Moltres at various
 	temperatures from 800 K to 1400 K.}
 	\begin{tabular}{S S S S}
 		\toprule
-		{Temperature [K]} & {$k_{\text{eff}}$ $\pm$ 1-$\sigma$ uncertainty
-		(Serpent)} & {$k_{\text{eff}}$ (Moltres)} & {Difference wrt Serpent
-		[pcm]}
+		{Temperature [K]} & {$k_{\text{eff}}$ $\pm$ $\sigma$
+		(Serpent 2)} & {$k_{\text{eff}}$ (Moltres)} & {Difference wrt Serpent
+		2 [pcm]}
 		\\
 		\midrule
 		800  & 1.01996 \pm 0.00005 & 1.02117 & 121 \\
@@ -82,14 +81,14 @@ neutron energy group to reduce computational load.
 	\label{table:ktemp}
 \end{table}
 
-The absolute value of $k_{\text{eff}}$ largely impacts the steady-state
+The absolute value of $k_{\text{eff}}$ impacts the final steady-state
 temperature of the reactor. We can raise or lower the average core temperature
 at steady state to meet the design specifications for the inlet and outlet
 temperatures by adjusting the fissile inventory and $k_{\text{eff}}$. In
 transient analysis, the delayed neutron fraction $\beta$ and reactivity
 coefficients $\alpha$ are
 important as they dictate the duration, shape, and magnitude of the reactor
-response to a transient initiator. The difference between $\beta$ and
+transient response. The difference between $\beta$ and
 $\beta_{\text{eff}}$ is that $\beta$ is the physical delayed neutron fraction
 while $\beta_{\text{eff}}$ is the delayed neutron fraction weighted on the
 adjoint neutron flux. We will compare the $\beta$ value from Moltres to the
@@ -102,8 +101,8 @@ in good agreement with a 4.43 pcm discrepancy.
 
 \begin{table}[htb!]
 	\centering
-	\caption{$\beta_{\text{eff}}$ and $\beta$ values from Serpent and Moltres,
-	respectively, at 973 K.}
+	\caption{$\beta_{\text{eff}}$ and $\beta$ values from Serpent 2 and
+	Moltres, respectively, at 973 K.}
 	\begin{tabular}{l S S}
 		\toprule
 		{Code} & {$\beta_{\text{eff}}$ [pcm]} & {Difference wrt Serpent [pcm]}
@@ -123,7 +122,10 @@ resonance absorption peaks and temperature-induced density changes. Although
 Doppler coefficients typically show logarithmic dependence to temperature, we
 report them, along with the other coefficients, as linear gradient
 values of the reactivity given the relatively linear trend within the relevant
-temperature range (Figure \ref{fig:reactivity}). Table \ref{table:alpha} shows
+temperature range (Figure \ref{fig:reactivity}). The temperature range
+extends below the melting point of the fuel salt (873 K) to ensure that
+the data covers the relevant range between 873 K and 900 K. Table
+\ref{table:alpha} shows
 the temperature coefficients as described prior. The total temperature
 coefficients from Serpent and Moltres show excellent agreement with a
 discrepancy of 0.019 pcm K$^{-1}$.
@@ -144,7 +146,7 @@ discrepancy of 0.019 pcm K$^{-1}$.
 	for the temperature range of 800 K to 1400 K.}
 	\begin{tabular}{l S S S S}
 		\toprule
-		{Code} & {$\alpha_D$ (log) [pcm]} & {$\alpha_D$ (linear) [pcm
+		{Software} & {$\alpha_D$ (log) [pcm]} & {$\alpha_D$ (linear) [pcm
 		K$^{-1}$]} & {$\alpha_\rho$ [pcm K$^{-1}$]} & {$\alpha_T$ [pcm
 		K$^{-1}$]} \\
 		\midrule
@@ -161,10 +163,8 @@ discrepancy of 0.019 pcm K$^{-1}$.
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=.8\textwidth]{nt-spec}
-    \caption{Reactivity values from Serpent and Moltres. The Doppler
-    reactivity values were calculated at a fixed density of 4.1249 g
-    cm$^{-3}$. The density reactivity values were calculated at a fixed
-    temperature of 973 K.}
+    \caption{The fine-group and six-group neutron energy spectra from Serpent
+    2 and Moltres normalized per unit lethargy.}
     \label{fig:ntspec}
 \end{figure}
 
@@ -182,10 +182,10 @@ neutron energy groups but this would adversely impact simulation times in the
 subsequent multiphysics finite element analyses.
 
 In summary, Moltres replicated most of the relevant neutronics parameters
-accurately with the group constant data from Serpent. The $\beta_{\text{eff}}$
-and temperature reactivity coefficients, which are important
-parameters for modeling transient reactor behavior, are in excellent
-agreement. The $k_{\text{eff}}$ values have discrepancies on the order of 100
-pcm and they are relatively small compared to the $k_{\text{eff}}$ values from
-the neutron diffusion and SP3 models in OpenFOAM
-\cite{cervi_development_2019}.
+accurately with the group constant data from Serpent. Moltres agrees with the
+high fidelity simulation in Serpent 2 for the $\beta_{\text{eff}}$ and
+temperature reactivity coefficients, which are important parameters for
+modeling transient reactor behavior. The $k_{\text{eff}}$ values have
+discrepancies on the order of 100 pcm and they are relatively small compared
+to the $k_{\text{eff}}$ values from the neutron diffusion and SP3 models in
+OpenFOAM \cite{cervi_development_2019}.

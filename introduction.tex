@@ -2,10 +2,13 @@
 
 Greenhouse gas emission from human activities is the main cause of climate
 change, a global phenomenon characterized by shifting weather patterns and
-rising temperatures. Climate change has dire consequences on human health and
-safety due to extreme weather events and the overall impact on food
-production. As a result, urgent measures are necessary to limit greenhouse gas
-emissions, namely CO$_2$ emissions from electricity generation.
+rising temperatures. The concentration of CO$_2$, a greenhouse gas, in the
+atmosphere has been rising steadily throughout modern human history
+\cite{us_department_of_commerce_global_nodate}. Climate change has dire
+consequences on human health and safety due to extreme weather events and the
+overall impact on food production \cite{noauthor_global_nodate}. As a result,
+urgent measures are necessary to limit greenhouse gas emissions, namely CO$_2$
+emissions from electricity generation.
 
 Electricity generation from burning fossil fuels represents the
 largest source of CO$_2$ emissions (38\% in 2018 \cite{iea_global_2019});
@@ -15,20 +18,21 @@ a viable low-carbon replacement for burning fossil fuels.
 Other low-carbon energy sources include solar-, wind-, and hydro-power. Each
 energy source has its own set of advantages and disadvantages; nuclear power's
 advantage over renewable energy sources is that it provides consistent
-base-load power independent of weather and geographical location (cite mit).
-Employing a diverse mix of these energy sources ensures energy security and
-reliability during and after our transition towards a low-carbon future (cite mit).
+base-load power independent of weather and geographical location
+\cite{petti_future_2018}. Employing a diverse mix of these energy sources
+ensures energy security and reliability in our transition
+towards a low-carbon future \cite{petti_future_2018}.
 
 The world would have to ramp up the current rate of reactor deployments to
 displace some of the
 presently large share of energy production from fossil fuel power plants.
 However, several obstacles stand in the way of mass reactor deployments. These
 include perceived safety risks, sustainability concerns, nuclear proliferation
-risks, and the ability to compete economically with other sources of energy.
-A potential solution to the aforementioned issues is
-the \gls{MSR} concept, one of six advanced reactor designs
-selected by the \gls{GIF} \cite{gif_technology_2002} for continued research
-and development.
+risks, and the ability to compete economically with other sources of energy
+\cite{massachusetts_institute_of_technology_future_2003}. A potential solution
+to the aforementioned issues is the \gls{MSR} concept, one of six advanced
+reactor designs selected by the Generation IV International Forum
+\cite{gif_technology_2002} for continued research and development.
 
 The primary coolants in MSRs consist of a molten salt mixture
 with fissile and/or fertile material directly dissolved in the coolant.
@@ -44,102 +48,85 @@ reduces reactor downtime during reactor operation.
 
 However, the liquid fuel form also brings about novel computational
 challenges in simulating the transient behavior of \glspl{MSR}; the
-neutronics and thermal-hydraulics are tightly coupled due to the strong
-temperature reactivity coefficient. Furthermore, we have to account for the
-movement of \glspl{DNP} as
-they are now generated directly within the primary coolant loop. Therefore,
+interactions between neutronics and thermal-hydraulics are stronger due
+to greater fuel material expansion. Furthermore, \glspl{DNP} in \glspl{MSR}
+can flow freely within the primary coolant
+loop as opposed to being held in place in a solid fuel matrix. Therefore,
 the choice of coupling methods for each set of physics requires careful
-consideration. Existing reactor system-level software and modeling approaches
-for conventional \gls{LWR} analysis contain reactor-specific assumptions in
-multiphysics coupling and other areas that render the techniques less suitable
-for simulating \glspl{MSR}. Thus, making minor modifications to these codes
-without changing the underlying algorithms is not the best approach for
-\gls{MSR} safety analysis.
+consideration. 
 
-In the past two decades, researchers have developed several
-new tools for simulating steady-state and transient behavior in \glspl{MSR}.
-Many of the earlier efforts featured simplifications in simulating
-thermal-hydraulics by solving 1-D Navier-Stokes equations or using
-predetermined uniform velocity fields \cite{krepel_dyn3d-msr_2007}
-\cite{kophazi_development_2009}. In more recent years, there has been
-significant progress towards fully coupled, spatial codes that feature
-2-D axisymmetric or full 3-D models. In 2011, Cammi et al.
-\cite{cammi_multi-physics_2011} performed a ``\gls{MPM}'' analysis
-of a simplified 2-D axisymmetric model of a single \gls{MSBR} fuel channel
-using the commercial finite element analysis software COMSOL Multiphysics. The
-physics were implemented through the two-group neutron diffusion
-equations, and the \gls{RANS} standard $k-\epsilon$ turbulence model, for the
-neutronics and thermal-hydraulics respectively. The
-authors emphasized the need for proper full coupling of the multiphysics and
-presented both steady-state and transient results in various
-scenarios such as reactivity insertions, changes in pumping rate, and the
-presence of periodic perturbations. This approach was featured again in a
-later paper by Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D
-axisymmetric model of the
-\gls{MSFR}. The authors presented results from the Politecnico di Milano
-COMSOL-based approach, and another approach by researchers from Delft
-University of Technology, in which they coupled their in-house neutronics and
-thermal-hydraulics codes, DALTON and HEAT respectively. With multigroup
-neutron diffusion and \gls{RANS} formulations on ultra fine meshes, both
-models showed good agreement in the steady-state neutron flux, temperature,
-and \gls{DNP} distributions, and in the power responses following various
-accident transient initiations. Aufiero et al. \cite{aufiero_development_2014}
-concurrently developed
-a full-core 3-D model of the \gls{MSFR} on OpenFOAM, albeit with one-group
-neutron diffusion to reduce computational load. With the 3-D model, the
-authors could simulate the asymmetric reactor response to the failure of a
-single pump in the sixteen-pump \gls{MSFR} configuration. The authors also
-provided some quantitative data supporting the use of implicit coupling over
-explicit coupling to obtain accurate solutions of the transient cases.
-Recognizing the huge computational burden required for full 3-D simulations, 
-later authors came up with innovative ways to alleviate this issue such as
-selective geometrical reduced order modeling for various components of a
-reactor based on the importance of the physical phenomena being simulated
-\cite{zanetti_geometric_2015}, or using a novel, efficient method for
-neutronics calculations \cite{laureau_transient_2017}.
+Most reactor analysis applications are usually reactor-specific by
+design such as PARCS and TRACE for \glspl{LWR}, and SAS4A/SASSYS-1 for
+liquid metal cooled reactors. Thus, these applications generally would not
+account for \gls{MSR}-specific phenomena and are not suitable for \gls{MSR}
+analysis without any modifications to the source code. Some research efforts
+do focus on adapting these applications for \gls{MSR} analysis. Examples
+include the coupling of modified versions of TRACE and PARCS
+\cite{pettersen_coupled_2016}, and the development of VERA-MSR from the
+integrated \gls{LWR} simulation tool VERA \cite{graham_development_2019}.
+Others developed their \gls{MSR} simulation tools from general
+multiphysics or \gls{CFD} applications such as COMSOL
+\cite{fiorina_modelling_2014} and OpenFOAM \cite{aufiero_development_2014}.
 
-The preceding discussion highlights the challenges faced in MSR simulation,
-and the need for a highly efficient simulation tool that incorporates
-implicitly coupled multiphysics with good computational scalability over
-multiple processing units. This paper presents the open source MSR simulation
-tool, Moltres, as a strong contender to overcoming these challenges for
-simulating the MSFR. Moltres is an application code
-built in the Multiphysics Object-Oriented Simulation Environment (MOOSE)
-parallel finite element framework. Similar to COMSOL and OpenFOAM, it solves
+This thesis demonstrates latest capabilities of Moltres
+\cite{lindsay_introduction_2018}, an open source MSR simulation tool. Moltres
+is an application built in the \gls{MOOSE} parallel finite element framework.
+It solves
 the deterministic multigroup neutron diffusion and thermal-hydraulics
 \glspl{PDE} simultaneously on the same mesh. It supports up to 3-D meshes and
-scales well for a large number of processors.
+scales well for a large number of processors. The underlying \gls{MOOSE}
+framework
+provides a range of implicit and explicit methods for the coupling between the
+neutronics and thermal-hydraulics governing equations.
 
-Moltres employs fully implicit coupling between the neutronics and
-thermal-hydraulics governing equations, to fully account for the tightly
-coupled physics expected in MSRs due to the movement of fuel in the salt. We
-implemented flow using the Navier-Stokes equations and zeroth-order
-approximation of eddy viscosity for a more accurate representation of the flow
-profile compared to imposing a predetermined velocity field.
+In the introductory journal article for Moltres, Lindsay et al.
+\cite{lindsay_introduction_2018} demonstrated Moltres' capabilities with
+2D-axisymmetric and 3D models of the \gls{MSRE}. The results showed good
+qualitative agreement with legacy \gls{MSRE} data but there were some minor
+quantitative discrepancies due to a number of differences in the legacy model. 
+Moltres has undergone further development in the past two years. The authors
+from the first paper have since developed various new capabilities in Moltres
+such as support for looping delayed neutron precursors back into the core,
+and a heat exchanger object to set the heat removal rate. 
+
+In addition to those new capabilities, this thesis presents two more recent
+developments in Moltres, namely fully integrating \gls{MOOSE}'s incompressible
+Navier-Stokes module into Moltres, and introducing a
+decay heat model. The incompressible Navier-Stokes module provides a more
+accurate representation of the flow profile, precursor movement, and heat
+transfer as opposed to assuming uniform or function-based velocity fields. 
 
 \section{Objectives}
 
-The main objective of this thesis is to demonstrate Moltres' capabilities in
-modeling multiphysics, steady-state and transient behavior of fast-spectrum
-\glspl{MSR} through the study of the \gls{MSFR} concept. This is achieved by
-first verifying Moltres' neutronics results against Serpent in the context of
-the \gls{MSFR}, and then comparing the coupled neutronics/thermal-hydraulics
-steady-state and transient accident results of the \gls{MSFR} concept. The
-multiphysics results are verified against the results by Fiorina et al.
-\cite{fiorina_modelling_2014} and Aufiero et al.
-\cite{aufiero_development_2014}.
+The main objectives of this thesis are to demonstrate and verify Moltres'
+latest capabilities in modeling multiphysics, steady-state, and transient
+behavior of fast-spectrum \glspl{MSR} through the study of the \gls{MSFR}
+concept. Code-to-code verification is an important exercise in software
+development for ensuring that the application produces accurate and reliable
+results. This thesis covers the \gls{MSFR} concept mainly because 
+there is readily available literature data to verify our results against. The
+steady-state and transient results also feature a significant degree of
+physics interaction between the neutronics and thermal-hydraulics. This
+present work will first present a verification of Moltres' \gls{MSFR}
+neutronics results against Serpent 2, followed by a verification of
+the coupled neutronics/thermal-hydraulics steady-state and transient accident
+results against results from the Polimi and TUDelft models published by
+Fiorina et al. \cite{fiorina_modelling_2014}. The
+secondary objective is to identify areas of improvement in Moltres for future
+research.
 
 \section{Thesis Outline}
 
-The outline of this thesis is as follows: Chapter 2 discusses the history and
-features of \glspl{MSR}. The \gls{MSFR} concept is covered in greater detail.
-Chapter 3 details the simulation codes and the general modeling approach for
-generating the results in this thesis. Chapter 4 provides a neutronics
-assessment by comparing key neutronics parameters from Moltres' eigenvalue
-calculations to Serpent's Monte Carlo calculations. Chapter 5 presents
-steady-state results of coupled neutronics/thermal-hydraulics \gls{MSFR}
-simulations in Moltres. Chapters 6 to 9 present transient accident simulation
-results for unprotected reactivity insertions, unprotected loss of flow,
-unprotected pump overspeed, and unprotected loss of heat sink, respectively.
-Lastly, Chapter 10 summarizes the key findings of this thesis and posits some
-potential avenues for future work.
+The outline of this thesis is as follows. Chapter 2 discusses the history and
+features of \glspl{MSR}, and a literature review of existing \gls{MSR}
+simulation tools. The chapter also covers the \gls{MSFR} concept in greater
+detail. Chapter 3 details the simulation codes and the general modeling
+approach for generating the results in this thesis. Chapter 4 provides a
+neutronics assessment by comparing key neutronics parameters from Moltres'
+eigenvalue calculations to Serpent's Monte Carlo calculations. Chapter 5
+presents steady-state results of coupled neutronics/thermal-hydraulics
+\gls{MSFR} simulations in Moltres. Chapter 6 presents transient accident
+simulation results for unprotected reactivity insertions, unprotected loss of
+heat sink, unprotected loss of flow, and unprotected pump overspeed,
+respectively. Lastly, Chapter 7 summarizes the key findings in this thesis
+and posits some potential avenues for future work.
