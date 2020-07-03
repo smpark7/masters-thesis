@@ -68,37 +68,25 @@ Others developed their \gls{MSR} simulation tools from general
 multiphysics or \gls{CFD} applications such as COMSOL
 \cite{fiorina_modelling_2014} and OpenFOAM \cite{aufiero_development_2014}.
 
-This thesis demonstrates latest capabilities of Moltres
-\cite{lindsay_introduction_2018}, an open source MSR simulation tool. Moltres
-is an application built in the \gls{MOOSE} parallel finite element framework.
-It solves
-the deterministic multigroup neutron diffusion and thermal-hydraulics
-\glspl{PDE} simultaneously on the same mesh. It supports up to 3-D meshes and
-scales well for a large number of processors. The underlying \gls{MOOSE}
-framework
-provides a range of implicit and explicit methods for the coupling between the
-neutronics and thermal-hydraulics governing equations.
-
-In the introductory journal article for Moltres, Lindsay et al.
-\cite{lindsay_introduction_2018} demonstrated Moltres' capabilities with
-2D-axisymmetric and 3D models of the \gls{MSRE}. The results showed good
-qualitative agreement with legacy \gls{MSRE} data but there were some minor
-quantitative discrepancies due to a number of differences in the legacy model. 
-Moltres has undergone further development in the past two years. The authors
-from the first paper have since developed various new capabilities in Moltres
-such as support for looping delayed neutron precursors back into the core,
-and a heat exchanger object to set the heat removal rate. 
-
-In addition to those new capabilities, this thesis presents two more recent
-developments in Moltres, namely fully integrating \gls{MOOSE}'s incompressible
-Navier-Stokes module into Moltres, and introducing a
-decay heat model. The incompressible Navier-Stokes module provides a more
-accurate representation of the flow profile, precursor movement, and heat
-transfer as opposed to assuming uniform or function-based velocity fields. 
+Moltres is an open source MSR simulation tool that falls under the latter
+category \cite{lindsay_introduction_2018}. It is an application built in the
+\gls{MOOSE} \cite{gaston_physics-based_2015} parallel finite element
+framework. Lindsay et al. first presented the tool in 2017 and demonstrated
+its capabilities by simulating 2-D and 3-D models of the \gls{MSRE}
+\cite{lindsay_introduction_2018}. The results showed good qualitative
+agreement with the original design calculations by \gls{MSRE} researchers at
+\gls{ORNL}. There has since been new developments in Moltres allowing for
+more accurate \gls{MSR} simulations.
 
 \section{Objectives}
 
-The main objectives of this thesis are to demonstrate and verify Moltres'
+This thesis demonstrates latest capabilities of Moltres
+\cite{lindsay_introduction_2018}, an open source MSR simulation tool.
+In particular, this thesis presents two more recent
+developments in Moltres, namely fully integrating \gls{MOOSE}'s incompressible
+Navier-Stokes module into Moltres, and introducing a
+decay heat model.
+The main objective of this thesis is to verify Moltres'
 latest capabilities in modeling multiphysics, steady-state, and transient
 behavior of fast-spectrum \glspl{MSR} through the study of the \gls{MSFR}
 concept. Code-to-code verification is an important exercise in software
@@ -120,7 +108,7 @@ research.
 The outline of this thesis is as follows. Chapter 2 discusses the history and
 features of \glspl{MSR}, and a literature review of existing \gls{MSR}
 simulation tools. The chapter also covers the \gls{MSFR} concept in greater
-detail. Chapter 3 details the simulation codes and the general modeling
+detail. Chapter 3 details the software and the general modeling
 approach for generating the results in this thesis. Chapter 4 provides a
 neutronics assessment by comparing key neutronics parameters from Moltres'
 eigenvalue calculations to Serpent's Monte Carlo calculations. Chapter 5
