@@ -135,7 +135,7 @@ neutron precursor concentration, and temperature. Together with the
 Navier-Stokes module, it solves
 the deterministic multigroup neutron diffusion and thermal-hydraulics
 \glspl{PDE} simultaneously on the same mesh. Moltres supports up to 3-D meshes
-and scales well for a large number of processors. The underlying \gls{MOOSE}
+and scales well over a large number of processors. The underlying \gls{MOOSE}
 framework provides a range of implicit and explicit methods for the coupling
 between the neutronics and thermal-hydraulics governing equations.
 
@@ -211,7 +211,7 @@ equations \ref{eq:neut} and \ref{eq:dnp}:
     \sum^G_{g'=1} (1-\beta) \nu \Sigma^f_{g'} \phi_{g'} + \chi^d_g \sum^I_i
     \lambda_i C_i, \label{eq:neut} \\
     \frac{\partial C_i}{\partial t} &= \beta_i \sum^G_{g'=1} \nu \Sigma^f_{g'}
-    \phi_{g'} - \lambda_i C_i - \boldsymbol{u} \cdot \nabla C_i + \nabla \cdot
+    \phi_{g'} - \lambda_i C_i - \vec{u} \cdot \nabla C_i + \nabla \cdot
     K \nabla C_i, \label{eq:dnp} \\
     \intertext{where}
     v_g &= \text{average speed of neutrons in group $g$ [cm$\cdot$s$^{-1}$],} 
@@ -278,7 +278,7 @@ most commercial \gls{CFD} software \cite{bartosiewicz_612_2019}.
 
 \begin{figure}[htb!]
     \centering
-    \includegraphics[width=.8\textwidth]{mesh}
+    \includegraphics[width=\textwidth]{mesh2}
     \caption{Mesh adopted in Moltres and a close-up view of the mesh around
     the boron carbide absorber.}
     \label{fig:mesh}
@@ -299,7 +299,8 @@ defined by the JEFF-3.1.2 library. The neutron flux
 and \gls{DNP} concentration values were approximated by first-order Lagrange
 and constant monomial shape functions respectively on the finite element mesh.
 Figure \ref{fig:mesh} shows the mesh adopted for the \gls{MSFR} model.
-We assumed vacuum boundary conditions for all six neutron group fluxes along
+This work assumes vacuum boundary conditions for all six neutron group fluxes
+along
 the external boundaries of the geometry, and homogeneous Neumann boundary
 conditions along the axial symmetry boundary. For the \gls{DNP}
 concentrations, we imposed homogeneous Neumann boundary conditions on the
@@ -317,7 +318,7 @@ decay heat modeling capability with the following equation:
 %
 \begin{align}
 	\frac{\partial \omega_j}{\partial t} &= f_j \sum^G_{g=1} \epsilon_{g}
-	\Sigma^f_{g} \phi_{g} - \lambda_j \omega_j - \boldsymbol{u} \cdot \nabla
+	\Sigma^f_{g} \phi_{g} - \lambda_j \omega_j - \vec{u} \cdot \nabla
 	\omega_j + \nabla \cdot K \nabla \omega_j, \label{eq:decayheat} \\
 	\intertext{where}
     \omega_j &= \text{total decay heat power density from decay heat
@@ -357,17 +358,17 @@ MOOSE Navier-Stokes module \cite{peterson_overview_2017}. The standard
 \gls{INS} equations are:
 %
 \begin{align}
-    \text{Momentum eq.:} && \rho \frac{\partial \boldsymbol{u}}{\partial t} &=
-    -\rho (\boldsymbol{u}
-    \cdot \nabla) \boldsymbol{u} + \nabla \cdot (-p \boldsymbol{I} + \mu [
-    \nabla \boldsymbol{u} + (\nabla \boldsymbol{u})^T] + \boldsymbol{f} &&
+    \text{Momentum eq.:} && \rho \frac{\partial \vec{u}}{\partial t} &=
+    -\rho (\vec{u}
+    \cdot \nabla) \vec{u} + \nabla \cdot (-p \vec{I} + \mu [
+    \nabla \vec{u} + (\nabla \vec{u})^T] + \vec{f} &&
     \label{eq:momemtum} \\
-    \text{Divergence-free:} && \nabla \cdot \boldsymbol{u} &= 0 &&
+    \text{Divergence-free:} && \nabla \cdot \vec{u} &= 0 &&
     \label{eq:divergence}
     \intertext{where}
     && p &= \text{ pressure [Pa],} && \nonumber \\
     && \mu &= \text{ dynamic viscosity [Pa s],} && \nonumber \\
-    && \boldsymbol{f} &= \text{ body force per unit volume [N m$^{-3}$].} &&
+    && \vec{f} &= \text{ body force per unit volume [N$\cdot$m$^{-3}$].} &&
     \nonumber
 \end{align}
 
@@ -384,7 +385,7 @@ similar to flow profile in the Polimi and TUDelft models at steady state.
 The energy balance equation for temperature used in this Moltres model is:
 %
 \begin{align}
-    \rho c_{p} \frac{\partial T}{\partial t} &= - \rho c_p \boldsymbol{u}
+    \rho c_{p} \frac{\partial T}{\partial t} &= - \rho c_p \vec{u}
     \cdot \nabla T + \nabla \cdot [(k + k_t) \nabla T] + Q_s
     \label{eq:temp} \\
     k_t &= \frac{\mu_t}{\rho Pr_t} \\
@@ -394,7 +395,7 @@ The energy balance equation for temperature used in this Moltres model is:
     c_p &= \text{specific heat capacity of molten salt
     [J$\cdot$kg$^{-1}\cdot$K$^{-1}$],} \nonumber \\
     T &= \text{temperature of molten salt [K]} \nonumber \\
-    \boldsymbol{u} &= \text{velocity of molten salt [m$\cdot$s$^{-1}$],}
+    \vec{u} &= \text{velocity of molten salt [m$\cdot$s$^{-1}$],}
     \nonumber \\
     k &= \text{thermal conductivity of molten salt
     [W$\cdot$m$^{-1}\cdot$K$^{-1}$],} \nonumber \\
@@ -408,12 +409,86 @@ $Sc_t$. The first term in the heat source $Q_s$ equation represents prompt
 fission heat, and the second term represents decay heat from the $J$ decay
 heat groups.
 
-We expected good qualitative agreement with the Polimi and TUDelft models,
-including the large recirculation region near the blanket tank walls and the
-resulting high temperatures in that region. There would be some minor
+With this model, the results were expected to show good qualitative agreement
+with the Polimi and TUDelft models, including the large recirculation region
+near the blanket tank walls and the resulting high temperatures in that
+region. The results in Chapter \ref{chap:ss} would be some minor
 discrepancies where the viscosity values are under- or over-predicted, leading
-to slightly inaccurate temperature and precursor concentration values from
-turbulent diffusion.
+to minor inaccuracies in temperature and precursor concentration distributions
+from turbulent diffusion.
+
+\subsubsection{Boundary Conditions}
+
+Table \ref{table:corebc} summarizes the boundary conditions for all variables
+on all of the relevant boundaries. Figure \ref{fig:msfrbc} shows the locations
+of the various boundaries listed in the table.
+
+\begin{table}[htbp!]
+    \small
+	\caption{Boundary conditions in the main reactor geometry (Figure
+	\ref{fig:msfrbc}.}
+	\centering
+	\begin{tabular}{ l l c}
+		\toprule
+		Variable & Boundary & Boundary Condition \\
+		\midrule
+		\multirow{4}{*}{Neutron flux $\phi_g$} & Top & $\frac{d \phi_g}{dx}
+		\big|_{\text{inflow}} = 0$ \\
+        & Outer & $\frac{d \phi_g}{dx} \big|_{\text{inflow}} = 0$ \\
+        & Bottom & $\frac{d \phi_g}{dx} \big|_{\text{inflow}} = 0$ \\
+        & Axial & $\frac{d \phi_g}{dx} = 0$ \\
+        \midrule
+        \multirow{6}{*}{Delayed neutron precursor concentration $C_i$} &
+        Top (Core) & $\frac{d C_i}{dx} = 0$ \\
+        & Bottom (Core) & $\frac{d C_i}{dx} = 0$ \\
+        & Outer (Core) & $\frac{d C_i}{dx} = 0$ \\
+        & Axial (Core) & $\frac{d C_i}{dx} = 0$ \\
+        & Inlet (Core) & $C_i = c$ \\
+        & Outlet (Core) & $u_x \cdot C_i = 0$ \\
+        \midrule
+        \multirow{6}{*}{Decay heat power density $\omega_j$} &
+        Top (Core) & $\frac{d \omega_j}{dx} = 0$ \\
+        & Bottom (Core) & $\frac{d \omega_j}{dx} = 0$ \\
+        & Outer (Core) & $\frac{d \omega_j}{dx} = 0$ \\
+        & Axial (Core) & $\frac{d \omega_j}{dx} = 0$ \\
+        & Inlet (Core) & $\omega_j = c$ \\
+        & Outlet (Core) & $u_x \cdot \omega_j = 0$ \\
+        \midrule
+        \multirow{6}{*}{Radial velocity $u_x$} & Top (Core) & $u_x = 0$ \\
+        & Bottom (Core) & $u_x = 0$ \\
+        & Outer (Core) & $u_x = 0$ \\
+        & Axial (Core) & $u_x = 0$ \\
+        & Inlet (Core) & $u_x = c$ \\
+        & Outlet (Core) & $\frac{d u_x}{dx} = 0$ \\
+        \midrule
+        \multirow{6}{*}{Axial velocity $u_y$} & Top (Core) & $u_y = 0$ \\
+        & Bottom (Core) & $u_y = 0$ \\
+        & Outer (Core) & $u_y = 0$ \\
+        & Axial (Core) & $\frac{d u_y}{dx} = 0$ \\
+        & Inlet (Core) & $u_y = 0$ \\
+        & Outlet (Core) & $\frac{d u_y}{dx} = 0$ \\
+        \midrule
+        \multirow{6}{*}{Temperature $T$} & Top (Core) &
+        $\frac{d T}{dx} = 0$ \\
+        & Bottom (Core) & $\frac{d T}{dx} = 0$ \\
+        & Outer (Core) & $\frac{d T}{dx} = 0$ \\
+        & Axial (Core) & $\frac{d T}{dx} = 0$ \\
+        & Inlet (Core) & $T = c$ \\
+        & Outlet (Core) & $\frac{d T}{dx} = 0$ \\
+		\bottomrule
+	\end{tabular}
+	\label{table:corebc}
+\end{table}
+
+\clearpage
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=\textwidth]{msfrbc}
+    \caption{The boundaries in the \gls{MSFR} geometry that are relevant for
+    the boundary conditions mentioned in Table \ref{table:corebc}.}
+    \label{fig:msfrbc}
+\end{figure}
 
 \subsection{Outer Loop Region}
 
@@ -428,13 +503,13 @@ out-of-core residence time of 2 seconds to follow the design specifications.
 
 \subsubsection{Neutronics Model}
 
-Since this region is largely subcritical, the only significant
-neutronics-related phenomena are the drift, and decay of \glspl{DNP}.
+Since this outer loop region is largely subcritical, the only significant
+neutronics-related phenomena are the drift and decay of \glspl{DNP}.
 The governing equation for the \glspl{DNP} is:
 %
 \begin{align}
     \frac{\partial C_i}{\partial t} &= - \lambda_i C_i - u
-    \frac{\partial C_i}{\partial x} + D_t \frac{\partial^2 C_i}{\partial x^2}.
+    \frac{\partial C_i}{\partial x}.
     \label{eq:dnploop}
 \end{align}
 %
@@ -445,8 +520,8 @@ coefficient are the same values used in the central core region.
 
 \subsubsection{Thermal-Hydraulics Model}
 
-Instead of the Navier-Stokes equations, we have a predetermined velocity of
-1.1275 m s$^{-1}$ in the outer loop region. The governing equation for
+A constant velocity of 1.1275 m s$^{-1}$ is applied in the outer loop region.
+The governing equation for
 temperature, derived from equation \ref{eq:temp}, is:
 %
 \begin{align}
@@ -454,51 +529,93 @@ temperature, derived from equation \ref{eq:temp}, is:
     \frac{\partial T}{\partial x} - Q_{hx} \label{eq:temploop} \\
     Q_{hx} &= \alpha (T - T_i) \delta (x_0) \label{eq:hx} \\
     \intertext{where}
-    \alpha &= \text{heat transfer coefficient [W K$^{-1}$],} \nonumber \\
+    Q_{hx} &= \text{heat removal rate through the heat exchanger [W],} 
+    \nonumber \\
+    \alpha &= \text{heat transfer coefficient [W$\cdot$K$^{-1}$],} \nonumber
+    \\
+    T_i &= \text{temperature of the intermediate salt [K],} \nonumber \\
     x_0 &= \text{position of the point heat exchanger [m].} \nonumber
 \end{align}
 
 The fission heat source term is replaced with a heat exchanger sink term
+$Q_{hx}$
 which depends on the temperature difference between the fuel salt $T$ and the
-secondary loop salt $T_s$. For simplicity, we assumed a constant temperature
-of 823 K in the secondary loop. The heat transfer coefficient was determined
-by assuming that the fuel outlet temperature is 1023 K and calculating the
-heat removal rate to induce a 100 K drop at the given volumetric flow rate
-and heat capacity of the fuel salt. We opted to ignore the diffusion term due
-to the discontinuity of the temperature distribution across the point heat
-exchanger. 
+intermediate loop salt $T_i$. For simplicity, this work assumes a constant
+temperature of 823 K in the intermediate loop. The heat transfer coefficient
+was determined by assuming that the fuel outlet temperature is 1023 K and
+calculating the heat removal rate to induce a 100 K drop at the given
+volumetric flow rate and heat capacity of the fuel salt. The resulting value
+for $\alpha$ is 370.668 W$\cdot$K$^{-1}$. This work opted to
+ignore the diffusion term due to the discontinuity of the temperature
+distribution across the point heat exchanger. 
 
-\subsection{Boundary Conditions and Flow Transfers}
+\subsubsection{Boundary Conditions}
 
-This subsection details the various boundary conditions for all of the
-tracked variables, and the \gls{DNP} and temperature flow transfers between
-the central core and outer loop regions. 
+Table \ref{table:loopbc} summarizes the boundary conditions for all variables
+on the inlet and outlet of the 1-D outer loop region.
 
-Starting with the central core region, for the neutron group fluxes, we
-imposed vacuum boundary conditions on the
-outermost boundaries of the geometry in Figure \ref{fig:core} excluding the
-axial boundary. The \gls{DNP} variables have homogeneous Neumann boundary
-conditions along the axis and the walls in the central core region, and inflow
-and outflow boundary conditions on the inlet and outlet boundaries,
-respectively. The temperature variable shares the same type of boundary
-conditions as the \gls{DNP} variables.
+\begin{table}[htbp!]
+    \small
+	\caption{Boundary conditions in the 1-D outer loop geometry. $u$
+	represents the 1-D velocity in this region.}
+	\centering
+	\begin{tabular}{ l l c}
+		\toprule
+		Variable & Boundary & Boundary Condition \\
+        \midrule
+        \multirow{2}{*}{Delayed neutron precursor concentration $C_i$} &
+        Inlet (Core) & $C_i = c$ \\
+        & Outlet (Core) & $u \cdot C_i = 0$ \\
+        \midrule
+        \multirow{2}{*}{Decay heat power density $\omega_j$} &
+        Inlet (Core) & $\omega_j = c$ \\
+        & Outlet (Core) & $u \cdot \omega_j = 0$ \\
+        \midrule
+        \multirow{2}{*}{Temperature $T$} &
+        Inlet (Core) & $T = c$ \\
+        & Outlet (Core) & $u \cdot T = 0$ \\
+		\bottomrule
+	\end{tabular}
+	\label{table:loopbc}
+\end{table}
 
-The flow rate is dictated by an inflow boundary condition at the core inlet
-for a volumetric flow rate of 4.5 m$^3$ s$^{-1}$. We imposed no-slip boundary
-conditions on the walls of the central core, and homogeneous Neumann boundary
-conditions on the outlet. Along the axial boundary, we have homogeneous
-Dirichlet boundary condition for the radial velocity component, and
-homogeneous Neumann boundary condition for the axial velocity component.
+\subsection{Flow Transfers}
+
+This subsection details the delayed neutron and decay heat precursors, and
+temperature flow transfers between the central core and outer loop regions. 
+
+%Starting with the central core region, for the neutron group fluxes, we
+%imposed vacuum boundary conditions on the
+%outermost boundaries of the geometry in Figure \ref{fig:core} excluding the
+%axial boundary. The \gls{DNP} variables have homogeneous Neumann boundary
+%conditions along the axis and the walls in the central core region, and inflow
+%and outflow boundary conditions on the inlet and outlet boundaries,
+%respectively. The temperature variable shares the same type of boundary
+%conditions as the \gls{DNP} variables.
+
+A parabolic flow profile was imposed on the inlet Dirichlet boundary
+condition. The equation for $u_x$ at the inlet is:
+%
+\begin{align}
+    u_x &= -2034.01 \Big[\frac{y}{18.75} - \Big(\frac{y}{18.75}\Big)^2 
+    \Big] \\
+    \intertext{where}
+    y = \text{height along the inlet [cm].}
+\end{align}
+%
+The inlet is 18.75 cm high, and the coefficient at the front is from
+normalizing the equation for a total volumetric flow rate of
+4.5 m$^3$ s$^{-1}$.
 
 At every timestep, Moltres also calculates weighted averages of the
-temperature and \gls{DNP} at the outlet. These values are weighted by the
+temperature and the precursors at the outlet. These values are weighted by the
 outflow velocity values at the outlet according to the following equation:
 %
 \begin{align}
-    \overline{\phi} &= \frac{\int_\mathcal{C} \phi(y) u(y) dy}{
+    \overline{\psi} &= \frac{\int_\mathcal{C} \psi(y) u(y) dy}{
     \int_\mathcal{C} u(y) dy} \\
     \intertext{where}
-    \phi &= \text{variable to be weighted} \nonumber \\
+    \psi &= \text{variable to be weighted} \nonumber \\
     \mathcal{C} &= \text{outlet boundary curve} \nonumber \\
     u &= \text{outflow velocity perpendicular to the outlet boundary [m
     s$^{-1}$].} \nonumber

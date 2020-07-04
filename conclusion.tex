@@ -1,5 +1,5 @@
-The unique phenomena in \glspl{MSR}, generally not found in conventional
-reactors, necessitate the development of new reactor safety analysis software.
+The unique phenomena in \glspl{MSR}
+necessitate the development of new reactor safety analysis software.
 This thesis presents the latest developments in Moltres, namely coupling its
 existing neutron diffusion module to the incompressible Navier-Stokes module
 in MOOSE, and developing a decay heat model for short-term transients. We
@@ -47,8 +47,8 @@ Dittus-Boelter correlation for the pump-initiated transients. Assuming a
 directly proportional relationship between $\mu_t$ and $\dot{m}$ yielded
 results in good agreement with the other two models for the pump overspeed
 transient. However, Moltres performed poorly in the loss of flow transient as
-we could not incorporate buoyancy-driven flow and its associated effects on
-$\mu_t$.
+this work could not incorporate buoyancy-driven flow and its associated
+effects on $\mu_t$.
 
 Overall, we have demonstrated that Moltres can handle most of the case
 studies that this thesis covered.
@@ -56,10 +56,10 @@ studies that this thesis covered.
 \section{Future Work}
 
 Further research and development on Moltres should aim to rectify the issues
-mentioned in this thesis. There are three main avenues for improvement.
-Firstly, proper 2D/3D heat exchanger implementation
+mentioned in this thesis. This work has highlighted three main avenues for
+improvement. Firstly, proper 2D/3D heat exchanger implementation
 would allow us to move away from the 1D outer loop system and towards a full
-2D/3D closed loop. The biggest change from this is users would be able to use
+2D/3D closed loop. The biggest change is that users would be able to use
 the Boussinesq approximation for buoyancy-driven flow capability in Moltres.
 Buoyancy-driven flow is a critical component in loss of forced flow scenarios
 and these scenarios in turn are important accident transients in reactor

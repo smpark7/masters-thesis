@@ -2,33 +2,34 @@ This chapter discusses the transient multiphysics simulation results of the
 \gls{MSFR} from Moltres for four accident scenarios. These scenarios, adapted
 from Fiorina et al.'s work \cite{fiorina_modelling_2014}, include unprotected
 instances of reactivity insertion, loss of heat sink, loss of flow, and pump
-overspeed accidents. The term ``unprotected'' means that there is no
-external intervention in these scenarios. As such, these simulations
+overspeed accidents. The term ``unprotected'' means no external interventions
+occur in these scenarios. As such, these simulations
 give an insight on the \gls{MSFR}'s passive safety capabilities in the absence
-of any active safety system. We used the steady-state configuration presented
-in the previous chapter as the initial conditions for the transient
-simulations discussed in this chapter. Specifically, we imported all
-steady-state spatial values for neutron flux, delayed neutron precursor
-concentration, temperature, velocity, and pressure as the initial state of the
-transient scenarios.
+of any active safety system. This work used the steady-state configuration
+presented in the previous chapter as the initial conditions for the transient
+simulations discussed in this chapter. Specifically, all steady-state spatial
+values for neutron flux, delayed neutron precursor concentration, temperature,
+velocity, and pressure were imported as the initial state of the transient
+scenarios.
 
 As noted by Fiorina et al. \cite{fiorina_modelling_2014}, explicit decay heat
 modeling has a negligible effect in reactivity-, and pump-initiated
 transients. Furthermore, only their Polimi model had decay
 heat modeling capabilities. Therefore, they presented results from their
-Polimi and TUDelft model for the four accident scenarios  without decay heat
-modeling; they enabled decay heat modeling for the loss of heat sink transient
-scenario only. For a direct comparison, we also ran all transient simulations
-without the decay heat model with the exception of the loss of heat sink
-scenario in which we ran two separate simulations with and without
-the decay heat model. More generally, we imposed various other simplifying
+Polimi and TUDelft model for the four accident scenarios without decay heat
+modeling and enabled decay heat modeling for the loss of heat sink transient
+scenario only. This work also ran all transient simulations without the decay
+heat model for a fair comparison. The only exception is loss of heat sink
+scenario in which two separate simulations with and without the decay heat
+model were run. More generally, this work imposed various other simplifying
 assumptions in our transient models to match their implementations as closely
 as possible, within Moltres' capabilities. The details of the setup for each
 transient simulation are in their respective sections.
 
 \section{Unprotected Reactivity Insertion}
 
-\glspl{RIA} are a type of nuclear accident caused by unintended positive
+Reactivity insertion accidents are a type of nuclear accident caused by
+unintended positive
 reactivity insertions. The excess reactivity causes the power output and
 temperatures in nuclear reactors to rise to potentially dangerous levels. In
 \glspl{MSR}, a positive reactivity insertion could occur when the online
@@ -36,17 +37,17 @@ refueling system injects excess fissile material into the core. Excessively
 high neutron fluences and temperatures negatively impact reactor structural
 integrity and increase the risk of containment breach.
 
-We modeled two unprotected step-wise reactivity insertion scenarios in Moltres
-by swapping out the original set of group constant data with two new, separate
-sets of data from Serpent corresponding to 50 pcm and 200 pcm reactivity
-insertions, respectively. We increased the reactivity of the Serpent
-\gls{MSFR} models by increasing the $^{233}$U-to-$^{232}$Th ratio in the fuel
-salt.
+This work modeled two unprotected step-wise reactivity insertion scenarios in
+Moltres by swapping out the original set of group constant data with two new,
+separate sets of data from Serpent corresponding to 50 pcm and 200 pcm
+reactivity insertions, respectively. The reactivity of the Serpent \gls{MSFR}
+models was increased by increasing the $^{233}$U-to-$^{232}$Th ratio in
+the fuel salt.
 
 The focus of this transient study is the neutronic and thermal-hydraulic
-behavior of the reactor core. Thus, we assume that the heat exchanger and the
-associated power generation equipment (generator turbines, heat sinks, etc.)
-can withstand all variations in the power output during the transients.
+behavior of the reactor core. Thus, this work assumes that the heat exchanger
+and the associated power generation equipment (generator turbines, heat sinks,
+etc.) can withstand all variations in the power output during the transients.
 
 Figures \ref{fig:50pcmheat} and \ref{fig:50pcmtemp} show the power output and
 average core temperature increase following the 50 pcm step-wise reactivity
@@ -58,8 +59,8 @@ Power continues to rise at a slower rate up to 4.63 GW at around $t=0.005$ s,
 at which point the negative reactivity from the Doppler effect and salt
 expansion becomes greater
 than the initial +50 pcm insertion. Power continues to fall as the average
-core temperature rises. There is a slight change in slope at $t=0.3$ s. This
-value approximately corresponds to the average half-life of the two
+core temperature rises. The slight change in slope occurs at $t=0.3$ s. The
+elapsed time approximately corresponds to the average half-life of the two
 shortest-lived delayed neutron precursor (DNP) groups ($t_{1/2}=0.195$ s and
 $0.424$ s); the decay of the surplus precursors produced in the initial phase
 negates a fraction of the negative reactivity from the elevated core
@@ -96,15 +97,16 @@ approximately 7.5 K higher than the initial average temperature.
 
 The results from Moltres show good agreement with the results from the Polimi
 and TUDelft models; Moltres reproduced all of the individual features in both
-plots. The most significant difference is in the magnitude of the reactor
-response. Moltres predicts a smaller peak in the power output and a smaller
-overall increase in the average core temperature. This is largely due to the
+plots. The magnitude of the reactor response is the most significant
+difference. Moltres predicts a smaller peak in the power output and a smaller
+overall increase in the average core temperature mainly due to the
 more negative temperature reactivity coefficient in Moltres than in the Polimi
 and TUDelft models. The temperature reactivity coefficient $\alpha_T$ in
 Moltres is $-7.184$ pcm K$^{-1}$ (Table \ref{table:alpha}), as opposed to
 approximately $-6.5$ pcm K$^{-1}$ within the relevant temperature range in the
-Polimi and TUDelft models. Therefore, we see a smaller temperature increase in
-the Moltres model for the same reactivity insertion. Multiplying the average
+Polimi and TUDelft models. Therefore, the results show a smaller temperature
+increase in the Moltres model for the same reactivity insertion. Multiplying
+the average
 core temperature increase at $t=10$ s with $\alpha_T$ gives us $-7.184$ pcm
 K$^{-1} \times 7.46$ K $= -53.6$ pcm, which is approximately equal to the 50
 pcm reactivity insertion.
@@ -126,15 +128,15 @@ pcm reactivity insertion.
 \end{figure}
 
 The results for the 200 pcm reactivity insertion scenario show similar trends
-to the 50 pcm case. The larger reactivity insertion illicits a stronger
+to the 50 pcm case. The greater reactivity insertion elicits a stronger
 prompt response in the power output which peaks at 92.1 GW. The average core
 temperature increases much more rapidly and subsequently triggers a sharper
 drop in power output. This results in the clearer distinction in the rate of
 core temperature increase before and after $t=0.01$ s. In this transient, we
 also observe greater deviation between Moltres and the other models arising
 from the differences in the temperature reactivity coefficients. Overall,
-Moltres' results show good agreement with the Polimi and TUDelft results and
-the differences arise mainly due to the differences in the temperature
+Moltres' results show good agreement with the Polimi and TUDelft results.
+The differences arise mainly due to the differences in the temperature
 reactivity coefficients.
 
 \clearpage
@@ -143,8 +145,8 @@ reactivity coefficients.
 
 An unprotected loss of heat sink accident can occur when the pumps in the
 intermediate loop fail. The heat exchangers would then lose most of their
-cooling capabilities. We followed Fiorina et al.'s approach in assuming that
-the cooling from the heat exchangers decreases exponentially with a time
+cooling capabilities. This work followed Fiorina et al.'s approach in assuming
+that the cooling from the heat exchangers decreases exponentially with a time
 constant of 1 s and all other parameters held constant
 \cite{fiorina_modelling_2014}. As mentioned in the Chapter \ref{chap:ss}, we
 will present two sets of results for this transient: 1) without decay heat
@@ -165,11 +167,11 @@ at around $t=5$ s. The average core temperature continues to rise while the
 power output falls through the rest of the transient.
 
 The results from Moltres show good agreement with the results from the Polimi
-and TUDelft. Moltres reproduced all of the trends that we see in the Polimi
+and TUDelft. Moltres reproduced all of the trends in the Polimi
 and TUDelft models. The temporary halt in the temperature increase occurs at
 a lower average core temperature for Moltres than the other two models. This
 is likely due to the difference in the temperature reactivity coefficient
-that we discussed in the reactivity insertion results; a smaller increase in
+discussed in the reactivity insertion results; a smaller increase in
 the average core temperature produces the same decrease in power output.
 
 \begin{figure}[htbp!]
@@ -199,16 +201,16 @@ blackout; the pumps would cease operating due to the loss of AC electrical
 power. Natural circulation resulting from temperature-dependent density
 changes becomes the dominant driving force for salt flow in the primary loop.
 Fiorina et al. \cite{fiorina_modelling_2014} applied the Boussinesq
-approximation for bouyancy-driven flow in their models, but we were unable to
-follow this procedure because we partitioned the
-primary loop into two separate geometries and used Dirichlet boundary
+approximation for buoyancy-driven flow in their models, but this approach was
+not possible in Moltres because the primary loop is partitioned into two
+separate geometries and used Dirichlet boundary
 conditions at the inlet to drive flow. Fiorina et al.'s Polimi and TUDelft
 models featured complete exponential coast-downs of the pumps with a time
-constant of 5 s. The resulting flow rate $\dot{m}$ from natural circulation was
-approximately 18 times smaller than the initial $\dot{m}$. Figure
+constant of 5 s. The resulting flow rate $\dot{m}$ from natural circulation
+was approximately 18 times smaller than the initial $\dot{m}$. Figure
 \ref{fig:flowrate} shows that the actual $\dot{m}$ decreased with a time
-constant of 8 s. Thus, for the \gls{MSFR} model in Moltres, we imposed a
-similar exponential decay term with a time constant of 8 s on the inflow
+constant of 8 s. Thus, for the \gls{MSFR} model in Moltres, this work imposed
+a similar exponential decay term with a time constant of 8 s on the inflow
 Dirichlet boundary condition:
 %
 \begin{align}
@@ -229,11 +231,11 @@ primary and intermediate loop through the heat exchanger as the heat transfer
 coefficient $h$ is dependent on the $\dot{m}$. This step was problematic
 because
 the pointwise heat exchanger implementation in Moltres performs differently
-compared to the heat exchangers that take up ``36\% of the out-of-core part''
-in the Polimi and TUDelft models \cite{fiorina_modelling_2014}. Most of the
-cooling happens in the top half of the heat exchanger where the temperature
-differential between the primary and intermediate loops is the largest. In the
-Polimi and TUDelft models, the overall $h$ is the
+compared with the heat exchangers that take up ``36\% of the out-of-core
+part'' in the Polimi and TUDelft models \cite{fiorina_modelling_2014}. Most of
+the cooling happens in the top half of the heat exchanger where the
+temperature differential between the primary and intermediate loops is the
+largest. In the Polimi and TUDelft models, the overall $h$ is the
 ``harmonic mean of the heat transfer coefficients on each side of the heat
 exchanger''. For this loss of flow transient, the authors intended to focus on
 the primary loop and assumed that only the pumps in the primary loop failed.
@@ -258,22 +260,22 @@ This gives the following relation between $h$ and$v$:
 \end{align}
 %
 However, this relation provided very different results in the unprotected loss
-of flow and pump overspeed transients compared to the Polimi and TUDelft
+of flow and pump overspeed transients compared with the Polimi and TUDelft
 models; it overpredicted the equilibrium power output in the
 unprotected loss of flow transient and underpredicted the same parameter in
-the unprotected pump overspeed transient. Upon further investigation, we found
-that raising the power of $v$ from 0.8 to 1.1 brought the average core
-temperatures closer to the results from the other models in both transients.
-Therefore, we adopted the raised power in this study.
+the unprotected pump overspeed transient. Upon further investigation, the
+present author found that raising the power of $v$ from 0.8 to 1.1 brought the
+average core temperatures closer to the results from the other models in both
+transients. Therefore, this work adopted the raised power in this study.
 
 Another issue pertained to the turbulent viscosity $\mu_t$ as a function of
-$v$. When we made a simple approximation of $\mu_t$ being directly
-proportional to $v$, the results differed significantly compared to the Polimi
-and TUDelft models (Appendix *). This is likely due to buoyancy-driven flow
+$v$. Using a simple approximation of $\mu_t$ being directly
+proportional to $v$, the results differed significantly compared with the
+Polimi and TUDelft models. This is likely due to buoyancy-driven flow
 contributing to turbulence; the turbulent energy $k$ equation in COMSOL's
 $k$-$\epsilon$ model has an explicit source term from buoyancy effects
 \cite{comsol_ab_comsol_2018}. Another point to note is the
-Reynolds number does not change if $\mu$ and $v$ decrease in tandem. This
+Reynolds number remains constant if $\mu$ and $v$ decrease in tandem. This
 preserves the existence of the recirculation zone in the core and it is at
 odds with the results from the Polimi and TUDelft models, which show that the
 recirculation zones disappear during the loss of flow transient. We
@@ -301,8 +303,8 @@ Although Moltres shows the same decreasing trend in power output, it failed to
 capture the exact individual features in the reactor response. In the Polimi 
 and TUDelft models, Fiorina et al.
 stated that after around $t=15$ s, the ``flow pattern changed in the core and
-the recirculation zones started to disappear''. As a result, there is a sudden
-drop in the average core temperature as the pocket of hot salt leaves the
+the recirculation zones started to disappear''. A sudden drop in the average
+core temperature results as the pocket of hot salt leaves the
 core. In Moltres, the wider peak in the average core temperature
 indicates that there was a more gradual change in the flow pattern.
 
@@ -338,9 +340,9 @@ buoyancy-driven flow in the other models, and its impact on the reactor
 response. They show that low-speed laminar flow is a poor substitute for
 buoyancy-driven flow in the context of the MSFR. It is particularly evident
 in the transition from high-speed turbulent flow to low-speed viscous
-flow as Moltres did not capture the intermediate stages accurately. The
-simplifying assumption for the uniform, time-dependent $\mu_t$ is also not
-ideal for a safety analysis code.
+flow as Moltres mispredicted the intermediate stages. The
+simplifying assumption for the uniform, time-dependent $\mu_t$ is also flawed
+in a safety analysis code.
 
 The results from this transient inform our goals for Moltres: 1)
 implementing a proper turbulence model, and
@@ -363,7 +365,8 @@ coefficient on the primary loop side of the heat exchanger and enables the
 reactor to operate at a higher power output. At the same time, the improved
 mixing flattens the temperature distribution in the core.
 
-We followed Fiorina et al.'s implementation \cite{fiorina_modelling_2014} by
+This workfollowed Fiorina et al.'s implementation
+\cite{fiorina_modelling_2014} by
 ramping up the inlet velocity, $u$, by 50\% from the nominal value, $u_0$,
 according to the following formula:
 %
@@ -373,8 +376,8 @@ according to the following formula:
     \tau &= 5 \text{ s.} \nonumber
 \end{align}
 %
-For this transient, we assumed that $\mu_t$ was directly proportional to $v$
-because the buoyancy effects are negligible and the recirculation zones 
+For this transient, this work assumed that $\mu_t$ was directly proportional
+to $v$ because the buoyancy effects are negligible and the recirculation zones 
 persist throughout the entire duration. Figures \ref{fig:poheat} and
 \ref{fig:potemp} show the power output and average core temperature increase
 during the unprotected pump overspeed transient in the Moltres, Polimi, and
@@ -385,7 +388,7 @@ average core temperature has a strictly decreasing trend, the temperature at
 the center of the core briefly rises due ot the sharp increase in power
 output. Since this is the region where most of the fissions take place, the
 Doppler effect and salt expansion causes the power output to stall and dip
-briefly before starting to rise again at $t=2.5$ s. The reactor tends to a new
+briefly before rising again at $t=2.5$ s. The reactor tends to a new
 equilibrium power output and average core temperature. The temperature
 distribution in the core is more evenly distributed because the turbulent
 thermal conductivity $k_t$ is directly proportional to $mu_t$.
