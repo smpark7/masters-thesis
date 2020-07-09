@@ -1,13 +1,19 @@
 This work demonstrates the \gls{MSFR} simulation capabilities of Moltres, a
 multiphysics simulation tool for \glspl{MSR} \cite{lindsay_introduction_2018}.
-To run simulations on Moltres, it requires input
+In particular, this work introduces two new capabilities: full support
+for coupling incompressible flow with the existing delayed neutron precursor
+looping capability, and a decay heat model. The former allows users to
+simulate non-trivial flow patterns in the core and simultaneously loop the
+precursors through an external region, and the latter to simulate delayed
+heating from fission products.
+To run simulations with Moltres, the user must provide input
 group constant data from a neutron transport solver for the
 multigroup neutron diffusion calculations, and a mesh file representing the
 geometry of the reactor. This work uses Serpent 2 \cite{leppanen_serpent_2014}
-for the former and Trelis \cite{noauthor_trelis_2018} for the latter.
+for the former and Trelis/Cubit \cite{noauthor_trelis_2018} for the latter.
 This chapter provides brief introductions to
 Serpent 2, \gls{MOOSE}, and Moltres, and the modeling approach for the
-multiphysics simulations in Moltres.
+\gls{MSFR} multiphysics simulations in this thesis.
 
 \section{Serpent 2}
 
@@ -16,9 +22,9 @@ neutron transport application under
 active development led by the VTT Technical Research Centre of Finland. It was
 created in 2004 for group constant generation in lattice geometries, and has
 since grown to support more general capabilities. Serpent 2 is highly
-parallelizable, supporting
-both MPI and OpenMP parallel programming APIs. It has also been validated and
-verified against experimental data and other well-established codes.
+parallelizable, supporting both MPI and OpenMP parallel programming APIs. It
+has also been validated and verified against experimental data and other well
+established codes \cite{leppanen_calculation_2014}.
 
 In Serpent 2, each neutron is tracked through a combination of
 ray-tracing-based surface tracking and rejection sampling-based delta
@@ -33,47 +39,12 @@ nuclear data libraries (e.g. ENDF \cite{chadwick_endf/b-vii.1_2011}, JEFF
 continuous-energy cross section data at discrete temperatures. Beyond the
 discrete library temperatures, Serpent 2 has a built-in Doppler-broadening
 preprocessor that extrapolates the relevant cross section data from a lower
-temperature \cite{leppanen_serpent_2014}. 
-
-In the context of this work, Serpent 2 uses the JEFF-3.1.2 nuclear
-data library \cite{oecd/nea_jeff-3.1.2_2014} to generate group constants
-needed by Moltres. The relevant group constant data are collapsed into six
-neutron energy groups, and calculated at discrete temperature values from 800
-K to 1300 K at 100 K intervals. Table \ref{table:bound} shows the upper bounds
-of each neutron energy group. The group constants relevant for neutronics
-calculations in Moltres are the
-macroscopic fission $\Sigma^f_{g}$, removal $\Sigma^r_{g}$, and scattering
-$\Sigma^s_{g' \rightarrow g}$ neutron cross sections,
-neutron diffusion coefficients $D_g$, average fission energies $\epsilon_g$,
-average neutron yields $\nu$, inverse neutron speeds $1/v$, flux spectra
-$\chi$, \gls{DNP} decay constants $\lambda_i$, and effective delayed neutron
-fractions $\beta_{eff}$. These group constants are extracted from
-the Serpent 2 output files using a Python script available from the Github
-repository that holds the Moltres source code \cite{lindsay_moltres_2017}. The
-script rewrites the group constants into a Moltres-compatible format.
+temperature \cite{leppanen_serpent_2014}.
 
 Serpent 2 provides standard geometric surfaces (e.g. planes, cylinders, cones)
 for defining reactor geometries. In this work, the reactor geometry is the
 same axisymmetric \gls{MSFR} geometry from the paper by Fiorina et al.
 \cite{fiorina_modelling_2014}, as shown in Fig. \ref{fig:msfrgeom}.
-
-\begin{table}[htb!]
-	\centering
-	\caption{Neutron energy group upper bounds used in Serpent 2.}
-	\begin{tabular}{c S}
-		\toprule
-		{Group number} & {Upper bound [MeV]}\\
-		\midrule
-		1 & 20\\
-		2 & 2.2313\\
-		3 & 0.4979\\
-		4 & 0.0247875\\
-		5 & 0.0055308\\
-		6 & 0.0007485\\
-		\bottomrule
-	\end{tabular}
-	\label{table:bound}
-\end{table}
 
 \section{MOOSE}
 
@@ -83,41 +54,40 @@ creating fully-coupled, non-linear, multiphysics solvers. The framework
 provides a user-friendly interface for this task through object-oriented
 programming in C++. All aspects of a typical multiphysics problem, such as the
 terms in the \glspl{PDE}, the initial and boundary conditions, the material
-properties, etc., are represented in \gls{MOOSE} as C++ objects. New objects
-can inherit properties from related old objects to simplify implementation and
-reduce code duplication. These objects are commonly referred to as kernels in
-\gls{MOOSE}. Overall, this approach
-is helpful for many researchers, a significant fraction of whom do not possess
-high-level programming backgrounds, as they are unencumbered by the
-technical details and complexities involved in programing mesh handling
-and \gls{PDE} solving in finite element analysis.
+properties, etc., are represented in \gls{MOOSE} as C++ objects. Child objects
+can inherit properties from parent objects to simplify implementation and
+reduce code duplication. Overall, this approach
+is helpful for many researchers as they are unencumbered by the
+technical details and complexities involved in programing mesh-handling
+and \gls{PDE}-solving in finite element analysis.
 
 \gls{MOOSE} itself relies on libMesh \cite{kirk_libmesh:_2006} and
-PETSc \cite{satish_petsc_2019} for its mesh handling and \gls{PDE} solver
+PETSc \cite{satish_petsc_2019} for mesh handling and \gls{PDE} solver
 functionalities. As a result, \gls{MOOSE} supports adaptive meshing schemes
-and automatic variable scaling amongst other advanced features for improved
-accuracy and performance times. Full
+and automatic variable scaling amongst other advanced featuresin finite
+element analysis. Full
 coupling is maintained by the execution of Newton-based solves on the
 weak formulations of the multiple \glspl{PDE} to minimize the residual values.
 Fully-coupled solves are essential for accurately resolving systems with
-strongly interacting physics. The \gls{MSR} concept is one such example, where
-the neutronics and thermal-hydraulics are tightly coupled through the Doppler
-effect and the temperature dependence of liquid fuel salt density.
+strongly interacting physics. The \gls{MSR} concept is one such example, in
+which the neutronics and thermal-hydraulics are tightly coupled through the
+Doppler effect and the temperature dependence of liquid fuel salt density.
 
 \gls{MOOSE}, and Moltres by extension, are capable of up to 3-D geometry
-modelling. They support a wide range of input mesh file formats listed in a
-\gls{MOOSE} webpage, including the commonly used Exodus II file format.
-Specifically for the 2-D case, axial symmetry is easily and automatically
-imposed by changing one line of code in the input file, without any changes in
+modelling. They support a wide range of input mesh file formats, including the
+commonly used Exodus II file format. Specifically for 2-D geometries, users
+can easily switch between Cartesian and polar coordinates by changing one line
+of code in the input file, without any changes in
 the Cartesian representations of the \glspl{PDE} and boundary conditions in
 their original C++ implementations. This feature provides significant
 computational time savings for 3-D systems that exhibit high axial symmetry.
 Another important feature for reducing computational time is the use of MPI
-for parallel computing. All \gls{MOOSE}-based codes can be compiled and
+for parallel computing. All \gls{MOOSE}-based applications can be compiled and
 run on high performance computing clusters.
 
-\gls{MOOSE} includes a set of built-in physics modules for commonly studied
-phenomena such as the heat conduction, flow dynamics and solid mechanics. This
+\gls{MOOSE} includes a set of built-in physics modules such as the Heat
+Conduction, Navier-Stokes, and Solid Mechanics modules for commonly studied
+physical phenomena. This
 work uses \gls{MOOSE}'s Navier-Stokes module for simulating
 incompressible salt flow in the \gls{MSFR}. Peterson et al. verified the
 incompressible flow capabilities in the
@@ -150,28 +120,80 @@ in Moltres, most significantly providing support for looping delayed neutron
 precursors back into the core, and a pointwise heat removal kernel to simulate
 a heat exchanger. The present author demonstrated these capabilities in a
 2-D axisymmetric model of the \gls{MSFR} with uniform salt flow
-\cite{park_safety_2019}. 
+\cite{park_safety_2019}. The present work also includes these capabilities
+which are discussed in the following section on the modeling approach.
 
 Building on the prior progress, this thesis presents two more recent
-developments in Moltres, namely the new kernels required to couple
+developments in Moltres, namely the new features required to couple
 incompressible flow with the delayed neutron precursor looping capability, and
 introducing a decay heat model to simulate decay heat from fission products.
 The incompressible flow profile from \gls{MOOSE}'s Navier-Stokes module
 provides a more accurate representation of the flow profile, precursor
 movement, and heat transfer as opposed to assuming uniform velocity fields
 featured in the previous papers \cite{lindsay_introduction_2018,
-park_safety_2019}.
+park_safety_2019}. The next section describes these new developments in
+detail.
 
 \section{Modeling Approach}
 
-This section discusses the neutronics and thermal-hydraulics
-\glspl{PDE} that Moltres solves and other relevant details specific to the
-\gls{MSFR} model in this work.
+This section discusses the group constant generation in Serpent 2, the
+neutronics and thermal-hydraulics \glspl{PDE} that Moltres solves, and the
+relevant procedures specific to the \gls{MSFR} model in this work.
 
-As mentioned in the previous chapter, the fuel salt loop is divided into two
-regions, the central core region where most of the fissions take place, and
-the outer loop region where the heat exchanger is located. The central core
-region specifically refers to the central region indicated by
+\subsection{Group Constant Generation}
+
+The current work uses the JEFF-3.1.2 nuclear data library
+\cite{oecd/nea_jeff-3.1.2_2014} with Serpent 2 to generate group constants
+needed by Moltres. The relevant group constant data are collapsed into six
+neutron energy groups, and calculated at discrete temperature values from 800
+K to 1300 K at 100 K intervals. Table \ref{table:bound} shows the upper bounds
+of each neutron energy group. The group constants relevant for neutronics
+calculations in Moltres are:
+%
+\begin{align*}
+    &\Sigma^f_{g} \text{: macroscopic fission cross section in group $g$,} \\
+    &\Sigma^r_{g} \text{: macroscopic removal cross section in group $g$,} \\
+    &\Sigma^s_{g' \rightarrow g} \text{: macroscopic scattering cross section
+    from group $g$' to $g$,} \\
+    &D_g \text{: diffusion coefficient of neutrons in group $g$,} \\
+    &\epsilon_g \text{: average fission energy per fission by a neutron from
+    group $g$,} \\
+    &\nu \text{: average neutron yield per fission by a neutron from group
+    $g$,} \\
+    &\frac{1}{v} \text{: inverse neutron speed in group $g$,} \\
+    &\lambda_i \text{: decay constant of \gls{DNP} group $i$,} \\
+    &\beta_{eff} \text{: effective delayed neutron fraction.} \\
+\end{align*}
+%
+These group constants are extracted from
+the Serpent 2 output files using a Python script available from the Github
+repository that holds the Moltres source code \cite{lindsay_moltres_2017}. The
+script rewrites the group constants into a Moltres-compatible format.
+
+\begin{table}[htb!]
+	\centering
+	\caption{Neutron energy group upper bounds used in Serpent 2.}
+	\begin{tabular}{c S}
+		\toprule
+		{Group number} & {Upper bound [MeV]}\\
+		\midrule
+		1 & 20\\
+		2 & 2.2313\\
+		3 & 0.4979\\
+		4 & 0.0247875\\
+		5 & 0.0055308\\
+		6 & 0.0007485\\
+		\bottomrule
+	\end{tabular}
+	\label{table:bound}
+\end{table}
+
+\subsection{Central Core Region}
+
+As mentioned in the Chapter \ref{chap:msr}, the fuel salt loop is divided into
+two regions, the central core region where most of the fissions take place,
+and the outer loop region where the heat exchanger is located. The central
+core region specifically refers to the central region indicated by
 the red box in Figure \ref{fig:core}. The outer loop is simplified
 into a 1-D pipe as it is a subcritical region and its main purposes are: to
 introduce an out-of-core residence time for the \glspl{DNP}, and to contain
@@ -190,8 +212,6 @@ imposing fixed albedo neutron flux boundary conditions.
     central core region in the modeling approach in Moltres.}
     \label{fig:core}
 \end{figure}
-
-\subsection{Central Core Region}
 
 The central core region is of greatest interest to us during steady state and
 transient scenarios; the center of the reactor is naturally where most of the
@@ -247,8 +267,8 @@ equations \ref{eq:neut} and \ref{eq:dnp}:
 \end{align}
 %
 
-While the limitations of the multigroup neutron diffusion compared to other
-deterministic and Monte Carlo methods, particularly for flux values near
+While the limitations of the multigroup neutron diffusion method compared to
+other deterministic and Monte Carlo methods, particularly for flux values near
 boundaries, are well-documented, the diffusion model provides acceptable
 accuracy at lower computational costs. Moreover, the central core region
 contains no material interfaces except at its boundaries. Chapter
@@ -300,14 +320,14 @@ and \gls{DNP} concentration values were approximated by first-order Lagrange
 and constant monomial shape functions respectively on the finite element mesh.
 Figure \ref{fig:mesh} shows the mesh adopted for the \gls{MSFR} model.
 This work assumes vacuum boundary conditions for all six neutron group fluxes
-along
-the external boundaries of the geometry, and homogeneous Neumann boundary
-conditions along the axial symmetry boundary. For the \gls{DNP}
-concentrations, we imposed homogeneous Neumann boundary conditions on the
-walls, and inflow and outflow boundary conditions on the inlet and outlet
-boundaries respectively. The inlet \gls{DNP} concentration values were
+along the external boundaries of the geometry, and homogeneous Neumann
+boundary conditions along the axial symmetry boundary. For the \gls{DNP}
+concentrations, this work imposed homogeneous Neumann boundary conditions on
+the walls, and inflow and outflow boundary conditions on the inlet and outlet
+boundaries, respectively. The inlet \gls{DNP} concentration values were
 imported from the outlet values of the 1-D outer loop pipe at the same
-timestep.
+timestep. Table \ref{table:corebc} describes these boundary conditions
+mathematically.
 
 For the decay heat model, a previous study on the MSFR by Aufiero et al.
 \cite{aufiero_extended_2013} showed that using three decay heat precursor
@@ -323,18 +343,18 @@ decay heat modeling capability with the following equation:
 	\intertext{where}
     \omega_j &= \text{total decay heat power density from decay heat
     precursors in group $j$ [W$\cdot$cm$^{-3}$],} \nonumber \\
-	f_j &= \text{fraction of decay heat from group $j$ to total power under
-	full-power conditions,}
-	\nonumber \\
-	\epsilon_g &= \text{average fission energy per fission [W],} \nonumber \\
+	f_j &= \text{fraction of total power attributable to decay heat group
+	$j$,} \nonumber \\
+	\epsilon_g &= \text{average fission energy per fission initiated by a
+	neutron in group $g$ [W],} \nonumber \\
 	\lambda_j &= \text{average decay constant of decay heat precursors in
 	group $j$ [s$^{-1}$].} \nonumber
 \end{align}
 
-Like the neutron and \gls{DNP} groups, Moltres can accommodate an arbitrary
-number of decay heat groups. This work uses the same decay heat fractions and decay constants, shown in Table
-\ref{eq:decayheat}, used in the Polimi and TUDelft models for three decay heat
-groups.
+Like the neutron energy and \gls{DNP} groups, Moltres can accommodate an
+arbitrary number of decay heat groups. The current work uses the same decay
+heat fractions and decay constants, shown in Table \ref{eq:decayheat}, used in
+the Polimi and TUDelft models for three decay heat groups.
 
 \begin{table}[htb!]
 	\centering
@@ -360,26 +380,27 @@ MOOSE Navier-Stokes module \cite{peterson_overview_2017}. The standard
 \begin{align}
     \text{Momentum eq.:} && \rho \frac{\partial \vec{u}}{\partial t} &=
     -\rho (\vec{u}
-    \cdot \nabla) \vec{u} + \nabla \cdot (-p \vec{I} + \mu [
-    \nabla \vec{u} + (\nabla \vec{u})^T] + \vec{f} &&
+    \cdot \nabla) \vec{u} + \nabla \cdot [-p \vec{I} + \mu [
+    \nabla \vec{u} + (\nabla \vec{u})^T]] + \vec{f} &&
     \label{eq:momemtum} \\
     \text{Divergence-free:} && \nabla \cdot \vec{u} &= 0 &&
     \label{eq:divergence}
     \intertext{where}
     && p &= \text{ pressure [Pa],} && \nonumber \\
-    && \mu &= \text{ dynamic viscosity [Pa s],} && \nonumber \\
+    && \mu &= \text{ dynamic viscosity [Pa$\cdot$s],} && \nonumber \\
     && \vec{f} &= \text{ body force per unit volume [N$\cdot$m$^{-3}$].} &&
     \nonumber
 \end{align}
 
-In addition to the intrinsic molecular viscosity, this thesis introduces an
+In addition to the intrinsic molecular viscosity in the \gls{INS} equations,
+this thesis introduces an
 eddy viscosity term to approximate turbulent flow effects. The current
 implementation of the Navier-Stokes module does not have a turbulence model
 such as the \gls{RANS} models used in the Polimi and TUDelft models
 \cite{fiorina_modelling_2014}. Thus, this work uses
 a zeroth-order approximation of the eddy viscosity based on the results
 reported in the Polimi/TUDelft models. The eddy viscosity is assumed to be 40
-Pa s. Despite the simplicity of this assumption, the resulting flow profile is
+Pa$\cdot$s. Despite the simplicity of this assumption, the resulting flow profile is
 similar to flow profile in the Polimi and TUDelft models at steady state.
 
 The energy balance equation for temperature used in this Moltres model is:
@@ -421,36 +442,41 @@ from turbulent diffusion.
 
 Table \ref{table:corebc} summarizes the boundary conditions for all variables
 on all of the relevant boundaries. Figure \ref{fig:msfrbc} shows the locations
-of the various boundaries listed in the table.
+of the various boundaries listed in the table. This thesis introduces the
+CoupledOutflow boundary condition for $C_i$ and $\omega_j$ that allows users
+to couple these variables to the outlet velocity components (e.g. $u_x$,
+$u_y$). Without this new feature, users could only use uniform or fixed
+function-based velocity profiles in conjunction with the precursor looping
+capability.
 
 \begin{table}[htbp!]
     \small
 	\caption{Boundary conditions in the main reactor geometry (Figure
-	\ref{fig:msfrbc}.}
+	\ref{fig:msfrbc}).}
 	\centering
 	\begin{tabular}{ l l c}
 		\toprule
 		Variable & Boundary & Boundary Condition \\
 		\midrule
 		\multirow{4}{*}{Neutron flux $\phi_g$} & Top & $\frac{d \phi_g}{dx}
-		\big|_{\text{inflow}} = 0$ \\
-        & Outer & $\frac{d \phi_g}{dx} \big|_{\text{inflow}} = 0$ \\
-        & Bottom & $\frac{d \phi_g}{dx} \big|_{\text{inflow}} = 0$ \\
-        & Axial & $\frac{d \phi_g}{dx} = 0$ \\
+		\big|_{\text{inflow}} = 0$ \\[.5ex]
+        & Outer & $\frac{d \phi_g}{dx} \big|_{\text{inflow}} = 0$ \\[.5ex]
+        & Bottom & $\frac{d \phi_g}{dx} \big|_{\text{inflow}} = 0$ \\[.5ex]
+        & Axial & $\frac{d \phi_g}{dx} = 0$ \\[.5ex]
         \midrule
         \multirow{6}{*}{Delayed neutron precursor concentration $C_i$} &
-        Top (Core) & $\frac{d C_i}{dx} = 0$ \\
-        & Bottom (Core) & $\frac{d C_i}{dx} = 0$ \\
-        & Outer (Core) & $\frac{d C_i}{dx} = 0$ \\
-        & Axial (Core) & $\frac{d C_i}{dx} = 0$ \\
+        Top (Core) & $\frac{d C_i}{dx} = 0$ \\[.5ex]
+        & Bottom (Core) & $\frac{d C_i}{dx} = 0$ \\[.5ex]
+        & Outer (Core) & $\frac{d C_i}{dx} = 0$ \\[.5ex]
+        & Axial (Core) & $\frac{d C_i}{dx} = 0$ \\[.5ex]
         & Inlet (Core) & $C_i = c$ \\
         & Outlet (Core) & $u_x \cdot C_i = 0$ \\
         \midrule
         \multirow{6}{*}{Decay heat power density $\omega_j$} &
-        Top (Core) & $\frac{d \omega_j}{dx} = 0$ \\
-        & Bottom (Core) & $\frac{d \omega_j}{dx} = 0$ \\
-        & Outer (Core) & $\frac{d \omega_j}{dx} = 0$ \\
-        & Axial (Core) & $\frac{d \omega_j}{dx} = 0$ \\
+        Top (Core) & $\frac{d \omega_j}{dx} = 0$ \\[.5ex]
+        & Bottom (Core) & $\frac{d \omega_j}{dx} = 0$ \\[.5ex]
+        & Outer (Core) & $\frac{d \omega_j}{dx} = 0$ \\[.5ex]
+        & Axial (Core) & $\frac{d \omega_j}{dx} = 0$ \\[.5ex]
         & Inlet (Core) & $\omega_j = c$ \\
         & Outlet (Core) & $u_x \cdot \omega_j = 0$ \\
         \midrule
@@ -459,22 +485,22 @@ of the various boundaries listed in the table.
         & Outer (Core) & $u_x = 0$ \\
         & Axial (Core) & $u_x = 0$ \\
         & Inlet (Core) & $u_x = c$ \\
-        & Outlet (Core) & $\frac{d u_x}{dx} = 0$ \\
+        & Outlet (Core) & $\frac{d u_x}{dx} = 0$ \\[.5ex]
         \midrule
         \multirow{6}{*}{Axial velocity $u_y$} & Top (Core) & $u_y = 0$ \\
         & Bottom (Core) & $u_y = 0$ \\
         & Outer (Core) & $u_y = 0$ \\
-        & Axial (Core) & $\frac{d u_y}{dx} = 0$ \\
+        & Axial (Core) & $\frac{d u_y}{dx} = 0$ \\[.5ex]
         & Inlet (Core) & $u_y = 0$ \\
-        & Outlet (Core) & $\frac{d u_y}{dx} = 0$ \\
+        & Outlet (Core) & $\frac{d u_y}{dx} = 0$ \\[.5ex]
         \midrule
         \multirow{6}{*}{Temperature $T$} & Top (Core) &
-        $\frac{d T}{dx} = 0$ \\
-        & Bottom (Core) & $\frac{d T}{dx} = 0$ \\
-        & Outer (Core) & $\frac{d T}{dx} = 0$ \\
-        & Axial (Core) & $\frac{d T}{dx} = 0$ \\
+        $\frac{d T}{dx} = 0$ \\[.5ex]
+        & Bottom (Core) & $\frac{d T}{dx} = 0$ \\[.5ex]
+        & Outer (Core) & $\frac{d T}{dx} = 0$ \\[.5ex]
+        & Axial (Core) & $\frac{d T}{dx} = 0$ \\[.5ex]
         & Inlet (Core) & $T = c$ \\
-        & Outlet (Core) & $\frac{d T}{dx} = 0$ \\
+        & Outlet (Core) & $\frac{d T}{dx} = 0$ \\[.5ex]
 		\bottomrule
 	\end{tabular}
 	\label{table:corebc}
@@ -494,18 +520,20 @@ of the various boundaries listed in the table.
 
 Moltres also accounts for the decay of
 \glspl{DNP} outside the central core region by simulating its flow in a
-separate 1-D pipe geometry. This outer loop pipe simulation is implicitly
+separate 1-D pipe geometry. This outer loop pipe calculation is implicitly
 coupled to the active core simulation through Picard iterations in MOOSE's
 MultiApp functionality and inlet/outlet boundary values. For this work with
-the \gls{MSFR} model, we assumed a pipe
-length of 2.255 m with salt flowing at 1.1275 m s$^{-1}$ for an average
-out-of-core residence time of 2 seconds to follow the design specifications.
+the \gls{MSFR} model, the pipe length is 2.255 m with salt flowing at 1.1275 m
+s$^{-1}$ for an out-of-core residence time of 2 s. The present author derived
+these parameters from the reference specifications of 4 s cycle
+time and 50\% out-of-core salt fraction (Table \ref{table:msfr}).
 
 \subsubsection{Neutronics Model}
 
-Since this outer loop region is largely subcritical, the only significant
-neutronics-related phenomena are the drift and decay of \glspl{DNP}.
-The governing equation for the \glspl{DNP} is:
+The outer loop region is largely subcritical because most of it is adjacent to
+the boron carbide absorber as shown in Figure \ref{fig:core}. Therefore, the
+only significant neutronics-related phenomena are the drift and decay of
+\glspl{DNP}. The governing equation for the \glspl{DNP} is:
 %
 \begin{align}
     \frac{\partial C_i}{\partial t} &= - \lambda_i C_i - u
@@ -520,9 +548,9 @@ coefficient are the same values used in the central core region.
 
 \subsubsection{Thermal-Hydraulics Model}
 
-A constant velocity of 1.1275 m s$^{-1}$ is applied in the outer loop region.
-The governing equation for
-temperature, derived from equation \ref{eq:temp}, is:
+A constant velocity of 1.1275 m s$^{-1}$ is applied in the outer loop region
+to maintain the nominal 2 s out-of-core residence time. The governing equation
+for temperature, derived from equation \ref{eq:temp}, is:
 %
 \begin{align}
     \rho c_{p} \frac{\partial T}{\partial t} &= - \rho c_p u
@@ -537,8 +565,8 @@ temperature, derived from equation \ref{eq:temp}, is:
     x_0 &= \text{position of the point heat exchanger [m].} \nonumber
 \end{align}
 
-The fission heat source term is replaced with a heat exchanger sink term
-$Q_{hx}$
+In the outer loop region, the fission heat source term is replaced with a heat
+exchanger sink term $Q_{hx}$
 which depends on the temperature difference between the fuel salt $T$ and the
 intermediate loop salt $T_i$. For simplicity, this work assumes a constant
 temperature of 823 K in the intermediate loop. The heat transfer coefficient
@@ -552,7 +580,7 @@ distribution across the point heat exchanger.
 \subsubsection{Boundary Conditions}
 
 Table \ref{table:loopbc} summarizes the boundary conditions for all variables
-on the inlet and outlet of the 1-D outer loop region.
+on the inlet and outlet of the 1-D outer loop region. 
 
 \begin{table}[htbp!]
     \small
@@ -597,15 +625,26 @@ A parabolic flow profile was imposed on the inlet Dirichlet boundary
 condition. The equation for $u_x$ at the inlet is:
 %
 \begin{align}
-    u_x &= -2034.01 \Big[\frac{y}{18.75} - \Big(\frac{y}{18.75}\Big)^2 
+    u_x &= -\xi \Big[\frac{y}{h} - \Big(\frac{y}{h}\Big)^2 
     \Big] \\
     \intertext{where}
-    y = \text{height along the inlet [cm].}
+    \xi &= \text{normalizing constant [m$\cdot$s$^{-1}$],} \nonumber \\
+    y &= \text{height along the inlet [m],} \nonumber \\
+    h &= \text{total height of the inlet $= 0.1875$ m.} \nonumber
 \end{align}
 %
-The inlet is 18.75 cm high, and the coefficient at the front is from
-normalizing the equation for a total volumetric flow rate of
-4.5 m$^3$ s$^{-1}$.
+$\xi$ is a normalizing constant that depends on the total volumetric flow
+rate, $\dot{V}$. Solving the following set of equations in $v$ and $\dot{V}$:
+%
+\begin{align}
+    v &= \xi [\frac{y}{h} - \frac{y^2}{h^2}] \\
+    \dot{V} &= \int^h_0 \int^{2 \pi}_0 v r d\theta dy \\
+    \intertext{where}
+    r &= \text{radius [m],} \nonumber \\
+    \theta &= \text{azimuthal angle [rad],} \nonumber
+\end{align}
+%
+gives $\xi = 20.3401$ m$\cdot$s$^{-1}$ for $\dot{V} = 4.5$ m$^3\cdot$s$^{-1}$. 
 
 At every timestep, Moltres also calculates weighted averages of the
 temperature and the precursors at the outlet. These values are weighted by the
@@ -617,8 +656,8 @@ outflow velocity values at the outlet according to the following equation:
     \intertext{where}
     \psi &= \text{variable to be weighted} \nonumber \\
     \mathcal{C} &= \text{outlet boundary curve} \nonumber \\
-    u &= \text{outflow velocity perpendicular to the outlet boundary [m
-    s$^{-1}$].} \nonumber
+    u &= \text{outflow velocity perpendicular to the outlet boundary
+    [m$\cdot$s$^{-1}$].} \nonumber
 \end{align}
 
 This outflow value from the central core region is transferred to the 1-D

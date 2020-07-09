@@ -1,45 +1,60 @@
-This chapter compares key neutronics results between Serpent and Moltres
-for a static model of the \gls{MSFR}, i.e. no salt flow, and uniform
-temperature distribution to assess the accuracy of the
+This chapter verifies Moltres' ability to reproduce key neutronics parameters
+using group constant data from Serpent 2, which is essential for accurate
+neutronics calculations in the subsequent multiphysics simulations. The model
+under study is a static model of the \gls{MSFR}, i.e. no salt flow, and
+uniform temperature distribution to assess the accuracy of the
 six-group neutron diffusion model in Moltres on a fast-spectrum reactor. This
-verification exercise builds on a previous study by Lindsay et al.
-\cite{lindsay_introduction_2018} that had verified Moltres' neutronics
+verification exercise builds on the previous study by Lindsay et al.
+\cite{lindsay_introduction_2018} that verified Moltres' neutronics
 capabilities with a two-group neutron diffusion model of the \gls{MSRE}.
 
-\textbf{Details of the static \gls{MSFR} model on Moltres}
+\textbf{Details of the static \gls{MSFR} model in Moltres}
 \begin{itemize}
     \item No salt flow (static salt)
+    \begin{center}
+        $v_{salt} = 0$ m$\cdot$s$^{-1}$
+    \end{center}
     \item Uniform temperature of 973 K throughout the 2D core model
+    \begin{center}
+        $T = 973$ K
+    \end{center}
     \item Six neutron energy groups
+    \begin{center}
+        $G = 6$
+    \end{center}
     \item Eight delayed neutron precursor groups
+    \begin{center}
+        $I = 8$
+    \end{center}
     \item Vacuum boundary conditions on the outer boundaries of the 2D core
     mesh
+    \begin{center}
+        $\frac{d \phi}{dx}\big|_{\text{inflow}} = 0$ m$^{-2}\cdot$s$^{-1}$
+    \end{center}
 \end{itemize}
 
 \section{Effective Multiplication Factor and Delayed Neutron Fraction}
 
-Moltres solves the six-group neutron diffusion equations as a
+Moltres solves the six-group neutron diffusion equations (Equation
+\ref{eq:neut}) as a
 steady-state eigenvalue problem to find the $k_{\text{eff}}$ for the static
 \gls{MSFR} model. Table
 \ref{table:keff} shows the $k_{\text{eff}}$ values from Serpent 2 and Moltres
 at 973 K and the corresponding salt density, and Table \ref{table:ktemp} shows
-the $k_{\text{eff}}$ values for other temperatures at 100 K intervals. We
-observe small discrepancies on the order of 100 pcm between the two codes
-which we attribute to two main factors: the accuracy of the neutron diffusion
+the $k_{\text{eff}}$ values for other temperatures at 100 K intervals. Two
+main factors contribute to the small discrepancies on the order of 100 pcm
+between the two applications: the accuracy of the neutron diffusion
 model, and the omission of the blanket tank structural material in Moltres.
 The neutron diffusion model is not as accurate as the other S$_{\text{N}}$ or
 SP$_{\text{N}}$ deterministic methods nor the Monte Carlo approach in Serpent.
-Regarding the omission of the blanket tank material, we replaced the
-2 cm-thick structural material with blanket salt. This replacement may be
-partly responsible for the higher $k_{\text{eff}}$ value calculated by Moltres
-as the macroscopic fission cross sections of the blanket salt are non-zero for
-the higher neutron energy groups. Nevertheless, the discrepancy is smaller
+Regarding the omission of the blanket tank material, the present author
+replaced the 2 cm-thick structural material with blanket salt. This
+replacement is partly responsible for the higher $k_{\text{eff}}$ value
+calculated by Moltres as fissions occur in the blanket salt. Nevertheless, the
+discrepancy is smaller
 than the 228.5 pcm and 256.7 pcm discrepancies reported by Cervi et al.
 \cite{cervi_development_2019} for their six-group $SP_3$ and neutron
-diffusion methods, respectively, in OpenFOAM. Aufiero et al.
-\cite{aufiero_development_2014} used the same neutron diffusion model in
-OpenFOAM for their transient analysis of the \gls{MSFR}, albeit with one
-neutron energy group to reduce computational load.
+diffusion methods, respectively.
 
 \begin{table}[htb!]
     \small
@@ -84,16 +99,20 @@ neutron energy group to reduce computational load.
 The absolute value of $k_{\text{eff}}$ impacts the final steady-state
 temperature of the reactor. We can raise or lower the average core temperature
 at steady state to meet the design specifications for the inlet and outlet
-temperatures by adjusting the fissile inventory and $k_{\text{eff}}$. In
-transient analysis, the delayed neutron fraction $\beta$ and reactivity
-coefficients $\alpha$ are
-important as they dictate the duration, shape, and magnitude of the reactor
-transient response. The difference between $\beta$ and
-$\beta_{\text{eff}}$ is that $\beta$ is the physical delayed neutron fraction
-while $\beta_{\text{eff}}$ is the delayed neutron fraction weighted on the
-adjoint neutron flux. We will compare the $\beta$ value from Moltres to the
-$\beta_{\text{eff}}$ value from Serpent because Moltres currently lacks a
-adjoint calculation capability. We calculated $\beta$ by
+temperatures by adjusting the fissile inventory. On the other hand, the
+delayed neutron fraction, $\beta$, and reactivity coefficients, $\alpha$, are
+clearer indicators of transient reactor behavior in an accident transient.
+$\beta$ primarily affects the magnitude of the initial change in power and the
+time delay towards the new equilibrium power, while $\alpha$ affects the
+magnitude of the change in reactor power and temperature.
+
+This work compares the $\beta$ value from Moltres to the
+$\beta_{\text{eff}}$ value from Serpent because Moltres currently lacks an
+adjoint calculation capability.
+The difference between $\beta$ and $\beta_{\text{eff}}$ is
+that $\beta$ is the unweighted delayed neutron fraction
+while $\beta_{\text{eff}}$ is the delayed neutron fraction weighted by the
+adjoint neutron flux. The present author calculated $\beta$ by
 taking the relative difference between the $k_{\text{eff}}$ values with and
 without \glspl{DNP} in Table \ref{table:keff}. The $\beta$ and
 $\beta_{\text{eff}}$ values at 973 K, shown in Table \ref{table:betaeff}, are
@@ -117,16 +136,15 @@ in good agreement with a 4.43 pcm discrepancy.
 
 \section{Reactivity Feedback Coefficients}
 
-The temperature reactivity feedback arises mainly from Doppler broadening of
-resonance absorption peaks and temperature-induced density changes. Although
-Doppler coefficients typically show logarithmic dependence to temperature, we
-report them, along with the other coefficients, as linear gradient
-values of the reactivity given the relatively linear trend within the relevant
-temperature range (Figure \ref{fig:reactivity}). The temperature range
-extends below the melting point of the fuel salt (873 K) to ensure that
-the data covers the relevant range between 873 K and 900 K. Table
-\ref{table:alpha} shows
-the temperature coefficients as described prior. The total temperature
+Temperature reactivity feedback arises mainly from Doppler broadening of
+resonance absorption peaks and thermal expansion. The current work reports
+the reactivity, $\rho$, values for temperatures from 800 K to 1400 K at 100 K
+intervals (Figure \ref{fig:reactivity}). The slopes represent the total,
+Doppler, density $\alpha$ values. The temperature range
+extends below the melting point of the fuel salt (841 K) to ensure that
+the data covers the relevant range between 841 K and 900 K. Table
+\ref{table:alpha} shows the various $\alpha$ values calculated using the
+linear least squares approach. The total temperature
 coefficients from Serpent and Moltres show excellent agreement with a
 discrepancy of 0.019 pcm K$^{-1}$.
 
@@ -135,8 +153,8 @@ discrepancy of 0.019 pcm K$^{-1}$.
     \includegraphics[width=.8\textwidth]{reactivity}
     \caption{Reactivity values from Serpent and Moltres. The Doppler
     reactivity values were calculated at a fixed density of 4.1249 g
-    cm$^{-3}$. The density reactivity values were calculated at a fixed
-    temperature of 973 K.}
+    cm$^{-3}$. The thermal expansion reactivity values were calculated at a
+    fixed temperature of 973 K.}
     \label{fig:reactivity}
 \end{figure}
 %
@@ -144,15 +162,15 @@ discrepancy of 0.019 pcm K$^{-1}$.
 	\centering
 	\caption{Doppler, density, and total temperature coefficients
 	for the temperature range of 800 K to 1400 K.}
-	\begin{tabular}{l S S S S}
+	\begin{tabular}{l S S S}
 		\toprule
-		{Software} & {$\alpha_D$ (log) [pcm]} & {$\alpha_D$ (linear) [pcm
+		{Software} & {$\alpha_D$ [pcm
 		K$^{-1}$]} & {$\alpha_\rho$ [pcm K$^{-1}$]} & {$\alpha_T$ [pcm
 		K$^{-1}$]} \\
 		\midrule
-		{Serpent} & -4034 \pm 14 & -3.737 \pm 0.013 & -3.424 \pm 0.013 &
+		{Serpent} & -3.737 \pm 0.013 & -3.424 \pm 0.013 &
 		-7.165 \pm 0.013 \\
-		{Moltres} & {-} & {-} & {-} & -7.184\\
+		{Moltres} & {-} & {-} & -7.184\\
 		\bottomrule
 	\end{tabular}
 	\label{table:alpha}
@@ -170,8 +188,8 @@ discrepancy of 0.019 pcm K$^{-1}$.
 
 Moltres also closely replicated the six-group neutron spectrum from the
 Serpent group constants. Figure \ref{fig:ntspec} compares the neutron energy
-spectra from Serpent and Moltres in the central fuel salt region. The
-six-group neutron spectra overlap exactly over each other. More generally, the
+spectra from Serpent and Moltres in the central fuel salt region. More
+generally, the
 plot shows the distinctive fast spectrum observed in the \gls{MSFR} with dips
 in the spectrum corresponding to elastic scattering resonances from lithium
 and fluorine. From this plot, we observe that the discrepancies in
@@ -181,11 +199,11 @@ accurate representation of the neutronics in the \gls{MSFR} by using more
 neutron energy groups but this would adversely impact simulation times in the
 subsequent multiphysics finite element analyses.
 
-In summary, Moltres replicated most of the relevant neutronics parameters
-accurately with the group constant data from Serpent. Moltres agrees with the
-high fidelity simulation in Serpent 2 for the $\beta_{\text{eff}}$ and
+In summary, Moltres replicated the relevant neutronics parameters
+accurately using the group constant data from Serpent 2. Moltres agrees with
+the high fidelity simulation in Serpent 2 for the $\beta_{\text{eff}}$ and
 temperature reactivity coefficients, which are important parameters for
 modeling transient reactor behavior. The $k_{\text{eff}}$ values have
-discrepancies on the order of 100 pcm and they are relatively small compared
-to the $k_{\text{eff}}$ values from the neutron diffusion and SP3 models in
-OpenFOAM \cite{cervi_development_2019}.
+discrepancies on the order of 100 pcm which are relatively small compared
+to other \gls{MSR} multiphysics simulation tools (e.g. the neutron diffusion
+and SP3 models in OpenFOAM \cite{cervi_development_2019}).

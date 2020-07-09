@@ -7,15 +7,16 @@ have emerged in recent years touting various \gls{MSR} designs. This chapter
 provides a brief history of \glspl{MSR}, followed by the distinctive features
 that earned the concept the label of being a Generation IV reactor. Lastly,
 this chapter presents the reference specifications of the \gls{MSFR} concept
-studied in this work.
+studied in this work and summarizes the state of the art in the international
+literature regarding modeling and simulation of the \gls{MSFR}.
 
-\section{History}
+\section{\gls{MSR} History}
 
 The first \gls{MSR}, named the \gls{ARE}, dates back to the 1940s
 as part of the US Aircraft Nuclear Propulsion program
-\cite{rosenthal_molten-salt_1970}. Researchers recommended the molten fluoride
+\cite{rosenthal_molten-salt_1970}. Researchers recommended molten fluoride
 salts in particular for high uranium solubility, chemical stability, low vapor
-pressure even at high temperatures, decent heat transfer properties,
+pressure even at high temperatures, good heat transfer properties,
 resistance against radiation damage, and reduced corrosive effects on some
 common structural material \cite{rosenthal_molten-salt_1970}. They
 subsequently built the 2.5 MW$_{\text{th}}$ ARE reactor at \gls{ORNL}, where
@@ -96,7 +97,7 @@ picked up pace due to renewed interest initiated by the Generation IV Forum in
 2001. Today, various national and commercial bodies are developing numerous
 \gls{MSR} concepts.
 
-\section{Features}
+\section{\gls{MSR} Features}
 
 As mentioned in Chapter \ref{chap:intro}, the most significant difference
 between \glspl{MSR} and other reactor concepts is the liquid fuel in
@@ -249,7 +250,7 @@ up pace only in recent years due to the growing interest from commercial
 
 In the past two decades, researchers have developed several
 new tools for simulating steady-state and transient behavior in \glspl{MSR}.
-Many of the earlier efforts featured simplifications in simulating
+Many earlier efforts featured simplifications in simulating
 thermal-hydraulics by solving 1-D Navier-Stokes equations or using
 predetermined uniform velocity fields \cite{krepel_dyn3d-msr_2007,
 kophazi_development_2009}. In more recent years, there has been
@@ -276,7 +277,7 @@ models agreed on the steady-state neutron flux, temperature,
 and \gls{DNP} distributions, as well as the power responses following various
 accident transient initiations. Aufiero et al. \cite{aufiero_development_2014}
 concurrently developed
-a full-core 3-D model of the \gls{MSFR} on OpenFOAM, albeit with one-group
+a full-core 3-D model of the \gls{MSFR} in OpenFOAM, albeit with one-group
 neutron diffusion to reduce computational load. With the 3-D model, the
 authors could simulate the asymmetric reactor response to the failure of a
 single pump in the sixteen-pump \gls{MSFR} configuration. The authors also
@@ -298,15 +299,15 @@ Figure \ref{fig:msfr} show the main specifications and schematic view of the
 \gls{MSFR}, respectively. Developed from the \gls{MSBR} design, the
 \gls{MSFR} is intended to run primarily on a closed thorium fuel cycle with
 continuous online fuel reprocessing. Several reasons motivated the omission of
-graphite moderators from the original \gls{MSBR} design. Graphite is
+graphite moderators from the original \gls{MSBR} design. Firstly, graphite is
 susceptible to
 long-term radiation damage and replacement is likely to be necessary during
-the operating lifetime of the reactor. Graphite also has a positive
+the operating lifetime of the reactor. Secondly, graphite also has a positive
 temperature coefficient of reactivity; eliminating graphite from the design
-ensures a greater safety margin \cite{mathieu_thorium_2006}. While negative
-temperature coefficients are attainable with very thermalized spectra,
-breeding ratios deteriorated significantly due to parasitic absorption in the
-graphite \cite{mathieu_thorium_2006}.
+ensures a greater safety margin \cite{mathieu_thorium_2006}. Lastly, while
+negative temperature coefficients are attainable with very thermalized
+spectra, breeding ratios deteriorated significantly due to parasitic
+absorption in the graphite \cite{mathieu_thorium_2006}.
 %
 \begin{figure}[htb!] 
 	\centering
@@ -326,7 +327,7 @@ graphite \cite{mathieu_thorium_2006}.
 		Parameter & Value \\
 		\midrule
 		Thermal/Electric output [MW$_{\text{th}}$/MW$_{\text{e}}$] & 3000 /
-		1500 
+		1300 
 		\\
 		Salt volume [m$^3$] & 18 \\
 		Salt fraction in core & 0.5 \\
@@ -347,7 +348,7 @@ being pumped back into the bottom of the core. The salt also passes through
 the online salt reprocessing and gas sparging systems located along the
 external loops. A toroidal blanket tank containing fertile salt for breeding
 surrounds the core radially. The top and bottom of the core are enclosed
-by nickel alloy reflectors. A layer of boron carbide behind the blanket tanks
+by nickel alloy reflectors. A layer of boron carbide behind the blanket tank
 protects the peripheral equipment from excessive neutron damage. During severe
 accidents when core temperatures rise to dangerous levels, the actively
 fan-cooled freeze plug at the bottom of the core melts and drains the fuel
@@ -360,11 +361,11 @@ deployed due to the lack of $^{233}$U reserves required for the initial core
 loading. In general, the fuel and blanket salts are approximately composed of
 eutectic mixtures of 77.5\% LiF - 22.5\% AcF$_4$; AcF$_4$ represents
 actinide fluorides such as uranium, thorium, plutonium, and other \gls{TRU}
-fluorides. For an initial composition consisting of $^{232}$Th and $^{233}$U,
+fluorides.  For an initial composition consisting of $^{232}$Th and $^{233}$U,
 the benchmark value for the amount of $^{233}$U for criticality under
 normal operating conditions is 2.5 mol\%. However, a neutronic benchmark
 study by Brovchenko et al. \cite{brovchenko_neutronic_2019} shows that
-different neutronics software with different nuclear data clearly provide
+different neutronics software with different nuclear data provide
 different $k_{eff}$ estimates even with the same isotopic compositions and
 temperature distributions. The individual co-authors adjusted the
 ratio of $^{232}$Th to $^{233}$U slightly to achieve exact criticality at a
@@ -374,14 +375,14 @@ performs the same exercise to adjust the inlet and outlet temperatures to
 match nominal values.
 
 The thermal and electric power output of the \gls{MSFR} are 3000 MW
-$_{\text{th}}$ and 1500 MW$_{\text{e}}$, respectively. The high thermal
-efficiency ($\eta_{th}=0.5$) is due to the high operating
+$_{\text{th}}$ and 1300 MW$_{\text{e}}$, respectively. The high thermal
+efficiency ($\eta_{th}=0.43$) is due to the high operating
 temperature. The inlet and outlet temperature
 specifications of the fuel salt are 923 K and 1023 K, respectively, for a
 minimum 50 K temperature buffer between the
 operating temperatures and the melting point of the salt (873 K)
-\cite{euratom_final_2015}. The \gls{MSFR} has
-heat exchangers and an intermediate coolant loop to isolate the power
+\cite{euratom_final_2015}. The \gls{MSFR} has heat exchangers and an
+intermediate molten salt coolant loop to separate the power
 conversion system from the highly radioactive fuel salt. This also serves as
 a layer of containment between the radioactive material and the outside
 environment. The exact composition of the intermediate coolant is not
@@ -390,20 +391,19 @@ LiF-ZrF$_4$, and FliBe \cite{merle_concept_2017}.
 
 \subsection{Model Reactor Geometry}
 
-This present work uses the same 2-D square-cylindrical \gls{MSFR} design to
-benchmark our results against results published by Fiorina et al.
+The present work uses the same 2-D square-cylindrical \gls{MSFR} design to
+compare our results to results published by Fiorina et al.
 \cite{fiorina_modelling_2014}. The design is a 2-D axisymmetric representation
 of the \gls{MSFR} with the sixteen individual external loops homogenized into
 a single outer loop as shown in Figure \ref{fig:msfrgeom}. For the multigroup
 group constants calculations in Serpent, the 2-D axisymmetric model is
-extended into a 3-D model by a 360-degrees rotation about the
+extended into a 3-D model by a 360-degree rotation about the
 central axis. The material definitions are the same as those specified in the
-reference \gls{MSFR} model. Accordingly, the pump and heat exchanger regions
-are assumed to be composed of 100\% fuel salt. While this may not be entirely
-accurate, the exact details of the pump and heat exchanger systems are still
-under active study, and this external loop region is presumed to be of little
-neutronic importance due to its position behind the strong boron carbide
-neutron absorber layer.
+reference \gls{MSFR} model \cite{brovchenko_neutronic_2019}. Accordingly, the
+pump and heat exchanger regions
+are assumed to be composed of 100\% fuel salt. While this is an approximation,
+the outer loop is shielded from the core by a layer of boron carbide and sees
+sufficiently low neutron fluxes that we may neglect its exact neutronics.
 %
 \begin{figure}[t!] 
 	\centering
@@ -414,18 +414,19 @@ neutron absorber layer.
 	\label{fig:msfrgeom}
 \end{figure}
 
-Although this present work uses the same 2-D axisymmetric geometry for
-generating
-group constant data from Serpent, there are two minor differences between the
-\gls{MSFR} geometry used in the Moltres model, and the Polimi and TUDelft
-models \cite{fiorina_modelling_2014}. Firstly, the reactor geometry for
+Although the present work uses the same 2-D axisymmetric geometry for
+generating group constant data from Serpent, there are two minor differences
+between the \gls{MSFR} geometry modeled herein, and the geometry used in the
+Polimi and TUDelft models \cite{fiorina_modelling_2014}. First, the reactor
+geometry for
 Moltres excludes the 2-cm-thick structural material around the blanket tank
 that separates the fuel and blanket salts. The thickness is much smaller than
-the rest of the regions in the geometry and caused issues for meshing. The
-neutronics results in Chapter \ref{chap:nts} shows that the overall $k_{eff}$
+the rest of the regions in the geometry and it complicated mesh generation in
+the adjacent regions near the boundaries. The
+neutronics results in Chapter \ref{chap:nts} show that the overall $k_{eff}$
 and other parameters from Moltres show good agreement with that from Serpent.
 It also has no direct impact on the temperature distribution results because
-this present work solves for the temperature distribution in the primary loop
+the present work solves for the temperature distribution in the primary loop
 with homogeneous Neumann boundary conditions on the fuel salt-to-wall
 interface. This approach is for consistency with the Polimi and TUDelft
 models.
@@ -453,29 +454,29 @@ components in the \gls{MSFR}.
 
 The reference start-up salt composition for the fuel and blanket salts is
 77.5\% LiF - 22.5\% AcF$_4$ (actinide fluorides)
-\cite{merle-lucotte_launching_2011}. Typically, researchers working with the
-\gls{MSFR}
-model tweak the exact actinide composition by varying the $^{232}$Th to
-$^{233}$U ratio to obtain a $k_{\text{eff}}$ value of 1 at a uniform
-temperature of 973 K \cite{brovchenko_neutronic_2019}. Thus, the exact
-actinide compositions vary depending on
-the nuclear data library and neutron transport code. This present work uses
+\cite{merle-lucotte_launching_2011}. Some researchers working with the
+\gls{MSFR} model tweak the exact actinide composition by varying the
+$^{232}$Th to $^{233}$U ratio to obtain a $k_{\text{eff}}$ value of 1 at a
+uniform temperature of 973 K \cite{brovchenko_neutronic_2019} or for other
+unmentioned reasons \cite{fiorina_molten_2013}. Thus, the exact
+actinide compositions vary depending on the nuclear data library, neutron
+transport code, and the purpose of the study. The present work uses
 a fuel salt composition of 77.5\% LiF - 19.913\% ThF$_4$ - 2.587\%
-$^{233}$UF$_4$ for all calculations, which is a simplifying assumption but a
-fuel burnup analysis is complex and out of scope for this thesis. Table
-\ref{table:prip} shows relevant physical properties of the fuel and blanket
-salts.
+$^{233}$UF$_4$ for all calculations, which gives steady-state inlet and outlet
+temperatures approximately equal to the nominal values in Table
+\ref{table:msfr}. Table \ref{table:prip} shows relevant physical properties of
+the fuel and blanket salts.
 %
 \begin{table}[htb!]
 \small
 \centering
-\caption{Properties of the fuel and blanket salts LiF-AcF$_4$.}
+\caption{Properties of the fuel and blanket salts LiF-AcF$_4$
+\cite{brovchenko_neutronic_2019}.}
 \begin{tabular}{l l r r}
 \toprule
 Property & Formula & {Value at 973 K} & Validity Range\\
 \midrule
 Melting temperature [K] & 841 & {N/A} & 1 bar \\
-Boiling temperature [K] & 1874 & {N/A} & 1 bar \\
 Density, $\rho$ [kg m$^{-3}$] & $4094-0.882 \cdot (T-1008)$ & $4125$ & 893-1123 K \\
 Dynamic viscosity, $\mu$ [Pa s] & $\rho \cdot 5.55 \times 10^{-8} \cdot e^{3689/T}$ & $1.015$ & 898-1121 K \\
 Thermal conductivity, $k$ [W m$^{-1}$ K$^{-1}$] & $0.928+8.397 \times 10^{-5} \cdot T$ & $0.01010$ & 891-1020 K \\
@@ -488,10 +489,9 @@ Specific heat, $c_p$ [J kg$^{-1}$ K$^{-1}$] & $-1111+2.78\cdot T$ & $1594$ & 867
 \subsubsection{Structural Materials}
 
 The reflectors on the periphery of the reactor core and the blanket tank are
-made of a NiCrW Hastelloy (metal alloy) \cite{brovchenko_neutronic_2019}.
-Table \ref{table:refl} details the elemental composition
-of the Hastelloy. The alloy has a density
-of 10 g$\cdot$cm$^{-3}$. The \gls{MSFR} also includes a 20 cm
+made of a NiCrW Hastelloy (metal alloy) \cite{brovchenko_neutronic_2019}, and
+Table \ref{table:refl} details its elemental composition. This alloy has a
+density of 10 g$\cdot$cm$^{-3}$. The \gls{MSFR} also includes a 20 cm
 layer of boron carbide (B$_4$C) to protect the heat exchangers and pumps from
 neutron irradiation. The reference specifications indicate that natural boron
 is used, which is composed of 19.8 \% $^{10}$B and 80.2 \% $^{11}$B, with an

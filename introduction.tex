@@ -1,27 +1,18 @@
 \section{Background and Motivation}
 
 Greenhouse gas emission from human activities is the main cause of climate
-change, a global phenomenon characterized by shifting weather patterns and
-rising temperatures. The concentration of CO$_2$, a greenhouse gas, in the
-atmosphere has been rising steadily throughout modern human history
-\cite{us_department_of_commerce_global_2020}. Climate change has dire
+change which has dire
 consequences on human health and safety due to extreme weather events and the
-overall impact on food production \cite{mcmichael_global_2004}. As a result,
-urgent measures are necessary to limit greenhouse gas emissions, namely CO$_2$
-emissions from electricity generation.
-
+overall impact on food production \cite{mcmichael_global_2004}.
 Electricity generation from burning fossil fuels represents the
 greatest source of CO$_2$ emissions (38\% in 2018 \cite{iea_global_2019});
 replacing it with low-carbon
 alternatives would curb a significant fraction of emissions. Nuclear power is
-a viable low-carbon replacement for burning fossil fuels.
-Other low-carbon energy sources include solar-, wind-, and hydro-power. Each
-energy source has its own set of advantages and disadvantages; nuclear power's
-advantage over renewable energy sources is that it provides consistent
-base-load power independent of weather and geographical location
-\cite{petti_future_2018}. Employing a diverse mix of these energy sources
-ensures energy security and reliability in our transition
-towards a low-carbon future \cite{petti_future_2018}.
+a viable low-carbon replacement for burning fossil fuels and it provides
+consistent base-load power independent of weather and geographical location
+\cite{petti_future_2018}. Furthermore, employing a diverse mix of nuclear
+power and renewable sources ensures energy security and reliability in our
+transition towards a low-carbon future \cite{petti_future_2018}.
 
 The world would have to ramp up the current rate of reactor deployments to
 displace some of the presently large share of energy production from fossil
@@ -49,14 +40,14 @@ reduces reactor downtime during reactor operation.
 However, the liquid fuel form also brings about novel computational
 challenges in simulating the transient behavior of \glspl{MSR}; the
 interactions between neutronics and thermal-hydraulics are stronger due
-to greater fuel material expansion. Furthermore, \glspl{DNP} in \glspl{MSR}
-can flow freely within the primary coolant
+to greater fuel material expansion. Furthermore, fissile material and
+\glspl{DNP} in \glspl{MSR} can flow freely within the primary coolant
 loop as opposed to being held in place in a solid fuel matrix. Therefore,
 the choice of coupling methods for each set of physics requires careful
 consideration. 
 
 Most reactor analysis applications are usually reactor-specific by
-design such as PARCS and TRACE for \glspl{LWR}, and SAS4A/SASSYS-1 for
+design such as TRACE for \glspl{LWR}, and SAS4A/SASSYS-1 for
 liquid metal cooled reactors. Thus, these applications would disregard
 \gls{MSR}-specific phenomena and are inappropriate for \gls{MSR}
 analysis without any modifications to the source code. Some research efforts
@@ -75,13 +66,13 @@ framework. Lindsay et al. first presented the tool in 2017 and demonstrated
 its capabilities by simulating 2-D and 3-D models of the \gls{MSRE}
 \cite{lindsay_introduction_2018}. The results showed good qualitative
 agreement with the original design calculations by \gls{MSRE} researchers at
-\gls{ORNL}. There has since been new developments in Moltres allowing for
-more accurate \gls{MSR} simulations.
+\gls{ORNL}. This thesis presents some of the new developments in Moltres
+allowing for more complex and accurate \gls{MSR} simulations.
 
 \section{Objectives}
 
 This thesis demonstrates latest capabilities of Moltres
-\cite{lindsay_introduction_2018}, an open source MSR simulation tool.
+\cite{lindsay_introduction_2018}.
 In particular, this thesis presents two more recent
 developments in Moltres, namely fully integrating \gls{MOOSE}'s incompressible
 Navier-Stokes module into Moltres, and introducing a
@@ -92,13 +83,13 @@ behavior of fast-spectrum \glspl{MSR} through the study of the \gls{MSFR}
 concept. Code-to-code verification is an important exercise in software
 development for ensuring that the application produces accurate and reliable
 results. This thesis covers the \gls{MSFR} concept mainly because it has been
-studied extensively with readily available literature data to verify our
-results against. The
-steady-state and transient results also feature a significant degree of
-physics interaction between the neutronics and thermal-hydraulics. This
+studied extensively with readily available data in the literature to verify
+our results against. The \gls{MSFR} design also features interesting flow
+patterns that greatly affect the steady-state and transient behavior. This
 present work will first present a verification of Moltres' \gls{MSFR}
-neutronics results against Serpent 2, followed by a verification of
-the coupled neutronics/thermal-hydraulics steady-state and transient accident
+diffusion neutronics against the Monte Carlo neutron tranport software
+Serpent 2, followed by a verification of
+the coupled neutronics/thermal-hydraulics steady-state and accident transient
 results against results from the Polimi and TUDelft models published by
 Fiorina et al. \cite{fiorina_modelling_2014}. The
 secondary objective is to identify areas of improvement in Moltres for future
@@ -114,8 +105,8 @@ approach for generating the results in this thesis. Chapter 4 provides a
 neutronics assessment by comparing key neutronics parameters from Moltres'
 eigenvalue calculations to Serpent's Monte Carlo calculations. Chapter 5
 presents steady-state results of coupled neutronics/thermal-hydraulics
-\gls{MSFR} simulations in Moltres. Chapter 6 presents transient accident
+\gls{MSFR} simulations in Moltres. Chapter 6 presents accident transient
 simulation results for unprotected reactivity insertions, unprotected loss of
-heat sink, unprotected loss of flow, and unprotected pump overspeed,
-respectively. Lastly, Chapter 7 summarizes the key findings in this thesis
+heat sink, unprotected loss of flow, and unprotected pump overspeed. Lastly,
+Chapter 7 summarizes the key findings in this thesis
 and posits some potential avenues for future work.
