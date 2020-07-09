@@ -152,7 +152,7 @@ constant of 1 s and all other parameters held constant
 will present two sets of results for this transient: 1) without decay heat
 modeling, and 2) with decay heat modeling.
 
-\subsection{Without Decay Heat}
+\subsection{Without Decay Heat} \label{sec:wodecayheat}
 
 Figures \ref{fig:lohsheat} and \ref{fig:lohstemp} show the power output and
 average core temperature increase during the unprotected loss of heat sink
@@ -191,6 +191,63 @@ the average core temperature produces the same decrease in power output.
 \clearpage
 
 \subsection{With Decay Heat}
+
+Decay heat from fission products poses a great safety risk in a loss of
+heat sink accident. Section \ref{sec:wodecayheat} showed that prompt fission
+power output quickly falls as core temperatures rise. However, decay power
+output is independent of the instantaneous neutron flux. Figure
+\ref{fig:moltresdecaypower} shows that the decay power output remains
+relatively high during a short-term transient. Decay heat becomes the dominant
+heat source from $t=34$ s and falls at a much slower rate than prompt heat.
+Figure \ref{fig:moltresdecaytemp} highlights the
+greater core temperature increase attributed to decay heat as compared with
+the results without decay heat. By $t=120$ s, the model with decay heat
+records an average core temperature increase that is 45 K higher than the
+model without decay heat. The average core temperature reaches approximately
+1220 K and would continue to rise further. This places undue thermal stress
+and accelerate corrosion rates in the Hastelloy structural material. In the
+absence of an auxiliary heat removal system in the primary loop, reactor
+operators would have to rely on the freeze plug to drain the core into a drain
+tank with emergency cooling systems to keep the salt cool.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.85\textwidth]{moltres-decay-power}
+    \caption{Power output during
+    an unprotected loss of heat sink transient in the Moltres model with and
+    without decay heat.}
+    \label{fig:moltresdecaypower}
+    \includegraphics[width=.85\textwidth]{moltres-decay-temp}
+    \caption{Average core temperature increase during
+    an unprotected loss of heat sink transient in the Moltres model with and
+    without decay heat.}
+    \label{fig:moltresdecaytemp}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.85\textwidth]{decay-temp}
+    \caption{Loop-averaged temperature increase during
+    an unprotected loss of heat sink transient in the Moltres and Polimi
+    models \cite{fiorina_modelling_2014} with decay heat.}
+    \label{fig:polimidecaytemp}
+\end{figure}
+
+Figure \ref{fig:polimidecaytemp} shows the loop-averaged temperature
+increase in the Moltres and Polimi models \cite{fiorina_modelling_2014}. The
+TUDelft model does not have a decay heat modeling capability. The Moltres
+model predicts the same increasing trend in the temperature. The loop-averaged
+temperature rises significantly at the start of the transient and continues to
+rise at a decreasing rate. The loop-averaged temperature increase in the
+Moltres model at $t=120$ s is approximately 17 K lower than that in the Polimi
+model. It is difficult to ascertain the exact cause for this difference
+without the power profile from the Polimi model with decay heat to compare
+with. However, if the decay power output are similar, the stronger negative
+temperature reactivity coefficient would cause the prompt power output in the
+Moltres model to fall faster than the Polimi model. Consequently, the
+loop-averaged temperature would be lower as shown in the figure. Overall, the
+results for the loss of heat sink transient agree with the Polimi and TUDelft
+model results in both cases, with and without decay heat modeling.
 
 \clearpage
 
