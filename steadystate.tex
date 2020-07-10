@@ -1,8 +1,26 @@
-With the verification of Moltres' neutronics modeling capabilities in the
-context of the \gls{MSFR}, this chapter will cover the steady-state
-multiphysics simulation results from Moltres.
+Building on Chapter \ref{chap:nts} which verified Moltres' neutronics modeling
+capabilities in the context of the \gls{MSFR}, this chapter will cover the
+steady-state multiphysics simulation results of the \gls{MSFR} using Moltres.
+The steady-state results depend heavily on both neutronics and
+thermal-hydraulics solving capabilities in Moltres. Thus, this exercise is the
+first verification step for Moltres as a multiphysics \gls{MSR} simulation
+tool. This chapter will specifically discuss the temperature, velocity,
+neutron flux, and precursor distributions and compare them with data from the
+literature. The steady-state operating conditions will also serve as the
+initial conditions for the subsequent accident transient simulations.
 
-The procedure for obtaining the steady-state results involved several steps
+This chapter will first
+present a summary of the procedure for obtaining the steady-state results.
+Next, the chapter discusses the steady-state results without modeling decay
+heat in direct comparison with the steady-state results from the Polimi and
+TUDelft models \cite{aufiero_development_2014}. After this
+comparison, the chapter separately discusses the minor differences in the
+results from decay heat modeling in the last subsection.
+
+\section{Simulation Procedure}
+
+The procedure for obtaining the results for the steady-state operating
+conditions involved several steps
 due to the tightly coupled \glspl{PDE}. First, a preliminary transient
 simulation of fluid flow in the \gls{MSFR} core was run, starting from zero
 inlet velocity and gradually ramping up to match the nominal flow rate (4.5
@@ -13,45 +31,12 @@ velocity in the full time-dependent simulation modeling the full coupled
 neutronics and thermal-hydraulics multiphysics model. The initial values for
 the temperature and neutron group flux distributions are 953 K and
 $1 \times 10^{14}$ cm$^{-2}$ s$^{-1}$ uniformly throughout the geometry.
-Finally, this work assumes that steady
-state is reached when the volume integral values of every variable remain
-constant (up to 6 sig. fig.) for at least four seconds in the simulation; this
+Finally, this work assumes that steady state is reached when the volume
+integral values of every variable remain constant (up to 6 significant
+figures) for at least four seconds in the simulation; this
 time period corresponds to the nominal circulation time of the \gls{MSFR}.
 
-For a direct comparison with the steady-state results from the Polimi and
-TUDelft models \cite{aufiero_development_2014}, this chapter will first
-present the steady-state results without modeling decay heat. After this
-comparison, the chapter separately discusses the minor differences in the
-results from decay heat modeling in the last subsection.
-
 \section{Steady-State Thermal-Hydraulics Results}
-
-\begin{figure}[t!]
-    \centering
-    \begin{subfigure}[t]{.365\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{flow-temp}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{.625\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{flow-temp-fiorina}
-    \end{subfigure}
-    \caption{Temperature and velocity fields in the core from Moltres
-    (left), Polimi (center), and TUDelft (right) models. The colors represent
-    temperature according to the respective colorbars and the arrows
-    represent velocity fields.}
-    \label{fig:flow-temp}
-\end{figure}
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=.6\textwidth]{flow}
-    \caption{Fuel salt flow streamlines and velocity magnitude in the core.
-    The colors represent velocity magnitude according to the colorbar on the
-    right.}
-    \label{fig:flow}
-\end{figure}
 
 Figure \ref{fig:flow-temp} shows the temperature and velocity fields of the
 fuel salt in the core at steady state from Moltres and the Polimi and TUDelft
@@ -71,7 +56,35 @@ regions without recirculation. Moltres, on the other hand, predicts explicit
 recirculating flow in these regions. This is due to our constant turbulent
 viscosity approximation in Moltres. The k-$\epsilon$ turbulence models in the
 Polimi and TUDelft models predict that the turbulent viscosity in these
-regions is as high as 100 Pa s, much higher than our 40 Pa s approximation.
+regions is as high as 100 Pa$\cdot$s, much higher than our 40 Pa$\cdot$s
+approximation.
+
+\begin{figure}[htbp!]
+    \centering
+    \begin{subfigure}[t]{.365\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{flow-temp}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{.625\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{flow-temp-fiorina}
+    \end{subfigure}
+    \caption{Temperature and velocity fields in the core from Moltres
+    (left), Polimi (center), and TUDelft (right) models. The colors represent
+    temperature according to the respective color bars and the arrows
+    represent velocity fields.}
+    \label{fig:flow-temp}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.6\textwidth]{flow}
+    \caption{Fuel salt flow streamlines and velocity magnitude in the core.
+    The colors represent velocity magnitude according to the color bar on the
+    right.}
+    \label{fig:flow}
+\end{figure}
 
 Nevertheless, similar temperature hotspots form in these regions of
 recirculation and stagnation as convection is the dominant heat transfer
@@ -82,13 +95,14 @@ the plots show cooler temperatures in high-velocity regions. The minimum
 temperature is 924 K at the inlet. 
 
 Although the temperatures at the hotspots are well below the melting point of the Ni-alloy structure (1500 K), they may cause undue thermal stress on the
-blanket tank structure and induce relatively faster salt corrosion rates. A
+blanket tank structure and accelerate salt corrosion rates. A
 sudden, large reactivity insertion could push fuel salt temperatures above the
 melting point of the Ni-alloy and cause irreversible damage. Furthermore,
 the reservoir of hot fuel salt may cause unpredictable behavior during
-transient scenarios when the flow profile undergoes a drastic change.
+transient scenarios when the flow profile fluctuates.
 Thus, Rouch et al. \cite{rouch_preliminary_2014} developed an improved
-hourglass-shaped design to optimize flow distribution and prevent these
+hourglass-shaped design for the central core region to optimize flow
+distribution and prevent these
 recirculation zones and hotspots from forming. A study of this new design
 using Moltres is a potential subject for future work when a proper turbulence
 model is in place.
@@ -104,15 +118,16 @@ distributions in the core for all six neutron energy groups, and Figure
 the core and at reactor half-height, respectively.
 The distributions are highly symmetric along the
 central and horizontal axes, as expected of a cylindrical reactor design. The
-relatively lower temperatures near the center of the core promotes the neutron
-flux peaking but it is of little concern as no structural parts vulnerable to
-neutron damage exist in that region. The peak total flux at the center is
+lower temperatures near the center of the core promote the neutron
+flux peaking but it is of little concern as no neutronically vulnerable
+structures exist in that region. The peak total flux at the center is
 $9.80 \times 10^{15}$ cm$^{-2}\cdot$s$^{-1}$, which is close to values
 reported by Fiorina et al. \cite{fiorina_molten_2013} and Aufiero et al.
 \cite{aufiero_development_2014} as shown in Table \ref{table:peak-flux}. The
 peak flux value from this paper is slightly higher as this work used the
-steady-state temperature distribution while Fiorina et al. and Aufiero et al.
-imposed a uniform temperature distribution at 973 K.
+heterogeneous temperature distribution in Figure \ref{fig:flow-temp} while
+Fiorina et al. and Aufiero et al. imposed uniform temperature distributions
+at 973 K.
 
 \begin{figure}[b!]
     \centering
@@ -343,8 +358,6 @@ reports the value as the physical fraction without adjoint weighting. The
 weighting results in a significant difference in $\beta_c$ because a greater
 fraction of the \glspl{DNP} decay in the recirculation zones, where the
 neutron importance is noticeably diminished.
-
-\clearpage
 
 \section{Steady-State Decay Heat Results}
 

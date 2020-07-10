@@ -24,7 +24,7 @@ created in 2004 for group constant generation in lattice geometries, and has
 since grown to support more general capabilities. Serpent 2 is highly
 parallelizable, supporting both MPI and OpenMP parallel programming APIs. It
 has also been validated and verified against experimental data and other well
-established codes \cite{leppanen_calculation_2014}.
+established neutron transport applications \cite{leppanen_calculation_2014}.
 
 In Serpent 2, each neutron is tracked through a combination of
 ray-tracing-based surface tracking and rejection sampling-based delta
@@ -192,18 +192,15 @@ script rewrites the group constants into a Moltres-compatible format.
 
 As mentioned in the Chapter \ref{chap:msr}, the fuel salt loop is divided into
 two regions, the central core region where most of the fissions take place,
-and the outer loop region where the heat exchanger is located. The central
-core region specifically refers to the central region indicated by
-the red box in Figure \ref{fig:core}. The outer loop is simplified
-into a 1-D pipe as it is a subcritical region and its main purposes are: to
-introduce an out-of-core residence time for the \glspl{DNP}, and to contain
-the heat removal kernel to simulate the heat exchanger.
+and the outer loop region where the heat exchanger is located. The red box in
+Figure \ref{fig:core} indicates the central core region. The outer loop is
+simplified into a 1-D pipe as it is a subcritical region. Its main purposes
+are to introduce an out-of-core residence time for the \glspl{DNP} and to
+contain the heat removal kernel to simulate the heat exchanger.
 Accordingly, this section provides separate descriptions for the governing
 equations in the central core region and the outer loop region. There is also
 a third region comprised of the blanket salt, the NiCrW Hastelloy reflectors, 
-and other material. This region is important for capturing a more accurate
-estimate of neutron leakage than would
-imposing fixed albedo neutron flux boundary conditions.
+and other material.
 
 \begin{figure}[htb!]
     \centering
@@ -393,15 +390,22 @@ MOOSE Navier-Stokes module \cite{peterson_overview_2017}. The standard
 \end{align}
 
 In addition to the intrinsic molecular viscosity in the \gls{INS} equations,
-this thesis introduces an
-eddy viscosity term to approximate turbulent flow effects. The current
-implementation of the Navier-Stokes module does not have a turbulence model
-such as the \gls{RANS} models used in the Polimi and TUDelft models
-\cite{fiorina_modelling_2014}. Thus, this work uses
-a zeroth-order approximation of the eddy viscosity based on the results
-reported in the Polimi/TUDelft models. The eddy viscosity is assumed to be 40
-Pa$\cdot$s. Despite the simplicity of this assumption, the resulting flow profile is
-similar to flow profile in the Polimi and TUDelft models at steady state.
+this thesis introduces an eddy viscosity term, $\mu_t$, to approximate
+turbulent flow effects. The current implementation of the Navier-Stokes module
+does not have a turbulence model. The options for turbulence modeling in
+\gls{CFD} include direct numerical simulations (DNS) and large eddy
+simulations (LES) for higher fidelity flow simulations, \gls{RANS} methods for
+balanced compromises between accuracy and computational speed, and lumped
+parameter and sub-channel methods for even faster performance with greater
+accuracy costs \cite{moorthi_review_2018}. The Polimi and TUDelft models used
+\gls{RANS} methods to model salt flow \cite{fiorina_modelling_2014}. This work
+uses a zeroth-order approximation of $\mu_t$ based on the calculated $\mu_t$
+values reported in the Polimi and TUDelft models. The models
+predicted spatial $\mu_t$ values ranging from 0-110 Pa$\cdot$s, with most
+of the core lying in the 30-50 Pa$\cdot$s range. Thus, the present work uses
+the approximated value $\mu_t=$ 40 Pa$\cdot$s. Despite the simplicity of this
+approximation, the resulting flow profile is similar to flow profile in the
+Polimi and TUDelft models at steady state.
 
 The energy balance equation for temperature used in this Moltres model is:
 %
@@ -580,7 +584,11 @@ distribution across the point heat exchanger.
 \subsubsection{Boundary Conditions}
 
 Table \ref{table:loopbc} summarizes the boundary conditions for all variables
-on the inlet and outlet of the 1-D outer loop region. 
+on the inlet and outlet of the 1-D outer loop region. The inlet boundary
+conditions are all Dirichlet boundary conditions. The inlet boundary values
+are set by the outflow from the central core region that this inlet is
+connected to in the actual reactor geometry. The outlet boundary conditions
+are all outflow boundary conditions as shown in the table.
 
 \begin{table}[htbp!]
     \small

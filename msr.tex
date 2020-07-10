@@ -58,44 +58,30 @@ technical perspective, two independent
 technology evaluation and design studies of the \gls{MSR} had reported
 favorably on the promise of the system \cite{macpherson_molten_1985}.
 
-In spite of this setback, research into \glspl{MSR} continued through the late
-1970s. In 1980, \gls{ORNL} published a report describing a new \gls{MSR}
-concept, called the \gls{DMSR} \cite{gehin_liquid_2016} with denatured
-$^{235}$U fuel (i.e. low-enriched uranium). The \gls{ORNL} researchers
-developed this design in response to the fuel reprocessing restrictions
-introduced by President Ford in 1976. The \gls{DMSR} would operate as a
-once-through
-converter system without fuel reprocessing. While the fuel consists of 19.75
-\% high-assay low-enriched uranium, the initial core loading includes thorium
-to boost its conversion ratio throughout its lifetime. It has a continuous
-online feed consisting of \gls{HALEU} to maintain criticality, and denatured
-$^{235}$U to keep uranium enrichment levels below nuclear non-proliferation
-policy thresholds. The design also includes a gas sparging system for removing
-gaseous fission products, while noble metals plate out onto the walls of
-the coolant loop. The older \gls{MSBR} design had a significant drawback; the
-extensive neutron damage in the graphite moderator necessitated frequent
-replacement (every four years) throughout its operational lifetime. The
-\gls{DMSR} avoids this issue by having a lower power density while maintaining
-the overall power output of 2250 MW$_{\text{th}}$. As a result, researchers
-projected that the graphite moderator would last for the entirety of the
-\gls{DMSR}'s design lifetime.
+Two other \gls{MSR} designs emerged in the 1970s: the \gls{DMSR} from
+\gls{ORNL} \cite{gehin_liquid_2016} and the \gls{MCFR} from the UK Atomic
+Energy Authority \cite{smith_assessment_1974}. \gls{ORNL}
+researchers developed the \gls{DMSR}, named after its planned use of denatured
+$^{235}$U fuel (i.e. low-enriched uranium), as a once-through converter system
+without fuel reprocessing in response to fuel reprocessing restrictions
+introduced by President Ford in 1976. On the other hand, UK researchers
+developed the lead-cooled \gls{MCFR} to enhance $^{239}$Pu breeding with the
+relatively fast neutron spectrum. Both designs failed to gain traction and did
+not inspire any working prototypes.
 
-There was a concurrent program at the UK Atomic Energy Authority for the
-development of a 2500 MW$_{\text{e}}$ lead-cooled Molten Chloride Fast Reactor
-concept \cite{smith_assessment_1974}. It is a dual fluid system,
-with separate loops for the fuel salt and the blanket salt. The blanket is a
-1 m-wide tank surrounding the core. The absence of moderators and the choice
-of chloride over fluoride salt resulted in a relatively hard neutron spectrum
-which favors $^{239}$Pu breeding over the thorium cycle. The UK researchers
-performed some experiments to study molten salt chemistry but there were no
-reactor prototypes. The UK program eventually shut down just like its
-US counterpart partly due to the successful demonstration of the Prototype
-Fast Reactor which had achieved criticality in 1974.
-
-Following a lull lasting through the late 20th century, \gls{MSR} research
-picked up pace due to renewed interest initiated by the Generation IV Forum in
-2001. Today, various national and commercial bodies are developing numerous
-\gls{MSR} concepts.
+Following a lull lasting through the late 20th century, researchers at
+\gls{CNRS} began research into \glspl{MSR} in 1997
+\cite{heuer_simulation_2010}. Starting from the \gls{MSBR} design, they
+performed parametric studies on the design based on safety, breeding, and
+other performance metrics \cite{mathieu_thorium_2006}. Their efforts
+culminated in the \gls{MSFR} concept, a fast-spectrum breeder \gls{MSR}
+designed to run on the thorium fuel cycle \cite{merle_optimized_2007}. In
+2008, the Generation IV International Forum highlighted the \gls{MSFR} among
+other \gls{MSR} designs for further development \cite{gif_generation_2008}.
+The \gls{MSFR} has also benefited from collaborative research through two
+European-funded projects, the EVOL and SAMOFAR projects
+\cite{euratom_final_2015}. Today, numerous other national and commercial
+bodies are also developing their own \gls{MSR} designs.
 
 \section{\gls{MSR} Features}
 
@@ -121,8 +107,10 @@ fuel salt mixture. Examples of one-fluid designs include the Integral Molten
 Salt Reactor from Terrestrial Energy \cite{leblanc_integral_2015} and the
 \gls{MSR} design from Transatomic Power
 \cite{transatomic_power_corporation_technical_2016} while two-fluid designs
-include the \gls{MSFR} \cite{serp_molten_2014} and \gls{MOSART}
-\cite{ignatiev_molten_2014}.
+include the \gls{MSFR} \cite{merle_optimized_2007} and \gls{MOSART}
+\cite{ignatiev_molten_2014}. The current work involves simulations of
+the \gls{MSFR} in Moltres and Section \ref{sec:msfr} describes this reactor
+design in further detail.
 
 \subsection{Safety}
 
@@ -223,24 +211,8 @@ of 1.31 days \cite{grape_10_2017}. Safeguards by design and close monitoring
 of \glspl{MSR} are therefore essential to avoiding spent nuclear fuel
 diversion.
 
-Economic analyses of \glspl{MSR} are preliminary at the current
-stage of \gls{MSR} development. Qualitatively, many technical factors favor
-\glspl{MSR} over \glspl{LWR}. Some of these factors include: smaller reactor
-core size due to low operating pressures, higher thermal efficiency and
-cheaper air-cooling systems due to high operating temperatures, reduction in
-fuel fabrication costs, and shorter reactor shutdown periods due to online
-refueling \cite{dolan_1_2017}. Moir \cite{moir_recommendations_2008}
-published data from \gls{ORNL} reports on the estimated electricity costs for
-a 1000 MWe \gls{MSR} with 20\% enriched $^{235}$U fuel and no reprocessing
-throughout the reactor's 30-year lifetime. Adjusted to year 2000 dollars, the
-electricity costs for this type of \gls{MSR} was 7\% and 8\% lower than that
-of pressurized water reactors and coal power plants. These differences are
-within the $\pm$10\% uncertainty range but Moir remains optimistic.
-The author also notes that costs could be lower in an \gls{MSR} with
-fertile feed and online reprocessing could reach fuel self sufficiency.
-
 In terms of technological readiness, \glspl{MSR} still require significant
-research efforts and engineering demonstrations for experimental validation of
+research efforts and experiments for the validation of
 various components before a full commercial model can be commissioned. Work
 towards creating a safety and licensing framework for \glspl{MSR} has picked
 up pace only in recent years due to the growing interest from commercial
@@ -250,10 +222,17 @@ up pace only in recent years due to the growing interest from commercial
 
 In the past two decades, researchers have developed several
 new tools for simulating steady-state and transient behavior in \glspl{MSR}.
-Many earlier efforts featured simplifications in simulating
-thermal-hydraulics by solving 1-D Navier-Stokes equations or using
-predetermined uniform velocity fields \cite{krepel_dyn3d-msr_2007,
-kophazi_development_2009}. In more recent years, there has been
+Earlier efforts featured simplifications in simulating
+thermal-hydraulics by using predetermined 1-D velocity fields. One such effort
+\cite{krepel_dyn3d-msr_2007} used DYN3D-MSR, an \gls{MSR} simulation tool
+adapted from the \gls{LWR} simulation tool DYN3D while another
+\cite{kophazi_development_2009} adapted DALTON, originally a simulation
+tool for high-temperature reactors. Both works studied the \gls{MSRE} and
+simulated flow through advection terms in the temperature and precursor
+equations in conjunction with full 3-D calculations for neutron flux and heat
+conduction.
+
+In more recent years, there has been
 significant progress towards fully coupled, spatial codes that feature
 2-D axisymmetric or full 3-D models. In 2011, Cammi et al.
 \cite{cammi_multi-physics_2011} performed a ``\gls{MPM}'' analysis
@@ -265,13 +244,21 @@ neutronics and thermal-hydraulics respectively. The
 authors emphasized the need for proper full coupling of the multiphysics and
 presented both steady-state and transient results in various
 scenarios such as reactivity insertions, changes in pumping rate, and the
-presence of periodic perturbations. This approach was featured again in a
-later paper by Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D
-axisymmetric model of the
-\gls{MSFR}. The authors presented results from the Politecnico di Milano
-COMSOL-based approach, and another approach by researchers from Delft
-University of Technology, in which they coupled their in-house neutronics and
-thermal-hydraulics codes, DALTON and HEAT respectively. With multigroup
+presence of periodic perturbations. Nagy et al. \cite{nagy_steady-state_2014}
+introduced an improved version of DALTON which coupled with a \gls{CFD}
+application and incorporated incompressible
+Navier-Stokes flow to simulate salt flow more accurately. The authors
+validated their model against \gls{MSRE} experimental data before presenting
+multiphysics simulation results of a different graphite-moderated breeder
+\gls{MSR}.
+
+Both DALTON and the COMSOL-based tool featured again in a later paper by
+Fiorina et al.
+\cite{fiorina_modelling_2014} in 2014 for a 2-D axisymmetric model of the
+\gls{MSFR}. The authors compared \gls{MSFR} simulations results from both
+tools, in which they dubbed the COMSOL and DALTON/HEAT tools the Polimi and
+TUDelft models, respectively, after the universities where each tool was
+developed. With multigroup
 neutron diffusion and \gls{RANS} formulations on ultra fine meshes, both
 models agreed on the steady-state neutron flux, temperature,
 and \gls{DNP} distributions, as well as the power responses following various
@@ -280,18 +267,37 @@ concurrently developed
 a full-core 3-D model of the \gls{MSFR} in OpenFOAM, albeit with one-group
 neutron diffusion to reduce computational load. With the 3-D model, the
 authors could simulate the asymmetric reactor response to the failure of a
-single pump in the sixteen-pump \gls{MSFR} configuration. The authors also
+single pump in the sixteen-pump \gls{MSFR} configuration. Aufiero et al. also
 provided quantitative data supporting the use of implicit coupling over
 explicit coupling to obtain accurate solutions of the transient cases.
-Recognizing the huge computational burden required for full 3-D simulations, 
-later authors came up with innovative ways to alleviate this issue. Methods
-include
-selective geometrical reduced order modeling for various components of a
-reactor based on the importance of the physical phenomena being simulated
-\cite{zanetti_geometric_2015}, or using a novel, efficient method for
-neutronics calculations \cite{laureau_transient_2017}.
 
-\section{Molten Salt Fast Reactor}
+Separately, Zhang et al. \cite{zhang_couple_2014} introduced another
+self-contained \gls{MSR} simulation tool named COUPLE. Similar to the COMSOL
+and OpenFOAM-based models, COUPLE solves the multigroup neutron diffusion
+equations and the incompressible Navier-Stokes equations with the
+$k$-$\epsilon$ turbulence model. The authors verified COUPLE's neutronics and
+thermal-hydraulics against MCNP and a FLUENT-based model, respectively, before
+presenting their multiphysics steady-state results with a 2-D axisymmetric
+model of the \gls{MSFR}.
+
+Recognizing the huge computational burden required for full 3-D simulations, 
+some authors came up with innovative ways to alleviate this issue. Zanetti et
+al. \cite{zanetti_geometric_2015} introduced a geometric multiscale modeling
+approach for various components of a reactor based on the importance of
+the physical phenomena being simulated. The authors employed a 3-D 
+single-channel model for the \gls{MSRE} core and modeled the other
+regions in the reactor such as the upper and lower plenums and the heat
+exchanger using a lumped parameter approach. They also applied flux
+factorization to decouple the temporal and spatial components in the neutron
+diffusion equation. Laureau et al. \cite{laureau_transient_2017} devised a
+different method, focusing solely making neutronics calculations more
+efficient while retaining OpenFOAM's \gls{CFD} capabilities. The authors
+adapted fission matrices, commonly used in Monte Carlo neutronics
+applications, for efficient transient calculations in a modified version of
+Serpent 2 \cite{leppanen_serpent_2014} and coupled it with OpenFOAM for
+multiphysics transient simulations of the \gls{MSFR}.
+
+\section{Molten Salt Fast Reactor} \label{sec:msfr}
 
 The \gls{MSFR} is a European reference fast-spectrum \gls{MSR} concept
 \cite{mathieu_thorium_2006, merle_optimized_2007}. Table \ref{table:msfr} and
@@ -320,7 +326,7 @@ absorption in the graphite \cite{mathieu_thorium_2006}.
 \begin{table}[htb!]
     \small
 	\caption{Main specifications of the \gls{MSFR} concept
-				\cite{serp_molten_2014}.}
+				\cite{merle_concept_2017}.}
 	\centering
 	\begin{tabular}{ l r }
 		\toprule
@@ -361,7 +367,10 @@ deployed due to the lack of $^{233}$U reserves required for the initial core
 loading. In general, the fuel and blanket salts are approximately composed of
 eutectic mixtures of 77.5\% LiF - 22.5\% AcF$_4$; AcF$_4$ represents
 actinide fluorides such as uranium, thorium, plutonium, and other \gls{TRU}
-fluorides.  For an initial composition consisting of $^{232}$Th and $^{233}$U,
+fluorides. Using fluoride salts instead of chloride salts results in a
+relatively thermal neutron spectrum. Therefore, the \gls{MSFR} has a more
+thermal neutron spectrum than a typical sodium fast reactor. For an initial
+composition consisting of $^{232}$Th and $^{233}$U,
 the benchmark value for the amount of $^{233}$U for criticality under
 normal operating conditions is 2.5 mol\%. However, a neutronic benchmark
 study by Brovchenko et al. \cite{brovchenko_neutronic_2019} shows that
@@ -403,7 +412,8 @@ reference \gls{MSFR} model \cite{brovchenko_neutronic_2019}. Accordingly, the
 pump and heat exchanger regions
 are assumed to be composed of 100\% fuel salt. While this is an approximation,
 the outer loop is shielded from the core by a layer of boron carbide and sees
-sufficiently low neutron fluxes that we may neglect its exact neutronics.
+sufficiently low neutron fluxes that we may neglect its exact neutronic
+properties.
 %
 \begin{figure}[t!] 
 	\centering
@@ -458,9 +468,9 @@ The reference start-up salt composition for the fuel and blanket salts is
 \gls{MSFR} model tweak the exact actinide composition by varying the
 $^{232}$Th to $^{233}$U ratio to obtain a $k_{\text{eff}}$ value of 1 at a
 uniform temperature of 973 K \cite{brovchenko_neutronic_2019} or for other
-unmentioned reasons \cite{fiorina_molten_2013}. Thus, the exact
-actinide compositions vary depending on the nuclear data library, neutron
-transport code, and the purpose of the study. The present work uses
+motivations \cite{fiorina_molten_2013} \cite{pettersen_coupled_2016}. Thus,
+the exact actinide compositions vary depending on the nuclear data library,
+neutron transport code, and the purpose of the study. The present work uses
 a fuel salt composition of 77.5\% LiF - 19.913\% ThF$_4$ - 2.587\%
 $^{233}$UF$_4$ for all calculations, which gives steady-state inlet and outlet
 temperatures approximately equal to the nominal values in Table
@@ -478,8 +488,8 @@ Property & Formula & {Value at 973 K} & Validity Range\\
 \midrule
 Melting temperature [K] & 841 & {N/A} & 1 bar \\
 Density, $\rho$ [kg m$^{-3}$] & $4094-0.882 \cdot (T-1008)$ & $4125$ & 893-1123 K \\
-Dynamic viscosity, $\mu$ [Pa s] & $\rho \cdot 5.55 \times 10^{-8} \cdot e^{3689/T}$ & $1.015$ & 898-1121 K \\
-Thermal conductivity, $k$ [W m$^{-1}$ K$^{-1}$] & $0.928+8.397 \times 10^{-5} \cdot T$ & $0.01010$ & 891-1020 K \\
+Dynamic viscosity, $\mu$ [Pa s] & $\rho \cdot 5.55 \times 10^{-8} \cdot e^{3689/T}$ & $0.01015$ & 898-1121 K \\
+Thermal conductivity, $k$ [W m$^{-1}$ K$^{-1}$] & $0.928+8.397 \times 10^{-5} \cdot T$ & $1.010$ & 891-1020 K \\
 Specific heat, $c_p$ [J kg$^{-1}$ K$^{-1}$] & $-1111+2.78\cdot T$ & $1594$ & 867-907 K \\
 \bottomrule
 \end{tabular}

@@ -139,8 +139,6 @@ Moltres' results show good agreement with the Polimi and TUDelft results.
 The differences arise mainly due to the differences in the temperature
 reactivity coefficients.
 
-\clearpage
-
 \section{Unprotected Loss of Heat Sink}
 
 An unprotected loss of heat sink accident can occur when the pumps in the
@@ -210,29 +208,6 @@ absence of an auxiliary heat removal system in the primary loop, reactor
 operators would have to rely on the freeze plug to drain the core into a drain
 tank with emergency cooling systems to keep the salt cool.
 
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=.85\textwidth]{moltres-decay-power}
-    \caption{Power output during
-    an unprotected loss of heat sink transient in the Moltres model with and
-    without decay heat.}
-    \label{fig:moltresdecaypower}
-    \includegraphics[width=.85\textwidth]{moltres-decay-temp}
-    \caption{Average core temperature increase during
-    an unprotected loss of heat sink transient in the Moltres model with and
-    without decay heat.}
-    \label{fig:moltresdecaytemp}
-\end{figure}
-
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=.85\textwidth]{decay-temp}
-    \caption{Loop-averaged temperature increase during
-    an unprotected loss of heat sink transient in the Moltres and Polimi
-    models \cite{fiorina_modelling_2014} with decay heat.}
-    \label{fig:polimidecaytemp}
-\end{figure}
-
 Figure \ref{fig:polimidecaytemp} shows the loop-averaged temperature
 increase in the Moltres and Polimi models \cite{fiorina_modelling_2014}. The
 TUDelft model does not have a decay heat modeling capability. The Moltres
@@ -249,7 +224,30 @@ loop-averaged temperature would be lower as shown in the figure. Overall, the
 results for the loss of heat sink transient agree with the Polimi and TUDelft
 model results in both cases, with and without decay heat modeling.
 
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.85\textwidth]{moltres-decay-power}
+    \caption{Power output during
+    an unprotected loss of heat sink transient in the Moltres model with and
+    without decay heat.}
+    \label{fig:moltresdecaypower}
+    \includegraphics[width=.85\textwidth]{moltres-decay-temp}
+    \caption{Average core temperature increase during
+    an unprotected loss of heat sink transient in the Moltres model with and
+    without decay heat.}
+    \label{fig:moltresdecaytemp}
+\end{figure}
+
 \clearpage
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.85\textwidth]{decay-temp}
+    \caption{Loop-averaged temperature increase during
+    an unprotected loss of heat sink transient in the Moltres and Polimi
+    models \cite{fiorina_modelling_2014} with decay heat.}
+    \label{fig:polimidecaytemp}
+\end{figure}
 
 \section{Unprotected Loss of Flow}
 
@@ -365,30 +363,6 @@ core temperature results as the pocket of hot salt leaves the
 core. In Moltres, the wider peak in the average core temperature
 indicates that there was a more gradual change in the flow pattern.
 
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=.85\textwidth]{lof-heat}
-    \caption{Power output during
-    an unprotected loss of flow transient in the Moltres, Polimi, and
-    TUDelft models \cite{fiorina_modelling_2014}.}
-    \label{fig:lofheat}
-    \includegraphics[width=.85\textwidth]{lof-temp}
-    \caption{Average core temperature increase during
-    an unprotected loss of flow transient in the Moltres, Polimi, and
-    TUDelft models \cite{fiorina_modelling_2014}.}
-    \label{fig:loftemp}
-\end{figure}
-
-\begin{figure}[htbp!]
-    \centering
-    \includegraphics[width=.37\textwidth]{lof-flow-temp}
-    \includegraphics[width=.62\textwidth]{fiorina-lof}
-    \caption{Temperature and velocity fields in the core at $t=300$ s during
-    a loss of flow transient in the Moltres ($\mu_c = \frac{1}{2} \mu_{t,0}$),
-    Polimi, and TUDelft models.}
-    \label{fig:lofflowtemp}
-\end{figure}
-
 Figure \ref{fig:lofflowtemp} shows the flow patterns and temperature
 distribution in the core at $t=300$ s in all three models. Figures
 \ref{fig:lofheat}, \ref{fig:loftemp}, and \ref{fig:lofflowtemp} combined
@@ -406,7 +380,31 @@ implementing a proper turbulence model, and
 2) developing a new heat exchanger feature that is compatible with the
 buoyancy-driven flow capabilities already present in Moltres.
 
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.85\textwidth]{lof-heat}
+    \caption{Power output during
+    an unprotected loss of flow transient in the Moltres, Polimi, and
+    TUDelft models \cite{fiorina_modelling_2014}.}
+    \label{fig:lofheat}
+    \includegraphics[width=.85\textwidth]{lof-temp}
+    \caption{Average core temperature increase during
+    an unprotected loss of flow transient in the Moltres, Polimi, and
+    TUDelft models \cite{fiorina_modelling_2014}.}
+    \label{fig:loftemp}
+\end{figure}
+
 \clearpage
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=.37\textwidth]{lof-flow-temp}
+    \includegraphics[width=.62\textwidth]{fiorina-lof}
+    \caption{Temperature and velocity fields in the core at $t=300$ s during
+    a loss of flow transient in the Moltres ($\mu_c = \frac{1}{2} \mu_{t,0}$),
+    Polimi, and TUDelft models.}
+    \label{fig:lofflowtemp}
+\end{figure}
 
 \section{Unprotected Pump Overspeed}
 
