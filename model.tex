@@ -42,8 +42,8 @@ preprocessor that extrapolates the relevant cross section data from a lower
 temperature \cite{leppanen_serpent_2014}.
 
 Serpent 2 provides standard geometric surfaces (e.g. planes, cylinders, cones)
-for defining reactor geometries. In this work, the reactor geometry is the
-same axisymmetric \gls{MSFR} geometry from the paper by Fiorina et al.
+for defining reactor geometries. In this work, the reactor geometry uses the
+same axisymmetric \gls{MSFR} geometry as the Polimi and TUDelft models
 \cite{fiorina_modelling_2014}, as shown in Fig. \ref{fig:msfrgeom}.
 
 \section{MOOSE}
@@ -259,8 +259,8 @@ equations \ref{eq:neut} and \ref{eq:dnp}:
     precursor group $i$ [s$^{-1}$],} \nonumber \\
     C_i &= \text{concentration of delayed neutron precursors in precursor
     group $i$ [cm$^{-3}$],} \nonumber \\
-    K &= \text{turbulent diffusion of the delayed neutron precursors
-    [cm$^2\cdot$s$^{-1}$].} \nonumber
+    K &= \text{turbulent diffusion coefficient of the delayed neutron
+    precursors [cm$^2\cdot$s$^{-1}$].} \nonumber
 \end{align}
 %
 
@@ -633,19 +633,19 @@ A parabolic flow profile was imposed on the inlet Dirichlet boundary
 condition. The equation for $u_x$ at the inlet is:
 %
 \begin{align}
-    u_x &= -\xi \Big[\frac{y}{h} - \Big(\frac{y}{h}\Big)^2 
+    u_x &= -\xi \Big[\frac{y}{H} - \Big(\frac{y}{H}\Big)^2 
     \Big] \\
     \intertext{where}
     \xi &= \text{normalizing constant [m$\cdot$s$^{-1}$],} \nonumber \\
     y &= \text{height along the inlet [m],} \nonumber \\
-    h &= \text{total height of the inlet $= 0.1875$ m.} \nonumber
+    H &= \text{total height of the inlet $= 0.1875$ m.} \nonumber
 \end{align}
 %
 $\xi$ is a normalizing constant that depends on the total volumetric flow
 rate, $\dot{V}$. Solving the following set of equations in $v$ and $\dot{V}$:
 %
 \begin{align}
-    v &= \xi [\frac{y}{h} - \frac{y^2}{h^2}] \\
+    v &= \xi [\frac{y}{H} - \frac{y^2}{H^2}] \\
     \dot{V} &= \int^h_0 \int^{2 \pi}_0 v r d\theta dy \\
     \intertext{where}
     r &= \text{radius [m],} \nonumber \\

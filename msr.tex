@@ -218,7 +218,7 @@ towards creating a safety and licensing framework for \glspl{MSR} has picked
 up pace only in recent years due to the growing interest from commercial
 \gls{MSR} developers.
 
-\section{Literature Review of MSR Simulation Tools}
+\section{Literature Review of MSR Simulation Tools} \label{sec:litrev}
 
 In the past two decades, researchers have developed several
 new tools for simulating steady-state and transient behavior in \glspl{MSR}.
@@ -253,17 +253,18 @@ multiphysics simulation results of a different graphite-moderated breeder
 \gls{MSR}.
 
 Both DALTON and the COMSOL-based tool featured again in a later paper by
-Fiorina et al.
-\cite{fiorina_modelling_2014} in 2014 for a 2-D axisymmetric model of the
-\gls{MSFR}. The authors compared \gls{MSFR} simulations results from both
-tools, in which they dubbed the COMSOL and DALTON/HEAT tools the Polimi and
-TUDelft models, respectively, after the universities where each tool was
-developed. With multigroup
-neutron diffusion and \gls{RANS} formulations on ultra fine meshes, both
-models agreed on the steady-state neutron flux, temperature,
+Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D axisymmetric
+model of the \gls{MSFR}. The authors, from Politecnico di Milano and
+Technical University of Delft, compared \gls{MSFR} transient safety
+analysis results from both tools. They referred to the COMSOL and DALTON/HEAT
+\gls{MSFR} models as the Polimi and TUDelft models, respectively, after the
+universities where each application was developed. This thesis also follows
+this naming convention. With
+multigroup neutron diffusion and \gls{RANS} formulations on ultra fine meshes,
+both models agreed on the steady-state neutron flux, temperature,
 and \gls{DNP} distributions, as well as the power responses following various
-accident transient initiations. Aufiero et al. \cite{aufiero_development_2014}
-concurrently developed
+accident transient initiations.
+Aufiero et al. \cite{aufiero_development_2014} concurrently developed
 a full-core 3-D model of the \gls{MSFR} in OpenFOAM, albeit with one-group
 neutron diffusion to reduce computational load. With the 3-D model, the
 authors could simulate the asymmetric reactor response to the failure of a
@@ -276,8 +277,8 @@ self-contained \gls{MSR} simulation tool named COUPLE. Similar to the COMSOL
 and OpenFOAM-based models, COUPLE solves the multigroup neutron diffusion
 equations and the incompressible Navier-Stokes equations with the
 $k$-$\epsilon$ turbulence model. The authors verified COUPLE's neutronics and
-thermal-hydraulics against MCNP and a FLUENT-based model, respectively, before
-presenting their multiphysics steady-state results with a 2-D axisymmetric
+thermal-hydraulics against MCNP and a FLUENT-based model, respectively, and
+presented their multiphysics steady-state results for a 2-D axisymmetric
 model of the \gls{MSFR}.
 
 Recognizing the huge computational burden required for full 3-D simulations, 
@@ -401,7 +402,7 @@ LiF-ZrF$_4$, and FliBe \cite{merle_concept_2017}.
 \subsection{Model Reactor Geometry}
 
 The present work uses the same 2-D square-cylindrical \gls{MSFR} design to
-compare our results to results published by Fiorina et al.
+compare the present results to results from the Polimi and TUDelft models
 \cite{fiorina_modelling_2014}. The design is a 2-D axisymmetric representation
 of the \gls{MSFR} with the sixteen individual external loops homogenized into
 a single outer loop as shown in Figure \ref{fig:msfrgeom}. For the multigroup

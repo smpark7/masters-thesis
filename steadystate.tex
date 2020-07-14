@@ -36,7 +36,7 @@ integral values of every variable remain constant (up to 6 significant
 figures) for at least four seconds in the simulation; this
 time period corresponds to the nominal circulation time of the \gls{MSFR}.
 
-\section{Steady-State Thermal-Hydraulics Results}
+\section{Steady-State Thermal-Hydraulics Results} \label{sec:ss-th}
 
 Figure \ref{fig:flow-temp} shows the temperature and velocity fields of the
 fuel salt in the core at steady state from Moltres and the Polimi and TUDelft
@@ -49,8 +49,8 @@ velocities in all three models occur at the inlet, outlet, and at core
 half-height approximately 0.40 m away from the central axis. A large
 recirculation region forms near the blanket tank walls from turbulent flow.
 Inertial forces dominate over viscous forces to form this large eddy. The main
-difference between Moltres and Fiorina et al.'s models is the flow profile
-near the central axis at the top and bottom of the core.
+difference between Moltres, and the Polimi and TUDelft models is the flow
+profile near the central axis at the top and bottom of the core.
 The Polimi and TUDelft models predict relatively stagnant flow in these
 regions without recirculation. Moltres, on the other hand, predicts explicit
 recirculating flow in these regions. This is due to our constant turbulent
@@ -279,36 +279,38 @@ the precursor distribution, Figure \ref{fig:pre} shows the rate of delayed
 neutron emission, which was calculated by multiplying each \gls{DNP} group
 $C_i$ with its associated decay constant $\lambda_i$.
 The Polimi and TUDelft models
-feature greater \gls{DNP} retention in the stagnant regions within the core.
-This effect is less pronounced in the Moltres model. Less build-up
-of \glspl{DNP} at the top of the core occurs in Moltres because most of the
-\glspl{DNP} produced near the center of the core cannot enter the axial
-recirculation zone that only appears in Moltres. The figure also shows less
-build-up in the large recirculation zone near the blanket tank.
+feature greater \gls{DNP} retention in the stagnant regions in the core. This
+effect is less pronounced in the Moltres model, most notably at the top of the
+core near the central axis and in the recirculation zone adjacent to the
+blanket tank. As mentioned in Section \ref{sec:ss-th}, only the Moltres model
+features a small recirculation zone at the top of the core. This local flow
+pattern is responsible for diverting the shorter-lived \glspl{DNP} away from
+the top of the core and reducing the build-up in that region.
 
-The in-core delayed neutron fraction $\beta_c$ is an important safety
-parameter for \glspl{MSR}. This value represents the actual delayed
-neutron fraction in \glspl{MSR} after accounting for the loss of delayed
-neutrons from \glspl{DNP} decaying outside the active core region.
+The in-core delayed neutron fraction, which we denote as $\beta_c$, is an
+important safety parameter for \glspl{MSR}. This value represents the actual
+delayed neutron fraction in \glspl{MSR} after accounting for the loss of
+delayed neutrons from \glspl{DNP} decaying outside the active core region.
 Reactors with smaller $\beta$ values exhibit greater prompt jumps in the
 neutron flux in response to reactivity insertions because they have a greater
 proportion of prompt neutrons under normal operating conditions. This is
-undesirable from a reactor safety perspective because it exposes the reactor
-to relatively more extreme conditions before active safety mechanisms
+undesirable from a reactor safety perspective because it reduces the time
+available for active safety mechanisms to
 activate and scram the reactor. In \glspl{MSR}, this danger is partly
 mitigated by the strong, negative fuel temperature reactivity coefficient. 
 Chapter 6 contains more in-depth discussions for various transient scenarios.
 
 Table \ref{table:dnf} compares the fraction of out-of-core emissions and
-the $\beta_c$ values from Moltres with the Polimi and TUDelft models. We
-calculated the fraction of out-of-core emissions by finding the total amount
-of each \gls{DNP} group in the core and the outer loop, multiplying each total
-by their associated decay time constants $\lambda_i$, and calculating the
-proportion of emissions in the outer loop relative to the grand total. We
-calculated $\beta_c$ by first obtaining the prompt neutron emission rate from
-Moltres and subsequently using in-core delayed neutron emission rate from the
-previous calculation to find the fraction of delayed neutron emission rate
-relative to total emission rate.
+the $\beta_c$ values from Moltres with the Polimi and TUDelft models. The
+present author calculated the fraction of out-of-core emissions by finding the
+average concentration of each \gls{DNP} group in the core and the outer loop,
+multiplying each average by their associated decay time constants $\lambda_i$
+for the average emission rate, and calculating the
+proportion of emissions in the outer loop relative to the total sum. The
+present author calculated $\beta_c$ by first obtaining the prompt neutron
+emission rate from Moltres and subsequently using the in-core delayed neutron
+emission rate from the previous calculation to find the fraction of delayed
+neutron emission rate relative to total emission rate.
 
 \begin{table}[t!]
 	\centering
@@ -333,26 +335,26 @@ The fraction of out-of-core emissions from our Moltres model
 differs significantly by approximately 10\%, and $\beta_c$ differs by
 60-70 pcm. The former is attributed to the lesser \gls{DNP} retention in the
 stagnant flow regions in the core; the \glspl{DNP} are more evenly distributed
-along the entire primary loop, leading to more delayed neutron emissions in
-the outer loop region. This is likely caused by differences in the
-flow pattern in the recirculation zone because convective transport
-dominates diffusive effects in the \gls{MSFR}. The exact flow pattern in the
-recirculation zones in the Polimi and TUDelft models is likely to differ from
+along the entire primary loop and a greater fraction of delayed neutron
+emissions occur in the outer loop region. The flow patterns are responsible
+for the distribution of shorter-lived \gls{DNP} since convection is the
+dominant mode of species transport in the \gls{MSFR}. The exact flow pattern
+in the recirculation zones in the Polimi and TUDelft models differs from
 that in Moltres (Figure \ref{fig:flow}). Figure \ref{fig:flow-temp} also shows
 some minor differences in the magnitude of the flow in the recirculation zones
 between Moltres, and the Polimi and TUDelft models. Although the sizes of the
 arrows representing flow velocity are on different scales, a
 quick comparison between the largest arrows and the arrows in the
 recirculation zone indicates that the recirculation zone in Moltres is
-relatively more stagnant. This could explain the concentration of \glspl{DNP}
+more stagnant. This could explain the concentration of \glspl{DNP}
 along an ``arc'' closer to the center of the core in Moltres as opposed to the
 more even distribution of \glspl{DNP} throughout the whole recirculation zones
-in the Polimi and TUDelft models. The higher peak \glspl{DNP} distribution in
+in the Polimi and TUDelft models. The higher peak \gls{DNP} distribution in
 Moltres also supports this assertion.
 
 In spite of the greater delayed neutron losses, the $\beta_c$ value is higher
-in Moltres than the Polimi and TUDelft models. To account for this
-peculiarity, Fiorina et al. \cite{fiorina_modelling_2014} applied adjoint flux
+in Moltres than the Polimi and TUDelft models. Fiorina et al.
+\cite{fiorina_modelling_2014} applied adjoint flux
 weighting for their $\beta_c$ calculation whereas this work
 reports the value as the physical fraction without adjoint weighting. The
 weighting results in a significant difference in $\beta_c$ because a greater
@@ -362,15 +364,15 @@ neutron importance is noticeably diminished.
 \section{Steady-State Decay Heat Results}
 
 The movement of decay heat precursors effectively redistributes a fraction of
-the volumetric heat source concentrated at the center of the core to the
-entire primary loop.
-Thus, the temperature distribution in the core should
+the fission heat source concentrated at the center of the core to other parts
+of the primary loop. Thus, the temperature distribution in the core should
 show less extreme temperatures compared with the simulation without decay
 heat.
 
 Figure \ref{fig:decayheat} shows the decay heat source distribution in the
 core for groups 1 to 3. The decay constants are $\lambda_j = 0.197$ s$^{-1},
-0.0168$ s$^{-1}, 0.000358$ s$^{-1}$ for groups 1, 2, and 3, respectively.
+0.0168$ s$^{-1}, 0.000358$ s$^{-1}$ for decay heat groups $j=$ 1, 2, and 3,
+respectively.
 Similar to the delayed neutron precursor distributions, the shorter-lived
 decay heat precursors show greater build-up in the recirculation zones
 compared with the longer-lived decay heat precursors that are more evenly
@@ -400,9 +402,9 @@ distributed throughout the core.
 Figure \ref{fig:decayheattemp} shows the
 difference in core temperatures at steady state with decay heat modeling
 relative to the core temperatures without decay heat in Figure
-\ref{fig:flow-temp}. This figure uses a different colormap scheme to clearly
-distinguish between temperature increases and decreases in the core. The
-hotspots in the recirculation zones are approximately
+\ref{fig:flow-temp}. This figure uses a different color map to clearly
+distinguish between positive and negative temperature differences in the core.
+The hotspots in the recirculation zones are approximately
 2 to 4 K cooler, while the cooled salt flowing in from the inlet is
 approximately 2 K hotter. These regions correspond to the hottest and coldest
 areas in the core and the results agree with the expectation that the extreme
@@ -411,9 +413,9 @@ precursors. The difference between the outlet and inlet temperatures falls
 from 101.1 K to 98.9 K as some of the decay heat precursors deposit heat in
 the outer loop region. The figure also shows some unphysical oscillations in
 the temperature near the outlet because the mesh near the boundary is too
-coarse. Users can avoid these oscillations near the outlet but using a mesh
-that is progressively finer the closer the element is to the boundary. The
-present author did not resolve this issue due to time constraints.
+coarse. Users can avoid these oscillations near the outlet by using a mesh
+that is progressively finer towards the boundary. The
+present author could not resolve this issue due to time constraints.
 
 \begin{figure}[htbp!]
     \centering
