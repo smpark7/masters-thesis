@@ -61,9 +61,9 @@ approximation.
 
 \begin{figure}[htbp!]
     \centering
-    \begin{subfigure}[t]{.365\textwidth}
+    \begin{subfigure}[t]{.35\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{flow-temp}
+        \includegraphics[width=\textwidth]{flow-temp-plasma}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{.625\textwidth}
@@ -79,7 +79,7 @@ approximation.
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=.6\textwidth]{flow}
+    \includegraphics[width=.58\textwidth]{flow-plasma}
     \caption{Fuel salt flow streamlines and velocity magnitude in the core.
     The colors represent velocity magnitude according to the color bar on the
     right.}
@@ -133,27 +133,27 @@ at 973 K.
     \centering
     \begin{subfigure}[t]{.325\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-g1}
+        \includegraphics[width=\textwidth]{g1}
     \end{subfigure}
     \begin{subfigure}[t]{.325\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-g2}
+        \includegraphics[width=\textwidth]{g2}
     \end{subfigure}
     \begin{subfigure}[t]{.325\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-g3}
+        \includegraphics[width=\textwidth]{g3}
     \end{subfigure}
     \begin{subfigure}[t]{.325\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-g4}
+        \includegraphics[width=\textwidth]{g4}
     \end{subfigure}
     \begin{subfigure}[t]{.325\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-g5}
+        \includegraphics[width=\textwidth]{g5}
     \end{subfigure}
     \begin{subfigure}[t]{.325\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-g6}
+        \includegraphics[width=\textwidth]{g6}
     \end{subfigure}
     \caption{Neutron flux distributions in the core for neutron energy groups
     1 to 6. The y and x axes represent height and radius (in cm) of the core
@@ -199,35 +199,35 @@ at 973 K.
     \centering
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre1}
+        \includegraphics[width=\textwidth]{pre1}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre2}
+        \includegraphics[width=\textwidth]{pre2}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre3}
+        \includegraphics[width=\textwidth]{pre3}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre4}
+        \includegraphics[width=\textwidth]{pre4}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre5}
+        \includegraphics[width=\textwidth]{pre5}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre6}
+        \includegraphics[width=\textwidth]{pre6}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre7}
+        \includegraphics[width=\textwidth]{pre7}
     \end{subfigure}
     \begin{subfigure}[t]{.243\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ss-pre8}
+        \includegraphics[width=\textwidth]{pre8}
     \end{subfigure}
     \caption{\gls{DNP} distributions in the core for \gls{DNP} groups
     1 to 8 (from left to right, top to bottom). Refer to Figure \ref{fig:neutronflux} for the height and radius
@@ -260,7 +260,7 @@ involving similar geometries.
     \begin{subfigure}[t]{.30\textwidth}
         \centering
         \vspace{.9cm}
-        \includegraphics[width=\textwidth]{ss-pre}
+        \includegraphics[width=\textwidth]{pre}
     \end{subfigure}
     \begin{subfigure}[t]{.69\textwidth}
         \centering
@@ -369,6 +369,27 @@ of the primary loop. Thus, the temperature distribution in the core should
 show less extreme temperatures compared with the simulation without decay
 heat.
 
+\begin{figure}[htbp!]
+    \centering
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{heat1-plasma}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{heat2-plasma}
+    \end{subfigure}
+    \begin{subfigure}[t]{.325\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{heat3-plasma}
+    \end{subfigure}
+    \caption{Decay heat source distribution in the core for decay heat groups
+    1 to 3 (from left to right). Refer to Figure \ref{fig:decayheattemp} for
+    the height and radius scales on the y and x axes, respectively. Note the
+    different scales for each distribution.}
+    \label{fig:decayheat}
+\end{figure}
+
 Figure \ref{fig:decayheat} shows the decay heat source distribution in the
 core for groups 1 to 3. The decay constants are $\lambda_j = 0.197$ s$^{-1},
 0.0168$ s$^{-1}, 0.000358$ s$^{-1}$ for decay heat groups $j=$ 1, 2, and 3,
@@ -377,27 +398,6 @@ Similar to the delayed neutron precursor distributions, the shorter-lived
 decay heat precursors show greater build-up in the recirculation zones
 compared with the longer-lived decay heat precursors that are more evenly
 distributed throughout the core.
-
-\begin{figure}[htbp!]
-    \centering
-    \begin{subfigure}[t]{.325\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{heat1}
-    \end{subfigure}
-    \begin{subfigure}[t]{.325\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{heat2}
-    \end{subfigure}
-    \begin{subfigure}[t]{.325\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{heat3}
-    \end{subfigure}
-    \caption{Decay heat source distribution in the core for decay heat groups
-    1 to 3 (from left to right). Refer to Figure \ref{fig:decayheattemp} for
-    the height and radius scales on the y and x axes, respectively. Note the
-    different scales for each distribution.}
-    \label{fig:decayheat}
-\end{figure}
 
 Figure \ref{fig:decayheattemp} shows the
 difference in core temperatures at steady state with decay heat modeling
@@ -419,7 +419,7 @@ present author could not resolve this issue due to time constraints.
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=.6\textwidth]{decay-heat-temp}
+    \includegraphics[width=.55\textwidth]{decay-heat-temp}
     \caption{Difference in core temperatures at steady state with decay heat
     relative to the result without decay heat (Figure \ref{fig:flow-temp}).}
     \label{fig:decayheattemp}
