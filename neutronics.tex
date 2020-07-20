@@ -3,35 +3,32 @@ using group constant data from Serpent 2, which is essential for accurate
 neutronics calculations in the subsequent multiphysics simulations. The model
 under study is a static model of the \gls{MSFR}, i.e. no salt flow, and
 uniform temperature distribution to assess the accuracy of the
-six-group neutron diffusion model in Moltres on a fast-spectrum reactor. This
+six-group neutron diffusion model in Moltres on a fast-spectrum reactor. Table
+\ref{table:static} lists relevant details of the static \gls{MSFR} model
+in Moltres. This
 verification exercise builds on the previous study by Lindsay et al.
 \cite{lindsay_introduction_2018} that verified Moltres' neutronics
 capabilities with a two-group neutron diffusion model of the \gls{MSRE}.
 
-\textbf{Details of the static \gls{MSFR} model in Moltres}
-\begin{itemize}
-    \item No salt flow (static salt)
-    \begin{center}
-        $v_{salt} = 0$ m$\cdot$s$^{-1}$
-    \end{center}
-    \item Uniform temperature of 973 K throughout the 2D core model
-    \begin{center}
-        $T = 973$ K
-    \end{center}
-    \item Six neutron energy groups
-    \begin{center}
-        $G = 6$
-    \end{center}
-    \item Eight delayed neutron precursor groups
-    \begin{center}
-        $I = 8$
-    \end{center}
-    \item Vacuum boundary conditions on the outer boundaries of the 2D core
-    mesh
-    \begin{center}
-        $\frac{d \phi}{dx}\big|_{\text{inflow}} = 0$ m$^{-2}\cdot$s$^{-1}$
-    \end{center}
-\end{itemize}
+\begin{table}[htbp!]
+    \small
+	\caption{Details of the static \gls{MSFR} model in Moltres.}
+	\centering
+	\begin{tabular}{ l c}
+		\toprule
+		Detail & Mathematical description \\
+        \midrule
+        No salt flow (static salt) & $v_{salt} = 0$ m$\cdot$s$^{-1}$ \\
+        Uniform temperature of 973 K throughout the 2D core model & $T = 973$
+        K \\
+        Six neutron energy groups & $G = 6$ \\
+        Eight delayed neutron precursor groups & $I = 8$ \\
+        Vacuum boundary conditions for neutron flux &
+        $\frac{d \phi}{dx}\big|_{\text{inflow}} = 0$ m$^{-2}\cdot$s$^{-1}$ \\
+		\bottomrule
+	\end{tabular}
+	\label{table:static}
+\end{table}
 
 \section{Effective Multiplication Factor and Delayed Neutron Fraction}
 
@@ -47,7 +44,7 @@ between the two applications: the accuracy of the neutron diffusion
 model, and the omission of the blanket tank structural material in Moltres.
 The neutron diffusion model is not as accurate as the other S$_{\text{N}}$ or
 SP$_{\text{N}}$ deterministic methods nor the Monte Carlo approach in Serpent.
-Regarding the omission of the blanket tank material, the present author
+Regarding the omission of the blanket tank material, I
 replaced the 2 cm-thick structural material with blanket salt. This
 replacement is partly responsible for the higher $k_{\text{eff}}$ value
 calculated by Moltres as fissions occur in the blanket salt. Nevertheless, the
@@ -112,7 +109,7 @@ adjoint calculation capability.
 The difference between $\beta$ and $\beta_{\text{eff}}$ is
 that $\beta$ is the unweighted delayed neutron fraction
 while $\beta_{\text{eff}}$ is the delayed neutron fraction weighted by the
-adjoint neutron flux. The present author calculated $\beta$ by
+adjoint neutron flux. I calculated $\beta$ by
 taking the relative difference between the $k_{\text{eff}}$ values with and
 without \glspl{DNP} in Table \ref{table:keff}. The $\beta$ and
 $\beta_{\text{eff}}$ values at 973 K, shown in Table \ref{table:betaeff}, are

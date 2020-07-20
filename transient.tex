@@ -3,7 +3,7 @@ This chapter discusses Moltres transient multiphysics simulations of the
 \gls{MSFR} transient analyses with the Polimi and TUDelft models
 \cite{fiorina_modelling_2014}, include unprotected reactivity
 insertion, loss of heat sink, loss of flow, and pump overspeed accidents. The
-term ``unprotected'' signify accident scenarios without treactor SCRAM. As
+term ``unprotected'' signifies accident scenarios without treactor SCRAM. As
 such, these simulations provide an insight on the
 \gls{MSFR}'s passive safety capabilities in the absence
 of active safety systems. This work used the steady-state configuration
@@ -234,7 +234,7 @@ rise at a decreasing rate. The loop-averaged temperature increase in the
 Moltres model at $t=120$ s is approximately 17 K lower than that in the Polimi
 model. It is difficult to ascertain the exact cause for this difference
 without the power profile from the Polimi model with decay heat to compare
-with. However, if the decay power output are similar, the stronger negative
+with. However, if the decay power output were similar, the stronger negative
 temperature reactivity coefficient would cause the prompt power output in the
 Moltres model to fall faster than the Polimi model. Consequently, the
 loop-averaged temperature would be lower as shown in the figure. Overall, the
@@ -266,8 +266,6 @@ model results in both cases, with and without decay heat modeling.
     \label{fig:polimidecaytemp}
 \end{figure}
 
-\clearpage
-
 \section{Unprotected Pump Overspeed}
 
 Pump overspeed refers to a sustained
@@ -282,7 +280,7 @@ coefficient on the primary loop side of the heat exchanger and enables the
 reactor to operate at a higher power output. At the same time, the improved
 mixing flattens the temperature distribution in the core.
 
-This work followed Fiorina et al.'s implementation
+This work followed the Polimi and TUDelft models
 \cite{fiorina_modelling_2014} by
 ramping up the inlet velocity, $u$, by 50\% from the nominal value, $u_0$,
 according to the following formula:
@@ -319,22 +317,22 @@ harmonic mean of the $h_i$ on each side of the heat exchanger, given as:
     [W$\cdot$K$^{-1}$].} \nonumber
 \end{align}
 %
-In addition to this, Fiorina et al. applied the Dittus-Boelter correlation
-\cite{dittus_heat_1930} for the relationship between $h_1$ and
+In addition to this, the Polimi and TUDelft models used the Dittus-Boelter
+correlation \cite{dittus_heat_1930} for the relationship between $h_1$ and
 $\dot{V}$. The Dittus-Boelter correlation for fluids being cooled is:
 %
 \begin{align}
     Nu &= 0.023 Re^{0.8} Pr^{0.3}, \label{eq:db} \\
     \intertext{where}
-    Nu &= \text{Nusselt number,} \nonumber \\
-    &\text{\ \ \ \ \ the ratio of convective to conductive heat
-    transfer at a boundary in a fluid,} \nonumber \\
-    Re &= \text{Reynolds number,} \nonumber \\
-    &\text{\ \ \ \ \ the ratio of inertial forces to viscous
-    forces within a fluid,} \nonumber \\
-    Pr &= \text{Prandtl number,} \nonumber \\
-    &\text{\ \ \ \ \ the ratio of momentum diffusivity to thermal
-    diffusivity.} \nonumber
+    Nu &= \text{Nusselt number} =
+    \frac{\text{convective heat transfer}}{\text{conductive heat transfer}}
+    = \frac{hL}{k}, \nonumber \\
+    Re &= \text{Reynolds number} =
+    \frac{\text{inertial forces}}{\text{viscous forces}} =
+    \frac{\rho u L}{\mu}, \nonumber \\
+    Pr &= \text{Prandtl number} =
+    \frac{\text{momentum diffusivity}}{\text{thermal diffusivity}} =
+    \frac{c_p \mu}{k}. \nonumber
 \end{align}
 %
 The only direct relation to $\dot{V}$ in the Dittus-Boelter correlation is
@@ -436,10 +434,10 @@ Dirichlet boundary condition:
     \dot{V}_0 &= \text{initial volumetric flow rate} = 4.5
     \text{ m$^3\cdot$s$^{-1}$.} \nonumber
 \end{align}
-
+%
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=.7\textwidth]{lof-flow-rate}
+    \includegraphics[width=.6\textwidth]{lof-flow-rate}
     \caption{The change in flow rate in the Polimi and TUDelft models and the
     imposed flow rate in Moltres.}
     \label{fig:flowrate}
@@ -453,7 +451,8 @@ on the primary loop and assumed that only the pumps in the primary loop
 failed.
 
 An issue arose pertaining to the turbulent viscosity $\mu_t$ as a function of
-$v$. When using a simple approximation of $\mu_t$ being directly proportional
+$v$. When using this simple approximation, in which $\mu_t$ being directly
+proportional
 to $v$, the results from Moltres differed significantly compared with the
 Polimi and TUDelft models. The difference is due to buoyancy-driven flow
 contributing to turbulence; the turbulent energy $k$ equation in COMSOL's
@@ -527,7 +526,7 @@ buoyancy-driven flow capabilities already present in Moltres.
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=.37\textwidth]{lof-flow-temp}
+    \includegraphics[width=.37\textwidth]{lof-plasma}
     \includegraphics[width=.62\textwidth]{fiorina-lof}
     \caption{Temperature and velocity fields in the core at $t=300$ s during
     a loss of flow transient in the Moltres ($\mu_c = \frac{1}{2} \mu_{t,0}$),

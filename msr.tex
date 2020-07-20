@@ -58,30 +58,71 @@ technical perspective, two independent
 technology evaluation and design studies of the \gls{MSR} had reported
 favorably on the promise of the system \cite{macpherson_molten_1985}.
 
-Two other \gls{MSR} designs emerged in the 1970s: the \gls{DMSR} from
-\gls{ORNL} \cite{gehin_liquid_2016} and the \gls{MCFR} from the UK Atomic
-Energy Authority \cite{smith_assessment_1974}. \gls{ORNL}
-researchers developed the \gls{DMSR}, named after its planned use of denatured
-$^{235}$U fuel (i.e. low-enriched uranium), as a once-through converter system
-without fuel reprocessing in response to fuel reprocessing restrictions
-introduced by President Ford in 1976. On the other hand, UK researchers
-developed the lead-cooled \gls{MCFR} to enhance $^{239}$Pu breeding with the
-relatively fast neutron spectrum. Both designs failed to gain traction and did
-not inspire any working prototypes.
+In spite of this setback, research into \glspl{MSR} continued through the late
+1970s. In 1980, \gls{ORNL} published a report describing a new \gls{MSR}
+concept, called the \gls{DMSR} \cite{gehin_liquid_2016} with denatured
+$^{235}$U fuel (i.e. low-enriched uranium). The \gls{ORNL} researchers
+developed this design in response to the fuel reprocessing restrictions
+introduced by President Ford in 1976. The \gls{DMSR} would operate as a
+once-through
+converter system without fuel reprocessing. While the fuel consists of 19.75
+\% high-assay low-enriched uranium, the initial core loading includes thorium
+to boost its conversion ratio throughout its lifetime. It has a continuous
+online feed consisting of \gls{HALEU} to maintain criticality, and denatured
+$^{235}$U to keep uranium enrichment levels below nuclear non-proliferation
+policy thresholds. The design also includes a gas sparging system for removing
+gaseous fission products, while noble metals plate out onto the walls of
+the coolant loop. The older \gls{MSBR} design had a significant drawback; the
+extensive neutron damage in the graphite moderator necessitated frequent
+replacement (every four years) throughout its operational lifetime. The
+\gls{DMSR} avoids this issue by having a lower power density while maintaining
+the overall power output of 2250 MW$_{\text{th}}$. As a result, researchers
+projected that the graphite moderator would last for the entirety of the
+\gls{DMSR}'s design lifetime.
+
+A concurrent program at the UK Atomic Energy Authority led the
+development of a 2500 MW$_{\text{e}}$ lead-cooled Molten Chloride Fast Reactor
+concept \cite{smith_assessment_1974}. It is a dual fluid system,
+with separate loops for the fuel salt and the blanket salt. The blanket is a
+1 m-wide tank surrounding the core. The absence of moderators and the choice
+of chloride over fluoride salt resulted in a relatively hard neutron spectrum
+which favors $^{239}$Pu breeding over the thorium cycle. The UK researchers
+performed some experiments to study molten salt chemistry but there were no
+reactor prototypes. The UK program eventually shut down just like its
+US counterpart partly due to the successful demonstration of the Prototype
+Fast Reactor which had achieved criticality in 1974.
 
 Following a lull lasting through the late 20th century, researchers at
 \gls{CNRS} began research into \glspl{MSR} in 1997
 \cite{heuer_simulation_2010}. Starting from the \gls{MSBR} design, they
-performed parametric studies on the design based on safety, breeding, and
+performed parametric studies based on safety, breeding, and
 other performance metrics \cite{mathieu_thorium_2006}. Their efforts
 culminated in the \gls{MSFR} concept, a fast-spectrum breeder \gls{MSR}
 designed to run on the thorium fuel cycle \cite{merle_optimized_2007}. In
 2008, the Generation IV International Forum highlighted the \gls{MSFR} among
 other \gls{MSR} designs for further development \cite{gif_generation_2008}.
 The \gls{MSFR} has also benefited from collaborative research through two
-European-funded projects, the EVOL and SAMOFAR projects
-\cite{euratom_final_2015}. Today, numerous other national and commercial
-bodies are also developing their own \gls{MSR} designs.
+European-funded projects, the \gls{EVOL} \cite{euratom_final_2015} and
+\gls{SAMOFAR} \cite{kloosterman_20_2017} projects. Under the \gls{EVOL}
+project, researchers further optimized the \gls{MSFR} design based on
+neutronic and thermal-hydraulic safety analyses. They also diversified
+start-up fuel options beyond the original $^{233}$U-based fuel composition to
+include $^{235}$U, $^{239}$Pu, and \gls{TRU}, and established fuel
+reprocessing schemes for the \gls{MSFR}. The \gls{SAMOFAR} project, which
+stated approximately 2 years after the end of the \gls{EVOL} project,
+supported more comprehensive safety assessments of the reactor and the
+reprocessing plant, and funded a number of experiments for validation of the
+\gls{MSFR}'s safety features. This thesis presents steady-state and
+transient results of the \gls{MSFR} in Moltres. Therefore, Section
+\ref{sec:msfr} describes the \gls{MSFR} design in further detail.
+
+Today, numerous other national and commercial
+bodies are also developing their own \gls{MSR} designs. These include the
+Integral Molten Salt Reactor from Terrestrial Energy
+\cite{leblanc_integral_2015}, the Transatomic Power \gls{MSR}
+\cite{transatomic_power_corporation_technical_2016}, the Russian \gls{MOSART}
+\cite{ignatiev_molten_2014}, and the Chinese Thorium Molten Salt Reactor
+project \cite{zhang_review_2018}.
 
 \section{\gls{MSR} Features}
 
@@ -104,13 +145,10 @@ $^{238}$U/$^{239}$Pu breeders. Breeder designs can be further categorized into
 one- or two-fluid designs. Two-fluid designs feature separate blanket molten
 salt mixtures that contain higher proportions of fertile material than the
 fuel salt mixture. Examples of one-fluid designs include the Integral Molten
-Salt Reactor from Terrestrial Energy \cite{leblanc_integral_2015} and the
-\gls{MSR} design from Transatomic Power
-\cite{transatomic_power_corporation_technical_2016} while two-fluid designs
-include the \gls{MSFR} \cite{merle_optimized_2007} and \gls{MOSART}
-\cite{ignatiev_molten_2014}. The current work involves simulations of
-the \gls{MSFR} in Moltres and Section \ref{sec:msfr} describes this reactor
-design in further detail.
+Salt Reactor \cite{leblanc_integral_2015} and the Transatomic Power
+\gls{MSR} design \cite{transatomic_power_corporation_technical_2016} while
+two-fluid designs include the \gls{MSFR} \cite{merle_optimized_2007} and
+\gls{MOSART} \cite{ignatiev_molten_2014}.
 
 \subsection{Safety}
 
@@ -181,6 +219,9 @@ causing a loss of flow accident \cite{ho_molten_2013}.
 
 \subsection{Other Features}
 
+This subsection briefly covers other \gls{MSR} features that are not the focus
+of this thesis for completeness.
+
 \glspl{MSR} have several positive sustainability features.
 The continuous removal of neutron poisons by the online reprocessing and gas
 sparging systems creates good neutron economy in \glspl{MSR}
@@ -210,6 +251,14 @@ after most of the $^{232}$Pa has decayed into $^{232}$U at a short half-life
 of 1.31 days \cite{grape_10_2017}. Safeguards by design and close monitoring
 of \glspl{MSR} are therefore essential to avoiding spent nuclear fuel
 diversion.
+
+Economic analyses of \glspl{MSR} are preliminary at the current
+stage of \gls{MSR} development. Qualitatively, many technical factors favor
+\glspl{MSR} over \glspl{LWR}. Some of these factors include: smaller reactor
+core size due to low operating pressures, higher thermal efficiency and
+cheaper air-cooling systems due to high operating temperatures, reduction in
+fuel fabrication costs, and shorter reactor shutdown periods due to online
+refueling \cite{dolan_1_2017}. 
 
 In terms of technological readiness, \glspl{MSR} still require significant
 research efforts and experiments for the validation of
@@ -252,8 +301,8 @@ validated their model against \gls{MSRE} experimental data before presenting
 multiphysics simulation results of a different graphite-moderated breeder
 \gls{MSR}.
 
-Both DALTON and the COMSOL-based tool featured again in a later paper by
-Fiorina et al. \cite{fiorina_modelling_2014} in 2014 for a 2-D axisymmetric
+Both DALTON and the COMSOL-based tool featured again in a 2014 paper by
+Fiorina et al. \cite{fiorina_modelling_2014} for a 2-D axisymmetric
 model of the \gls{MSFR}. The authors, from Politecnico di Milano and
 Technical University of Delft, compared \gls{MSFR} transient safety
 analysis results from both tools. They referred to the COMSOL and DALTON/HEAT
@@ -370,7 +419,7 @@ eutectic mixtures of 77.5\% LiF - 22.5\% AcF$_4$; AcF$_4$ represents
 actinide fluorides such as uranium, thorium, plutonium, and other \gls{TRU}
 fluorides. Using fluoride salts instead of chloride salts results in a
 relatively thermal neutron spectrum. Therefore, the \gls{MSFR} has a more
-thermal neutron spectrum than a typical sodium fast reactor. For an initial
+thermal neutron spectrum than a typical fast-spectrum reactors. For an initial
 composition consisting of $^{232}$Th and $^{233}$U,
 the benchmark value for the amount of $^{233}$U for criticality under
 normal operating conditions is 2.5 mol\%. However, a neutronic benchmark

@@ -10,7 +10,7 @@ To run simulations with Moltres, the user must provide input
 group constant data from a neutron transport solver for the
 multigroup neutron diffusion calculations, and a mesh file representing the
 geometry of the reactor. This work uses Serpent 2 \cite{leppanen_serpent_2014}
-for the former and Trelis/Cubit \cite{noauthor_trelis_2018} for the latter.
+for the former and Trelis/CUBIT \cite{noauthor_trelis_2018} for the latter.
 This chapter provides brief introductions to
 Serpent 2, \gls{MOOSE}, and Moltres, and the modeling approach for the
 \gls{MSFR} multiphysics simulations in this thesis.
@@ -64,7 +64,7 @@ and \gls{PDE}-solving in finite element analysis.
 \gls{MOOSE} itself relies on libMesh \cite{kirk_libmesh:_2006} and
 PETSc \cite{satish_petsc_2019} for mesh handling and \gls{PDE} solver
 functionalities. As a result, \gls{MOOSE} supports adaptive meshing schemes
-and automatic variable scaling amongst other advanced featuresin finite
+and automatic variable scaling amongst other advanced features in finite
 element analysis. Full
 coupling is maintained by the execution of Newton-based solves on the
 weak formulations of the multiple \glspl{PDE} to minimize the residual values.
@@ -446,10 +446,10 @@ from turbulent diffusion.
 
 Table \ref{table:corebc} summarizes the boundary conditions for all variables
 on all of the relevant boundaries. Figure \ref{fig:msfrbc} shows the locations
-of the various boundaries listed in the table. This thesis introduces the
-CoupledOutflow boundary condition for $C_i$ and $\omega_j$ that allows users
-to couple these variables to the outlet velocity components (e.g. $u_x$,
-$u_y$). Without this new feature, users could only use uniform or fixed
+of the various boundaries listed in the table. The CoupledOutflow boundary
+condition for $C_i$ and $\omega_j$ is a new feature in Moltres that allows
+users to couple these variables to the outlet velocity components (e.g. $u_x$,
+$u_y$). Without this boundary condition, users could only use uniform or fixed
 function-based velocity profiles in conjunction with the precursor looping
 capability.
 
@@ -529,7 +529,7 @@ coupled to the active core simulation through Picard iterations in MOOSE's
 MultiApp functionality and inlet/outlet boundary values. For this work with
 the \gls{MSFR} model, the pipe length is 2.255 m with salt flowing at 1.1275 m
 s$^{-1}$ for an out-of-core residence time of 2 s. The present author derived
-these parameters from the reference specifications of 4 s cycle
+these parameters from the reference specifications of 4s cycle
 time and 50\% out-of-core salt fraction (Table \ref{table:msfr}).
 
 \subsubsection{Neutronics Model}
@@ -553,7 +553,7 @@ coefficient are the same values used in the central core region.
 \subsubsection{Thermal-Hydraulics Model}
 
 A constant velocity of 1.1275 m s$^{-1}$ is applied in the outer loop region
-to maintain the nominal 2 s out-of-core residence time. The governing equation
+to maintain the nominal 2s out-of-core residence time. The governing equation
 for temperature, derived from equation \ref{eq:temp}, is:
 %
 \begin{align}
@@ -588,7 +588,7 @@ on the inlet and outlet of the 1-D outer loop region. The inlet boundary
 conditions are all Dirichlet boundary conditions. The inlet boundary values
 are set by the outflow from the central core region that this inlet is
 connected to in the actual reactor geometry. The outlet boundary conditions
-are all outflow boundary conditions as shown in the table.
+are all outflow boundary conditions as shown in Table \ref{table:loopbc}.
 
 \begin{table}[htbp!]
     \small
