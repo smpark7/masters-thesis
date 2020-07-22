@@ -3,7 +3,7 @@ This chapter discusses Moltres transient multiphysics simulations of the
 \gls{MSFR} transient analyses with the Polimi and TUDelft models
 \cite{fiorina_modelling_2014}, include unprotected reactivity
 insertion, loss of heat sink, loss of flow, and pump overspeed accidents. The
-term ``unprotected'' signifies accident scenarios without treactor SCRAM. As
+term ``unprotected'' signifies accident scenarios without reactor SCRAM. As
 such, these simulations provide an insight on the
 \gls{MSFR}'s passive safety capabilities in the absence
 of active safety systems. This work used the steady-state configuration
@@ -16,7 +16,7 @@ scenarios.
 As noted by Fiorina et al. \cite{fiorina_modelling_2014}, explicit decay heat
 modeling has a negligible effect in reactivity-, and pump-initiated
 transients. Furthermore, only their Polimi model had this capability.
-Therefore, they featured decay heat modeling for the loss of heat sink
+Therefore, they included decay heat modeling for the loss of heat sink
 accident scenario only. The current work also ran all transient simulations
 without the decay heat model for a fair comparison. The only exception is the
 loss of heat sink scenario in which two separate simulations with and without
@@ -46,8 +46,7 @@ structural integrity and increase the risk of containment breach.
     \centering
     \includegraphics[width=.7\textwidth]{50pcm-jump}
     \caption{Power output during the prompt response following a 50 pcm
-    step-wise unprotected reactivity insertion in the Moltres, Polimi, and
-    TUDelft models \cite{fiorina_modelling_2014}.}
+    step-wise unprotected reactivity insertion in the Moltres model.}
     \label{fig:50pcmjump}
 \end{figure}
 
@@ -80,7 +79,7 @@ shortest-lived delayed neutron precursor (DNP) groups ($t_{1/2}=0.195$ s and
 $0.424$ s); the decay of the surplus precursors produced in the initial phase
 negates a fraction of the negative reactivity from the elevated core
 temperature. By $t=3$ s, most of the heated salt and \glspl{DNP} from the
-initial phase will have circulated around the primary loop and returned to the
+initial phase will have circulated the primary loop and returned to the
 core. The heated salt causes a small, noticeable dip in power before the power
 output stabilizes.
 
@@ -232,9 +231,9 @@ model predicts the same increasing trend in the temperature. The loop-averaged
 temperature rises significantly at the start of the transient and continues to
 rise at a decreasing rate. The loop-averaged temperature increase in the
 Moltres model at $t=120$ s is approximately 17 K lower than that in the Polimi
-model. It is difficult to ascertain the exact cause for this difference
-without the power profile from the Polimi model with decay heat to compare
-with. However, if the decay power output were similar, the stronger negative
+model. Unfortunately, the power profile from the Polimi model is not available
+for direct comparison.
+However, if the decay power output were similar, the stronger negative
 temperature reactivity coefficient would cause the prompt power output in the
 Moltres model to fall faster than the Polimi model. Consequently, the
 loop-averaged temperature would be lower as shown in the figure. Overall, the
@@ -245,8 +244,8 @@ model results in both cases, with and without decay heat modeling.
     \centering
     \includegraphics[width=.85\textwidth]{moltres-decay-power}
     \caption{Power output during
-    an unprotected loss of heat sink transient in the Moltres model with and
-    without decay heat.}
+    an unprotected loss of heat sink transient in the Moltres model with
+    decay heat.}
     \label{fig:moltresdecaypower}
     \includegraphics[width=.85\textwidth]{moltres-decay-temp}
     \caption{Average core temperature increase during
@@ -270,14 +269,15 @@ model results in both cases, with and without decay heat modeling.
 
 Pump overspeed refers to a sustained
 increase in pump speed in the primary coolant loop. The increased flow rate
-$\dot{m}$ impacts reactor performance in several ways.
-It affects the neutronics by reducing the in-core $\beta$ as more of the
-shorter-lived precursors will tend to flow out of the core before decaying.
-This net loss of neutrons reduces the reactivity in the core, thereby causing
-core temperatures to fall to counteract this change through temperature
-reactivity feedback. The increased $\dot{V}$ also enhances the heat transfer
-coefficient on the primary loop side of the heat exchanger and enables the
-reactor to operate at a higher power output. At the same time, the improved
+$\dot{V}$ impacts reactor performance in several ways. It reduces the in-core
+$\beta$ as more of the shorter-lived precursors will tend to flow out of the
+core and decay in the subcritical outer loop region.
+The increased $\dot{V}$ also enhances the heat transfer
+coefficient on the primary loop side of the heat exchanger and introduces
+cooler fuel salt to the core. The reactivity increase from the temperature
+reactivity feedback outweighs the reactivity decrease from the loss of delayed
+neutrons. Thus, the overall neutron flux and power output is higher at the
+new equilibrium state. At the same time, the improved
 mixing flattens the temperature distribution in the core.
 
 This work followed the Polimi and TUDelft models
@@ -349,7 +349,7 @@ However, this relation provided very different results in the unprotected pump
 overspeed and loss of flow transients compared with the Polimi and TUDelft
 models. This approach underpredicted the equilibrium power output in the
 unprotected pump overspeed transient and overpredicted the same parameter in
-the unprotected loss of flow transient. Upon further investigation, I
+the unprotected loss of flow transient. Upon further investigation, it was
 found that raising the power of $v$ from 0.8 to 1.1 brought the
 average core temperatures closer to the results from the other models in both
 transients. Therefore, this work adopted the raised power in this thesis.
@@ -359,7 +359,8 @@ Figures \ref{fig:poheat} and
 during the unprotected pump overspeed transient in the Moltres, Polimi, and
 TUDelft models. Figure \ref{fig:poshort} shows the same results for the first
 20 seconds of the transient. At the start of the transient, the rising flow
-rate cools the core and causes power output to rise sharply. Although the
+rate cools the core by convecting heat away from the center and causes power
+output to rise sharply. Although the
 average core temperature has a strictly decreasing trend, the temperature at
 the center of the core briefly rises due to the sharp increase in power
 output. Since this is the region where most of the fissions take place, the
@@ -367,7 +368,7 @@ Doppler effect and salt expansion causes the power output to stall and dip
 briefly before rising again at $t=2.5$ s. The reactor tends to a new
 equilibrium power output and average core temperature. The temperature
 distribution in the core is more evenly distributed because the turbulent
-thermal conductivity $k_t$ is directly proportional to $mu_t$.
+thermal conductivity $k_t$ is directly proportional to $\mu_t$.
 
 \begin{figure}[htbp!]
     \centering
@@ -415,7 +416,7 @@ changes becomes the dominant driving force for salt flow in the primary loop.
 Fiorina et al. \cite{fiorina_modelling_2014} applied the Boussinesq
 approximation for buoyancy-driven flow in the Polimi and TUDelft models, but
 this approach was not possible in Moltres because the primary loop is
-partitioned into two separate geometries and used Dirichlet boundary
+partitioned into two separate geometries and uses Dirichlet boundary
 conditions at the inlet to drive flow. The Polimi and TUDelft
 models featured complete exponential coast-downs of the pumps with a time
 constant of 5 s. The final flow rate $\dot{V}_f$ from natural circulation
@@ -451,10 +452,9 @@ on the primary loop and assumed that only the pumps in the primary loop
 failed.
 
 An issue arose pertaining to the turbulent viscosity $\mu_t$ as a function of
-$v$. When using this simple approximation, in which $\mu_t$ being directly
-proportional
-to $v$, the results from Moltres differed significantly compared with the
-Polimi and TUDelft models. The difference is due to buoyancy-driven flow
+$v$. This simple approximation, in which $\mu_t$ being directly proportional
+to $v$, causes the results from Moltres to differ significantly compared with
+the Polimi and TUDelft models. The difference is due to buoyancy-driven flow
 contributing to turbulence; the turbulent energy $k$ equation in COMSOL's
 $k$-$\epsilon$ model has an explicit source term from buoyancy effects
 \cite{comsol_ab_comsol_2018}. Another point to note is the
@@ -462,19 +462,20 @@ Reynolds number remains constant if $\mu$ and $v$ decrease in tandem. This
 preserves the existence of the recirculation zone in the core and it is at
 odds with the results from the Polimi and TUDelft models, which show that the
 recirculation zones disappear during the loss of flow transient. The current
-work circumvented this issue by letting fixed fractions of the initial
-$\mu_{t,0}$ be conserved regardless of the final flow velocity, according to
+work circumvented this issue by retaining fixed fractions of the initial
+$\mu_{t,0}$ regardless of the final flow velocity, according to
 the following equation:
 %
 \begin{align}
     \mu_t &= \mu_c + (\mu_{t,0} - \mu_c) e^{-t/8} \label{lofmu} \\
     \intertext{where}
-    \mu_c &= \text{ conserved fraction of $\mu_{t,0}$ [Pa$\cdot$s].} \nonumber
+    \mu_c &= \text{ fixed fraction of $\mu_{t,0}$ independent with time
+    [Pa$\cdot$s].} \nonumber
 \end{align}
 %
 This measure allowed for laminar flow to develop in the core and yielded
 results showing better qualitative agreement with those from the Polimi and
-TUDelft models. The subsequent paragraphs discuss these results.
+TUDelft models.
 
 Figures \ref{fig:lofheat} and \ref{fig:loftemp} show the power output and
 average core temperature increase during the unprotected loss of flow
@@ -489,7 +490,7 @@ stated that after around $t=15$ s, the ``flow pattern changed in the core and
 the recirculation zones started to disappear''. The pocket of hot salt leaves
 the core and causes a sudden drop in the average core temperature. In Moltres,
 the wider peak in the average core temperature
-indicates that there was a more gradual change in the flow pattern.
+indicates a more gradual change in the flow pattern.
 
 Figure \ref{fig:lofflowtemp} shows the flow patterns and temperature
 distribution in the core at $t=300$ s in all three models. Figures

@@ -26,10 +26,12 @@ Although Moltres currently lacks a proper turbulence model, the uniform
 turbulent viscosity $\mu_t$ approximation was accurate enough to reproduce
 most of the expected results for the \gls{MSFR}
 steady-state and transient analyses. The steady-state temperature and velocity
-distributions showed many similiarities in their shapes and magnitudes to the
+distributions showed many similarities in their shapes and magnitudes to the
 Polimi and TUDelft model results \cite{fiorina_modelling_2014}. The uniform
-$\mu_t$ approximation was responsible for the minor differences in the flow at
-the top of the core and the loss of delayed neutrons to out-of-core emissions.
+$\mu_t$ approximation was responsible for some differences in the flow in the
+recirculation zones. In turn, these differences in the recirculation zones
+resulted in
+differences in the loss of delayed neutrons to out-of-core emissions.
 The results with the decay heat model showed a slight flattening of the
 temperature distribution in the core that is in line with our expectations
 given the diffusion and advection of the decay heat precursors.
@@ -41,7 +43,7 @@ small difference in the temperature reactivity coefficient accounted for the
 small difference in the magnitude of the peaks in power output and average
 core temperature increase. The differences between the pointwise heat
 exchanger in Moltres and the volumetric heat exchanger in the other two
-models required minor adjustments in the relationship between flow rate
+models required adjustments in the relationship between flow rate
 $\dot{V}$ and the heat transfer coefficient $h$ from the original
 Dittus-Boelter correlation for the pump-initiated transients. Assuming a
 directly proportional relationship between $\mu_t$ and $\dot{V}$ yielded
@@ -52,11 +54,11 @@ effects on $\mu_t$.
 
 \section{Future Work}
 
-Further research and development on Moltres should aim to rectify the issues
+Further research and development of Moltres should aim to rectify the issues
 mentioned in this thesis. This work has highlighted three main avenues for
-improvement. Firstly, proper 2D/3D heat exchanger implementation
-would allow us to move away from the 1D outer loop system and towards a full
-2D/3D closed loop. If this were implemented, users would be able to use
+improvement. Firstly, a proper 2-D/3-D heat exchanger implementation would
+provide users with the option to simulate a fully closed
+2-D/3-D coolant loop. If this were implemented, users would be able to use
 the Boussinesq approximation for buoyancy-driven flow capability in Moltres.
 Buoyancy-driven flow is a critical component in loss of forced flow scenarios
 which are important to reactor safety analyses.
@@ -64,11 +66,11 @@ which are important to reactor safety analyses.
 Secondly, Moltres would benefit from a proper turbulence model such as
 $k$-$\epsilon$ \cite{jones_prediction_1972} or $k$-$\omega$
 \cite{wilcox_turbulence_2006}. Turbulence effects are
-significant in \gls{MSR} designs with fast flow and they inform optimization
+significant in \gls{MSR} designs and they inform optimization
 studies for improving flow patterns and eliminating local hotspots in eddies.
 The current work, particularly the loss of flow accident scenario, shows
 that simplifying assumptions for turbulence lead to erroneous results under
-flow conditions that deviate significantly from steady state.
+flow conditions that deviate significantly from steady-state.
 
 Lastly, a compressible Navier-Stokes model would be essential for modeling
 effects such as variable temperature-dependent density

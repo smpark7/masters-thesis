@@ -44,8 +44,8 @@ between the two applications: the accuracy of the neutron diffusion
 model, and the omission of the blanket tank structural material in Moltres.
 The neutron diffusion model is not as accurate as the other S$_{\text{N}}$ or
 SP$_{\text{N}}$ deterministic methods nor the Monte Carlo approach in Serpent.
-Regarding the omission of the blanket tank material, I
-replaced the 2 cm-thick structural material with blanket salt. This
+Regarding the omission of the blanket tank material, this model
+replaces the 2 cm-thick structural material with blanket salt. This
 replacement is partly responsible for the higher $k_{\text{eff}}$ value
 calculated by Moltres as fissions occur in the blanket salt. Nevertheless, the
 discrepancy is smaller
@@ -109,7 +109,7 @@ adjoint calculation capability.
 The difference between $\beta$ and $\beta_{\text{eff}}$ is
 that $\beta$ is the unweighted delayed neutron fraction
 while $\beta_{\text{eff}}$ is the delayed neutron fraction weighted by the
-adjoint neutron flux. I calculated $\beta$ by
+adjoint neutron flux. This work calculates $\beta$ by
 taking the relative difference between the $k_{\text{eff}}$ values with and
 without \glspl{DNP} in Table \ref{table:keff}. The $\beta$ and
 $\beta_{\text{eff}}$ values at 973 K, shown in Table \ref{table:betaeff}, are
@@ -139,7 +139,7 @@ the reactivity, $\rho$, values for temperatures from 800 K to 1400 K at 100 K
 intervals (Figure \ref{fig:reactivity}). The slopes represent the total,
 Doppler, density $\alpha$ values. The temperature range
 extends below the melting point of the fuel salt (841 K) to ensure that
-the data covers the relevant range between 841 K and 900 K. Table
+the data cover the relevant range between 841 K and 900 K. Table
 \ref{table:alpha} shows the various $\alpha$ values calculated using the
 linear least squares approach. The total temperature
 coefficients from Serpent and Moltres show excellent agreement with a
@@ -189,11 +189,9 @@ spectra from Serpent and Moltres in the central fuel salt region. More
 generally, the
 plot shows the distinctive fast spectrum observed in the \gls{MSFR} with dips
 in the spectrum corresponding to elastic scattering resonances from lithium
-and fluorine. From this plot, we observe that the discrepancies in
-$k_{\text{eff}}$ arise mainly from discretizing neutron energy into groups
-rather than the neutron diffusion model itself. We could obtain a more
-accurate representation of the neutronics in the \gls{MSFR} by using more
-neutron energy groups but this would adversely impact simulation times in the
+and fluorine. We could obtain a more accurate representation of the neutronics
+in the \gls{MSFR} by using more neutron energy groups with appropriate energy
+boundaries but this would adversely impact simulation times in the
 subsequent multiphysics finite element analyses.
 
 In summary, Moltres replicated the relevant neutronics parameters

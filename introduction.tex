@@ -1,7 +1,7 @@
 \section{Background and Motivation}
 
 Greenhouse gas emission from human activities is the main cause of climate
-change which has dire
+change, which has dire
 consequences on human health and safety due to extreme weather events and the
 overall impact on food production \cite{mcmichael_global_2004}.
 Electricity generation from burning fossil fuels represents the
@@ -15,7 +15,8 @@ power and renewable sources ensures energy security and reliability in our
 transition towards a low-carbon future \cite{petti_future_2018}.
 
 The world would have to ramp up the current rate of reactor deployments to
-displace some of the presently large share of energy production from fossil
+displace a portion of the presently large share of energy production from
+fossil
 fuel power plants. However, several obstacles stand in the way of mass reactor
 deployments. These obstacles include perceived safety risks, sustainability
 concerns, nuclear proliferation
@@ -25,8 +26,8 @@ to the aforementioned issues is the \gls{MSR} concept, one of six advanced
 reactor designs selected by the Generation IV International Forum
 \cite{gif_technology_2002} for continued research and development.
 
-The primary coolants in MSRs consist of a molten salt mixture
-with fissile and/or fertile material directly dissolved in the coolant.
+The primary coolants in MSRs consist of molten salt mixtures
+with fissile and/or fertile material dissolved directly in the coolants.
 MSRs possess an inherently robust safety feature in the strongly negative fuel
 temperature coefficient of reactivity. Some designs can also incorporate the
 thorium fuel cycle for improved sustainability arising from the use of
@@ -47,10 +48,11 @@ the choice of coupling methods for each set of physics requires careful
 consideration. 
 
 Most reactor analysis applications are usually reactor-specific by
-design such as TRACE for \glspl{LWR}, and SAS4A/SASSYS-1 for
+design such as TRACE \cite{nrc_trace_nodate} for \glspl{LWR}, and
+SAS4A/SASSYS-1 \cite{fanning_sas4a/sassys-1_2017} for
 liquid metal cooled reactors. Thus, these applications would disregard
 \gls{MSR}-specific phenomena and are inappropriate for \gls{MSR}
-analysis without any modifications to the source code. Some research efforts
+analysis without modifications to the source code. Some research efforts
 do focus on adapting these applications for \gls{MSR} analysis. Examples
 include the coupling of modified versions of TRACE and PARCS
 \cite{pettersen_coupled_2016}, and the development of VERA-MSR from the
@@ -59,12 +61,12 @@ Others developed their \gls{MSR} simulation tools from general
 multiphysics or \gls{CFD} applications such as COMSOL
 \cite{fiorina_modelling_2014} and OpenFOAM \cite{aufiero_development_2014}.
 
-Moltres is an open source MSR simulation tool that falls under the latter
-category \cite{lindsay_introduction_2018}. It is an application built in the
-\gls{MOOSE} \cite{gaston_physics-based_2015} parallel finite element
-framework. Lindsay et al. first presented the tool in 2017 and demonstrated
-its capabilities by simulating 2-D and 3-D models of the \gls{MSRE}
-\cite{lindsay_introduction_2018}. The results showed good qualitative
+Similarly, Moltres \cite{lindsay_introduction_2018} is an open-source MSR
+simulation tool built in the \gls{MOOSE} \cite{gaston_physics-based_2015}
+parallel finite element framework. Lindsay et al.
+\cite{lindsay_introduction_2018} first presented the tool in 2017 and
+demonstrated its capabilities by simulating 2-D and 3-D models of the
+\gls{MSRE}. The results showed good qualitative
 agreement with the original design calculations by \gls{MSRE} researchers at
 \gls{ORNL}. This thesis presents some of the new developments in Moltres
 allowing for more complex and accurate \gls{MSR} simulations.
@@ -84,10 +86,10 @@ concept. Code-to-code verification is an important exercise in software
 development for ensuring that the application produces accurate and reliable
 results. This thesis covers the \gls{MSFR} concept mainly because it has been
 studied extensively with readily available data in the literature to verify
-our results against. The \gls{MSFR} design also features interesting flow
+against. The \gls{MSFR} design also features interesting flow
 patterns that greatly affect the steady-state and transient behavior. This
 present work will first present a verification of Moltres' \gls{MSFR}
-diffusion neutronics against the Monte Carlo neutron tranport software
+diffusion neutronics against the Monte Carlo neutron transport software
 Serpent 2, followed by a verification of
 the coupled neutronics/thermal-hydraulics steady-state and accident transient
 results against two sets of results published by

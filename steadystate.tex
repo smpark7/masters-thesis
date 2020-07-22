@@ -31,24 +31,23 @@ velocity in the full time-dependent simulation modeling the full coupled
 neutronics and thermal-hydraulics multiphysics model. The initial values for
 the temperature and neutron group flux distributions are 953 K and
 $1 \times 10^{14}$ cm$^{-2}$ s$^{-1}$ uniformly throughout the geometry.
-Finally, this work assumes that steady state is reached when the volume
+Finally, this work assumes that model has reached steady-state when the volume
 integral values of every variable remain constant (up to 6 significant
 figures) for at least four seconds in the simulation; this
-time period corresponds to the nominal circulation time of the \gls{MSFR}.
+period of time corresponds to the nominal circulation time of the \gls{MSFR}.
 
 \section{Steady-State Thermal-Hydraulics Results} \label{sec:ss-th}
 
 Figure \ref{fig:flow-temp} shows the temperature and velocity fields of the
-fuel salt in the core at steady state from Moltres and the Polimi and TUDelft
+fuel salt in the core at steady-state from Moltres and the Polimi and TUDelft
 models. Figure \ref{fig:flow} provides an alternate view of the flow profile
-through flow streamlines superimposed on the velocity magnitude distribution.
+with flow streamlines superimposed on the velocity magnitude distribution.
 The results from Moltres show good qualitative agreement with the Polimi and
 TUDelft models \cite{fiorina_modelling_2014}; the plots show similar
 flow and hotspot features in all three models. Furthermore, the highest salt
 velocities in all three models occur at the inlet, outlet, and at core
 half-height approximately 0.40 m away from the central axis. A large
-recirculation region forms near the blanket tank walls from turbulent flow.
-Inertial forces dominate over viscous forces to form this large eddy. The main
+recirculation region forms near the blanket tank walls. The main
 difference between Moltres, and the Polimi and TUDelft models is the flow
 profile near the central axis at the top and bottom of the core.
 The Polimi and TUDelft models predict relatively stagnant flow in these
@@ -80,7 +79,8 @@ approximation.
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=.58\textwidth]{flow-plasma}
-    \caption{Fuel salt flow streamlines and velocity magnitude in the core.
+    \caption{Fuel salt flow streamlines and velocity magnitude in the core
+    from Moltres.
     The colors represent velocity magnitude according to the color bar on the
     right.}
     \label{fig:flow}
@@ -94,18 +94,13 @@ model ($\approx$ 1300 K) than the TUDelft model ($\approx$ 1200K). Similarly,
 the plots show cooler temperatures in high-velocity regions. The minimum
 temperature is 924 K at the inlet. 
 
-Although the temperatures at the hotspots are well below the melting point of the Ni-alloy structure (1500 K), they may cause undue thermal stress on the
+Although the temperatures at the hotspots are well below the melting point of
+the Ni-alloy structure (1500 K), they may cause undue thermal stress on the
 blanket tank structure and accelerate salt corrosion rates. A
 sudden, large reactivity insertion could push fuel salt temperatures above the
 melting point of the Ni-alloy and cause irreversible damage. Furthermore,
 the reservoir of hot fuel salt may cause unpredictable behavior during
 transient scenarios when the flow profile fluctuates.
-Thus, Rouch et al. \cite{rouch_preliminary_2014} developed an improved
-hourglass-shaped design for the central core region to optimize flow
-distribution and prevent these
-recirculation zones and hotspots from forming. A study of this new design
-using Moltres is a potential subject for future work when a proper turbulence
-model is in place.
 
 \section{Steady-State Neutronics Results}
 
@@ -157,7 +152,8 @@ at 973 K.
     \end{subfigure}
     \caption{Neutron flux distributions in the core for neutron energy groups
     1 to 6. The y and x axes represent height and radius (in cm) of the core
-    relative to the entire reactor geometry.}
+    relative to the entire reactor geometry. Note the different scales for
+    each flux distribution.}
     \label{fig:neutronflux}
 \end{figure}
 
@@ -187,7 +183,7 @@ at 973 K.
 		{Model} & {Temperature distribution} & {Peak Neutron Flux [$\times 10^{15}$ cm$^{-2}$ s$^{-1}$]}
 		\\
 		\midrule
-		{Moltres (This paper)} & {Steady state} & 9.80\\
+		{Moltres (This paper)} & {Steady-state} & 9.80\\
 		{COMSOL} & {Uniform, 973 K} & 8.6 \\
 		{OpenFOAM} & {Uniform, 973 K} & 9.0 \\
 		\bottomrule
@@ -251,7 +247,7 @@ the core as their half-lives are shorter than the time it takes to reach the
 outlet while the precursors from the longest-lived group (Group 1) are
 relatively evenly distributed due to their long half-lives. For the
 longer-lived groups, the \gls{DNP} concentrations are ill-resolved on the
-mesh elements adjacent to the outlet and the inlet boundaries, respectively.
+mesh elements adjacent to the outlet and the inlet boundaries.
 Thus, the present author recommends careful mesh refinement for future work
 involving similar geometries.
 
@@ -293,11 +289,12 @@ delayed neutron fraction in \glspl{MSR} after accounting for the loss of
 delayed neutrons from \glspl{DNP} decaying outside the active core region.
 Reactors with smaller $\beta$ values exhibit greater prompt jumps in the
 neutron flux in response to reactivity insertions because they have a greater
-proportion of prompt neutrons under normal operating conditions. This is
-undesirable from a reactor safety perspective because it reduces the time
+proportion of prompt neutrons under normal operating conditions. This effect
+is undesirable from a reactor safety perspective because it reduces the time
 available for active safety mechanisms to
-activate and scram the reactor. In \glspl{MSR}, this danger is partly
-mitigated by the strong, negative fuel temperature reactivity coefficient. 
+activate and scram the reactor. In \glspl{MSR}, the strong, negative fuel
+temperature reactivity coefficient partly mitigates the sharp increase in
+neutron flux. 
 Chapter 6 contains more in-depth discussions for various transient scenarios.
 
 Table \ref{table:dnf} compares the fraction of out-of-core emissions and
@@ -331,7 +328,7 @@ neutron emission rate relative to total emission rate.
 	\label{table:dnf}
 \end{table}
 
-The fraction of out-of-core emissions from our Moltres model
+The fraction of out-of-core emissions from the Moltres model
 differs significantly by approximately 10\%, and $\beta_c$ differs by
 60-70 pcm. The former is attributed to the lesser \gls{DNP} retention in the
 stagnant flow regions in the core; the \glspl{DNP} are more evenly distributed
@@ -357,9 +354,13 @@ in Moltres than the Polimi and TUDelft models. Fiorina et al.
 \cite{fiorina_modelling_2014} applied adjoint flux
 weighting for their $\beta_c$ calculation whereas this work
 reports the value as the physical fraction without adjoint weighting. The
-weighting results in a significant difference in $\beta_c$ because a greater
+adjoint weighting results in a smaller $\beta_c$ because a greater
 fraction of the \glspl{DNP} decay in the recirculation zones, where the
-neutron importance is noticeably diminished.
+neutron importance is noticeably diminished. Fast reactors also typically have
+smaller $\beta_{\text{eff}}$ because the fission cross sections of fertile
+isotopes (e.g. $^{238}$U and $^{232}Th$) monotonically decrease with
+decreasing neutron energy \cite{ott_introductory_1985}. On average, delayed
+neutrons are less energetic than prompt neutrons.
 
 \section{Steady-State Decay Heat Results}
 
@@ -399,7 +400,7 @@ compared with the longer-lived decay heat precursors that are more evenly
 distributed throughout the core.
 
 Figure \ref{fig:decayheattemp} shows the
-difference in core temperatures at steady state with decay heat modeling
+difference in core temperatures at steady-state with decay heat modeling
 relative to the core temperatures without decay heat in Figure
 \ref{fig:flow-temp}. This figure uses a different color map to clearly
 distinguish between positive and negative temperature differences in the core.
@@ -413,14 +414,13 @@ from 101.1 K to 98.9 K as some of the decay heat precursors deposit heat in
 the outer loop region. The figure also shows some nonphysical oscillations in
 the temperature near the outlet because the mesh near the boundary is too
 coarse for the given outlet velocities. Users can avoid these oscillations
-near the outlet by using a mesh
-that is progressively finer towards the boundary. The
-present author could not resolve this issue due to time constraints.
+near the outlet by using a mesh that is progressively finer towards the
+boundary. This exercise is left as an objective for future work.
 
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=.55\textwidth]{decay-heat-temp}
-    \caption{Difference in core temperatures at steady state with decay heat
+    \caption{Difference in core temperatures at steady-state with decay heat
     relative to the result without decay heat (Figure \ref{fig:flow-temp}).}
     \label{fig:decayheattemp}
 \end{figure}

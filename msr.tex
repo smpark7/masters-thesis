@@ -1,7 +1,7 @@
-\glspl{MSR} are one of six advanced reactor designs shortlisted by
+\glspl{MSR} are one of six advanced reactor classes shortlisted by
 the Generation IV Forum in 2001 for promising significant advances in safety,
 sustainability, efficiency, and cost over existing designs. This
-has attracted significant attention and resources towards
+attracted significant attention and resources towards
 \gls{MSR} research, most noticeable by the number of start-up companies that
 have emerged in recent years touting various \gls{MSR} designs. This chapter
 provides a brief history of \glspl{MSR}, followed by the distinctive features
@@ -75,7 +75,8 @@ gaseous fission products, while noble metals plate out onto the walls of
 the coolant loop. The older \gls{MSBR} design had a significant drawback; the
 extensive neutron damage in the graphite moderator necessitated frequent
 replacement (every four years) throughout its operational lifetime. The
-\gls{DMSR} avoids this issue by having a lower power density while maintaining
+\gls{DMSR} avoids this issue by running on a lower power density while
+maintaining
 the overall power output of 2250 MW$_{\text{th}}$. As a result, researchers
 projected that the graphite moderator would last for the entirety of the
 \gls{DMSR}'s design lifetime.
@@ -87,8 +88,8 @@ with separate loops for the fuel salt and the blanket salt. The blanket is a
 1 m-wide tank surrounding the core. The absence of moderators and the choice
 of chloride over fluoride salt resulted in a relatively hard neutron spectrum
 which favors $^{239}$Pu breeding over the thorium cycle. The UK researchers
-performed some experiments to study molten salt chemistry but there were no
-reactor prototypes. The UK program eventually shut down just like its
+performed some experiments to study molten salt chemistry but they did not
+build reactor prototypes. The UK program eventually shut down just like its
 US counterpart partly due to the successful demonstration of the Prototype
 Fast Reactor which had achieved criticality in 1974.
 
@@ -109,7 +110,7 @@ neutronic and thermal-hydraulic safety analyses. They also diversified
 start-up fuel options beyond the original $^{233}$U-based fuel composition to
 include $^{235}$U, $^{239}$Pu, and \gls{TRU}, and established fuel
 reprocessing schemes for the \gls{MSFR}. The \gls{SAMOFAR} project, which
-stated approximately 2 years after the end of the \gls{EVOL} project,
+started approximately two years after the end of the \gls{EVOL} project,
 supported more comprehensive safety assessments of the reactor and the
 reprocessing plant, and funded a number of experiments for validation of the
 \gls{MSFR}'s safety features. This thesis presents steady-state and
@@ -139,7 +140,7 @@ and the removal of gaseous fission products via a gas sparging system.
 The various \gls{MSR} designs under development today illustrate the
 flexibility of this reactor concept. Graphite-moderated thermal-spectrum
 \glspl{MSR} are typically straightforward \gls{LEU} burners or
-$^{232}$Th/$^{233}$U iso-breeders/breeders, while epithermal- and
+$^{232}$Th/$^{233}$U breeders, while epithermal- and
 fast-spectrum \glspl{MSR} can operate as \gls{TRU} fuel burners or
 $^{238}$U/$^{239}$Pu breeders. Breeder designs can be further categorized into
 one- or two-fluid designs. Two-fluid designs feature separate blanket molten
@@ -156,7 +157,7 @@ two-fluid designs include the \gls{MSFR} \cite{merle_optimized_2007} and
 strong negative temperature reactivity feedback of the fuel salt due to
 greater temperature-induced expansion in liquid fuel than solid
 fuel. Combined with the Doppler broadening of resonance capture cross sections
-present in both fuel forms, there would be a smaller temperature
+present in both fuel forms, an \gls{MSR} would see a smaller temperature
 increase following an unprotected reactivity insertion. The overall
 temperature reactivity coefficient varies widely among \gls{MSR}
 designs due to other structures, such as moderators and reflectors, present in
@@ -207,7 +208,7 @@ is low.
 
 However, \glspl{MSR} do have some associated safety risks.
 Firstly, \glspl{MSR} have smaller fractions of delayed neutron precursors in
-the active core region as some of them decay in the external loop regions.
+the active core region as some of the decay in the outer loop regions.
 This complicates reactor control and may result in faster transients due to
 the decrease in average neutron lifetime. Secondly, hot molten salts are
 corrosive and the corrosion mechanism is different from conventional
@@ -281,10 +282,11 @@ simulated flow through advection terms in the temperature and precursor
 equations in conjunction with full 3-D calculations for neutron flux and heat
 conduction.
 
-In more recent years, there has been
-significant progress towards fully coupled, spatial codes that feature
+In more recent years, researchers made significant progress towards fully
+coupled, spatially resolved computational tools that feature
 2-D axisymmetric or full 3-D models. In 2011, Cammi et al.
-\cite{cammi_multi-physics_2011} performed a ``\gls{MPM}'' analysis
+\cite{cammi_multi-physics_2011} performed a ``Multi-Physics Modelling''
+analysis
 of a simplified 2-D axisymmetric model of a single \gls{MSBR} fuel channel
 using the commercial finite element analysis software COMSOL Multiphysics. The
 physics were implemented through the two-group neutron diffusion equations,
@@ -297,15 +299,15 @@ presence of periodic perturbations. Nagy et al. \cite{nagy_steady-state_2014}
 introduced an improved version of DALTON which coupled with a \gls{CFD}
 application and incorporated incompressible
 Navier-Stokes flow to simulate salt flow more accurately. The authors
-validated their model against \gls{MSRE} experimental data before presenting
+validated their model against \gls{MSRE} experimental data and presented
 multiphysics simulation results of a different graphite-moderated breeder
 \gls{MSR}.
 
-Both DALTON and the COMSOL-based tool featured again in a 2014 paper by
-Fiorina et al. \cite{fiorina_modelling_2014} for a 2-D axisymmetric
-model of the \gls{MSFR}. The authors, from Politecnico di Milano and
-Technical University of Delft, compared \gls{MSFR} transient safety
-analysis results from both tools. They referred to the COMSOL and DALTON/HEAT
+Fiorina et al. \cite{fiorina_modelling_2014} adopted both DALTON and the
+COMSOL-based application in their study of a 2-D axisymmetric model of the
+\gls{MSFR}. The authors, from Politecnico di Milano and Technical University
+of Delft, compared \gls{MSFR} transient safety analysis results from both
+tools. They referred to the COMSOL and DALTON/HEAT
 \gls{MSFR} models as the Polimi and TUDelft models, respectively, after the
 universities where each application was developed. This thesis also follows
 this naming convention. With
@@ -361,13 +363,14 @@ long-term radiation damage and replacement is likely to be necessary during
 the operating lifetime of the reactor. Secondly, graphite also has a positive
 temperature coefficient of reactivity; eliminating graphite from the design
 ensures a greater safety margin \cite{mathieu_thorium_2006}. Lastly, while
-negative temperature coefficients are attainable with very thermalized
-spectra, breeding ratios deteriorated significantly due to parasitic
-absorption in the graphite \cite{mathieu_thorium_2006}.
+negative temperature coefficients are attainable with extremely thermalized
+spectra, these configurations require large volumes of graphite which
+significantly deteriorate breeding ratios due to parasitic absorption
+\cite{mathieu_thorium_2006}.
 %
 \begin{figure}[htb!] 
 	\centering
-	\includegraphics[width=0.8\textwidth]{MSFR}
+	\includegraphics[width=0.7\textwidth]{MSFR}
 	\caption{Schematic view of the MSFR concept. Figure reproduced from
 	Brovchenko et al. \cite{brovchenko_design-related_2013}.}
 	\label{fig:msfr}
@@ -399,10 +402,10 @@ absorption in the graphite \cite{mathieu_thorium_2006}.
 
 In the \gls{MSFR} design, fuel salt flows vertically upward through a 9 m$^3$
 central core region. At the top of the core, the flow separates into sixteen
-smaller external loops, each of which passes through a heat exchanger before
+smaller outer loops, each of which passes through a heat exchanger before
 being pumped back into the bottom of the core. The salt also passes through
 the online salt reprocessing and gas sparging systems located along the
-external loops. A toroidal blanket tank containing fertile salt for breeding
+outer loops. A toroidal blanket tank containing fertile salt for breeding
 surrounds the core radially. The top and bottom of the core are enclosed
 by nickel alloy reflectors. A layer of boron carbide behind the blanket tank
 protects the peripheral equipment from excessive neutron damage. During severe
@@ -428,12 +431,12 @@ different neutronics software with different nuclear data provide
 different $k_{eff}$ estimates even with the same isotopic compositions and
 temperature distributions. The individual co-authors adjusted the
 ratio of $^{232}$Th to $^{233}$U slightly to achieve exact criticality at a
-uniform temperature of 973 K for their own neutronics software
+uniform temperature of 973 K for their neutronics software
 \cite{brovchenko_neutronic_2019}. This thesis
 performs the same exercise to adjust the inlet and outlet temperatures to
 match nominal values.
 
-The thermal and electric power output of the \gls{MSFR} are 3000 MW
+The thermal and electric power outputs of the \gls{MSFR} are 3000 MW
 $_{\text{th}}$ and 1300 MW$_{\text{e}}$, respectively. The high thermal
 efficiency ($\eta_{th}=0.43$) is due to the high operating
 temperature. The inlet and outlet temperature
@@ -453,7 +456,7 @@ LiF-ZrF$_4$, and FliBe \cite{merle_concept_2017}.
 The present work uses the same 2-D square-cylindrical \gls{MSFR} design to
 compare the present results to results from the Polimi and TUDelft models
 \cite{fiorina_modelling_2014}. The design is a 2-D axisymmetric representation
-of the \gls{MSFR} with the sixteen individual external loops homogenized into
+of the \gls{MSFR} with the sixteen individual outer loops homogenized into
 a single outer loop as shown in Figure \ref{fig:msfrgeom}. For the multigroup
 group constants calculations in Serpent, the 2-D axisymmetric model is
 extended into a 3-D model by a 360-degree rotation about the
@@ -467,7 +470,7 @@ properties.
 %
 \begin{figure}[t!] 
 	\centering
-	\includegraphics[width=0.5\textwidth]{msfr-geom}
+	\includegraphics[width=0.65\textwidth]{msfr-geom-legend}
 	\caption{2-D axisymmetric model of the \gls{MSFR} core used for the
 	simulations in Serpent. All dimensions are in meters.
 	\cite{brovchenko_neutronic_2019}}
@@ -475,7 +478,7 @@ properties.
 \end{figure}
 
 Although the present work uses the same 2-D axisymmetric geometry for
-generating group constant data from Serpent, there are two minor differences
+generating group constant data from Serpent, two minor differences exist
 between the \gls{MSFR} geometry modeled herein, and the geometry used in the
 Polimi and TUDelft models \cite{fiorina_modelling_2014}. First, the reactor
 geometry for
@@ -495,7 +498,7 @@ The second difference pertains to the out-of-core section of the primary loop.
 The focus for Moltres development has been on core multiphysics over detailed
 out-of-core multiphysics. The Moltres model simulates the outer loop as a 1-D
 pipe with a pointwise heat sink to represent the heat exchanger. To simulate
-the pumps, a Dirichlet boundary condition for velocity at the inlet boundaries
+the pumps, a Dirichlet boundary condition for inlet velocity
 drives the flow in the central core region of the primary loop. At every
 timestep, Moltres converges the core and outer loop calculations using Picard
 iterations. This approach shares some similarities with the
