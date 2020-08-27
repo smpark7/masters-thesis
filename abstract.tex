@@ -1,0 +1,43 @@
+Molten salt reactors, a class of advanced nuclear reactors, promise
+numerous improvements over the current fleet of largely light-water reactors.
+As the world continues its transition towards low-carbon electricity
+generation to combat climate change, building molten salt reactors is a
+potential
+option in the near-term future for replacing fossil fuel and aging nuclear
+power plants. At the current state of development, molten salt reactors still
+require extensive research to become viable. This thesis presents the latest
+developments in Moltres, a simulation tool for molten salt reactors. These
+new developments are: the support for coupling the incompressible
+Navier-Stokes
+and the delayed neutron precursor looping systems, and a model for
+simulating decay heat from fission products at steady-state and during
+transients. This work demonstrates these capabilities through multiphysics
+simulations of the Molten Salt Fast
+Reactor concept. This work first verifies the six-group neutron diffusion
+results from Moltres against continuous-energy Monte Carlo neutron transport
+results from Serpent 2. The multiplication factors $k_{\text{eff}}$, delayed
+neutron fractions $\beta$, temperature reactivity coefficient $\alpha_T$, and
+the six-group neutron energy spectra from Moltres agreed with the high
+fidelity simulation results from Serpent 2. The $k_{\text{eff}}$ values have
+small discrepancies on the order of 100 pcm, which is smaller than the
+$-256.7$ pcm discrepancy reported in the literature with the same six-group
+neutron diffusion approach. The decay heat model showed an expected flattening
+of the temperature distribution due to the movement of the
+decay heat precursors throughout the primary coolant loop. This work also
+demonstrates and verifies steady-state and
+transient multiphysics simulations of the Molten Salt Fast Reactor. The
+transient scenarios under study include unprotected instances of reactivity
+insertion, loss of heat sink, loss of flow, and pump overspeed. This thesis
+verifies the steady-state and transient results against data from the
+literature for the same case studies. The steady-state temperature and
+velocity distributions, and the peak neutron flux showed good agreement with
+the literature results. Minor differences in the delayed neutron precursor
+distribution and the in-core delayed neutron fraction were explainable with
+the differences in the handling of turbulence in the models. In three of the
+transient results (reactivity insertion, loss of heat sink, and pump
+overspeed), Moltres reproduced the expected magnitude and pattern of the
+reactor response to these transient initiators.
+The loss of flow results showed greater discrepancies that resulted from
+differences in the fluid dynamics modeling in Moltres and the other models.
+Through the verification studies, this work has also identified avenues
+for further Moltres software development.

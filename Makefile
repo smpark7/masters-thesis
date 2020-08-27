@@ -5,7 +5,7 @@ latexopt   = -halt-on-error -file-line-error
 all: all-via-pdf
 
 all-via-pdf: $(manuscript).tex $(references)
-	pdflatex $(latexopt) --shell-escape $<
+	pdflatex $(latexopt) $<
 	bibtex $(manuscript).aux
 	pdflatex $(latexopt) $<
 	pdflatex $(latexopt) $<
@@ -24,7 +24,7 @@ epub:
 	ebook-convert $(manuscript).html $(manuscript).epub
 
 clean:
-	rm -f *.pdf *.dvi *.toc *.aux *.out *.log *.bbl *.blg *.log *.spl *~ *.spl *.zip *.acn *.glo *.ist *.epub
+	rm -f *.pdf *.dvi *.toc *.aux *.out *.log *.bbl *.blg *.log *.spl *~ *.spl *.zip *.acn *.glo *.ist *.epub *.synctex.gz *.lof *.lot *.acr *.glg *.gls *.alg 
 
 realclean: clean
 	rm -rf $(manuscript).dvi
@@ -37,6 +37,6 @@ realclean: clean
 	convert $< $@
 
 zip:
-	zip paper.zip *.tex *.eps *.bib
+	zip $(manuscript).zip *.tex *.eps *.bib
 
 .PHONY: all clean

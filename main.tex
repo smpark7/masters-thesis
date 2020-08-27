@@ -1,85 +1,56 @@
-%% Package and Class "uiucthesis2014" for use with LaTeX2e.
+%% Package and Class "uiucthesis2018" for use with LaTeX2e.
 \documentclass[edeposit,fullpage,11pt]{uiucthesis2018}
 
 
 \usepackage[acronym,toc]{glossaries}
+\makeglossaries
 \include{acros}
 
 \usepackage{xspace}
 \usepackage{graphics}
-
+\graphicspath{{images/}}
 
 \usepackage{placeins}
 \usepackage{booktabs} % nice rules (thick lines) for tables
 \usepackage{microtype} % improves typography for PDF
 
 \usepackage[hyphens]{url}
-\usepackage{hyperref}
-\usepackage{subfig}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{hhline}
 \usepackage{amsmath}
+\allowdisplaybreaks
 \usepackage{color}
 \usepackage{multirow}
 \usepackage{siunitx}
-\sisetup{
-    input-decimal-markers = .,input-ignore = {,},table-number-alignment = right,
-    group-separator={,}, group-four-digits = true
-}
-\usepackage{fourier}
 \usepackage{booktabs}
-\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \usepackage{threeparttable, tablefootnote}
 
-%tikzpicture fit to page width
+
 \usepackage{environ}
 \makeatletter
-\newsavebox{\measure@tikzpicture}
-\NewEnviron{scaletikzpicturetowidth}[1]{%
-  \def\tikz@width{#1}%
-  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
-  \BODY
-  \end{lrbox}
-  \pgfmathparse{#1/\wd\measure@tikzpicture}%
-  \edef\tikzscale{\pgfmathresult}%
-  \BODY
-}
 
 \usepackage{tabularx}
-\newcolumntype{b}{>{\hsize=1.0\hsize}X}
-\newcolumntype{q}{>{\hsize=0.5\hsize}X}
-\newcolumntype{R}{>{\raggedleft\arraybackslash\hsize=0.5\hsize}X}
-\newcolumntype{z}{>{\hsize=0.75\hsize}X}
-\newcolumntype{s}{>{\hsize=.5\hsize}X}
-\newcolumntype{m}{>{\hsize=.75\hsize}X}
 
 \usepackage{cleveref}
 \usepackage{datatool}
 \usepackage[numbers]{natbib}
 \usepackage{notoccite}
-
-
 \usepackage{tikz}
-\usetikzlibrary{positioning, arrows, decorations, shapes}
-
-\usetikzlibrary{shapes.geometric,arrows}
-\tikzstyle{process} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm,text centered, draw=black, fill=blue!30]
-
-\tikzstyle{object} = [ellipse, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=green!30]
-\tikzstyle{objectr} = [ellipse, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-
-\tikzstyle{empty} =  [rectangle, rounded corners, minimum width=2.5cm, minimum height=0.7cm,text centered, draw=black, fill=white!30]
-\tikzstyle{arrow} = [thick,->,>=stealth]
 
 
-\title{Thesis Title}
+\title{Advancement and Verification of Moltres for Molten Salt Reactor Safety
+Analysis}
 \author{Sun Myung Park}
-\department{Nuclear, Plasma, Radiological Engineering}
-%\schools{B.S., National University of Singapore, 2017}
+\department{Nuclear, Plasma \& Radiological Engineering}
+%\schools{}
 \msthesis
 \advisor{Kathryn D. Huff}
-\degreeyear{2019}
-\committee{Assistant Professor Kathryn D. Huff, Adviser \\ Professor xyz}
+\degreeyear{2020}
+\committee{Assistant Professor Kathryn D. Huff, Advisor \\ Associate Professor
+Tomasz Kozlowski}
 
 
 \begin{document}
@@ -90,13 +61,13 @@
 %% Note that ProQuest truncates their abstracts at 350 words.
 \begin{abstract}
 
-Abstract.
+\input{abstract}
 
 \end{abstract}
 
 \chapter*{Acknowledgments}
 
-Acks.
+\input{acks}
 
 %% The thesis format requires the Table of Contents to come
 %% before any other major sections, all of these sections after
@@ -115,25 +86,46 @@ Acks.
 
 %% Create a List of Abbreviations. The left column
 %% is 1 inch wide and left-justified
-%\chapter{List of Abbreviations}
-%\printglossaries
+\printglossary[title=List of Abbreviations,type=\acronymtype,nonumberlist,
+nogroupskip=true]
 %% Create a List of Symbols. The left column
 %% is 0.7 inch wide and centered
 
 \pagebreak
 \mainmatter
+\glsresetall
 
 \chapter{Introduction}
+\label{chap:intro}
 \input{introduction}
 
 \chapter{Molten Salt Reactors}
+\label{chap:msr}
 \input{msr}
 
-\chapter{Modelling Approach}
+\chapter{Methodology}
+\label{chap:model}
 \input{model}
 
-\chapter*{Appendix}
-\input{appendix}
+\chapter{Neutronics Results}
+\label{chap:nts}
+\input{neutronics}
+
+\chapter{Coupled Neutronics/Thermal-Hydraulics Steady-State Results}
+\label{chap:ss}
+\input{steadystate}
+
+\chapter{Transient Scenarios}
+\label{chap:transient}
+\input{transient}
+
+\chapter{Conclusion}
+\label{chap:conclusion}
+\input{conclusion}
+%
+%\chapter*{Appendix}
+%\label{chap:appendix}
+%\input{appendix}
 
 \backmatter
 
@@ -143,4 +135,3 @@ Acks.
 \end{document}
 \endinput
 %%
-%% End of file `thesis-ex.tex'.

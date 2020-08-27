@@ -1,0 +1,80 @@
+Unique phenomena in \glspl{MSR} necessitate the development of new reactor
+safety analysis software. This thesis presents the latest developments in
+Moltres, namely coupling its existing neutron diffusion module to the
+incompressible Navier-Stokes module in MOOSE and developing a decay heat model
+for short-term transients. This work demonstrated and verified some of
+Moltres' current capabilities through a static-model
+neutronics study and a coupled neutronics/thermal-hydraulics safety analysis
+of the \gls{MSFR} concept.
+
+The neutronics study showed good agreement between Moltres and Serpent 2. With
+the relevant group constant data from Serpent 2,
+Moltres could accurately replicate the $k_{eff}$, $\beta$,
+$\alpha_T$, and multi-group neutron flux results from Serpent 2. The
+$k_{eff}$ estimates from Moltres were approximately 100 pcm higher for all
+measurements between 800 K and 1400 K. This discrepancy is notably smaller
+than the discrepancies observed in the neutron diffusion and SP3 models
+developed in OpenFOAM \cite{aufiero_extended_2013}. The $\beta$ and $\alpha_T$
+values from Moltres had 1.46\% and 0.265\% discrepancies, respectively, to
+Serpent 2's results. Lastly, the normalized six-group neutron fluxes from
+Moltres all had less than 1\% discrepancy compared with Serpent 2.
+The results of this study extend
+the code-to-code verification of Moltres'
+neutron diffusion model with the six-group, fast-spectrum \gls{MSFR} model.
+
+Although Moltres currently lacks a proper turbulence model, the uniform
+turbulent viscosity $\mu_t$ approximation was accurate enough to reproduce
+most of the expected results for the \gls{MSFR}
+steady-state and transient analyses. The steady-state temperature and velocity
+distributions showed many similarities in their shapes and magnitudes to the
+Polimi and TUDelft model results \cite{fiorina_modelling_2014}. The uniform
+$\mu_t$ approximation was responsible for some differences in the flow in the
+recirculation zones. In turn, these differences in the recirculation zones
+resulted in
+differences in the loss of delayed neutrons to out-of-core emissions.
+The results with the decay heat model showed a slight flattening of the
+temperature distribution in the core that is in line with our expectations
+given the diffusion and advection of the decay heat precursors.
+
+The unprotected reactivity insertion and loss of heat sink results showed the
+same trends Fiorina et al. \cite{fiorina_modelling_2014} observed in their
+Polimi and TUDelft models. The
+small difference in the temperature reactivity coefficient accounted for the
+small difference in the magnitude of the peaks in power output and average
+core temperature increase. The differences between the pointwise heat
+exchanger in Moltres and the volumetric heat exchanger in the other two
+models required adjustments in the relationship between flow rate
+$\dot{V}$ and the heat transfer coefficient $h$ from the original
+Dittus-Boelter correlation for the pump-initiated transients. Assuming a
+directly proportional relationship between $\mu_t$ and $\dot{V}$ yielded
+results in good agreement with the other two models for the pump overspeed
+transient. However, Moltres performed poorly in the loss of flow transient as
+this work could not incorporate buoyancy-driven flow and its associated
+effects on $\mu_t$.
+
+\section{Future Work}
+
+Further research and development of Moltres should aim to rectify the issues
+mentioned in this thesis. This work has highlighted three main avenues for
+improvement. Firstly, a proper 2-D/3-D heat exchanger implementation would
+provide users with the option to simulate a fully closed
+2-D/3-D coolant loop. If this were implemented, users would be able to use
+the Boussinesq approximation for buoyancy-driven flow capability in Moltres.
+Buoyancy-driven flow is a critical component in loss of forced flow scenarios
+which are important to reactor safety analyses.
+
+Secondly, Moltres would benefit from a proper turbulence model such as
+$k$-$\epsilon$ \cite{jones_prediction_1972} or $k$-$\omega$
+\cite{wilcox_turbulence_2006}. Turbulence effects are
+significant in \gls{MSR} designs and they inform optimization
+studies for improving flow patterns and eliminating local hotspots in eddies.
+The current work, particularly the loss of flow accident scenario, shows
+that simplifying assumptions for turbulence lead to erroneous results under
+flow conditions that deviate significantly from steady-state.
+
+Lastly, a compressible Navier-Stokes model would be essential for modeling
+effects such as variable temperature-dependent density
+changes following a large reactivity insertion and finite wave propagation
+speeds in the salt. The presence of bubbles in the core from the gas sparging
+system increases fuel compressibility and enhances compressibility effects
+\cite{cervi_development_2019}. 
