@@ -333,8 +333,10 @@ accurately model decay heat in the MSFR for up to 300 seconds after shutdown
 with a relative error of less than 2\%. Thus, this thesis implements the new
 decay heat modeling capability with the following equation:
 %
+\pagebreak
 \begin{align}
-	\frac{\partial \omega_j}{\partial t} &= f_j \sum^G_{g=1} \epsilon_{g}
+	\frac{\partial \omega_j}{\partial t} &= f_j \lambda_j \sum^G_{g=1}
+	\epsilon_{g}
 	\Sigma^f_{g} \phi_{g} - \lambda_j \omega_j - \vec{u} \cdot \nabla
 	\omega_j + \nabla \cdot K \nabla \omega_j, \label{eq:decayheat} \\
 	\intertext{where}
